@@ -96,7 +96,7 @@ class AhorroController extends BaseController {
             ->orderBy('ahorro.id', 'desc')
             ->get();
 
-		return Response::json(['success'=>true, 'historial'=>$historial]);            
+		return Response::json(['success'=>true, 'historial'=>$historial]);
 
 	}
 

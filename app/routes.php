@@ -34,6 +34,7 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('portafolios', 'PortafolioController@lista');
 	Route::get('portafolio/{id}', 'PortafolioController@portafolio');
+	Route::get('portafolio/user/{id}', 'PortafolioController@portafolioUser');
 
 	Route::post('registroPortafolio', 'PortafolioController@postRegistro');
 	Route::post('registroTarjeta', 'UsersController@registroTarjeta');
@@ -58,44 +59,49 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('rpi/cerrar_puerta', 'RpiController@cerrarPuerta');
 
+	//Route::get('renta_all', 'RentaController@getAll');
+
 }); 
 
 
-//Route::get('ahooro/last_30/{id}', 'AhorroController@getHistorialLast30'); // Todos los registros por usuario
-Route::get('salir', function(){
-
-	Sentry::logout();
-
-});
-
 Route::get('hola', function(){
-	echo "Fecha Hoy : ".date('Y-m-d');
-	echo "<br>";
-	echo "Fecha hace 30 dias: ". date('Y-m-d', strtotime('today - 30 days'));
-	return;
 
-  /* Send notification to Pusher
-    $message = "Este es un mensaje del servidor!";
-    Pusherer::trigger('test_channel', 'my_event', array( 'message' => $message ));
-
-	Elephant::emit('eventMsg', array('foo' => 'bar'));
-	*/
+	
+	return "Hola";
 });
 
-Route::get('user_check', function(){
 
-	if ( ! Sentry::check())
-	{
-	    return  "User is not logged in, or is not activated";
-	    
-	}
-	else
-	{
-		return $user = Sentry::getUser();
-	}
 
-    
-});
+Route::get('renta', 'RentaController@vista');
+Route::post('renta', 'RentaController@save');
+
+Route::get('renta_all', 'RentaController@getAll');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // curl -u jefersonpatino@yahoo.es:320542 -X GET http://localhost/proyectos_laravel/laravel4/public/account

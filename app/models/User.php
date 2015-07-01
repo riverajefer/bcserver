@@ -36,4 +36,9 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 	}
 	*/
 
+	public function portafolio()
+	{
+		return $this->belongsTo('Portafolio');
+	}
+	
 }

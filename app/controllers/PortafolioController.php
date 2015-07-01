@@ -49,6 +49,16 @@ class PortafolioController extends BaseController {
 		return Response::json(['success'=>true, 'portafolios'=>$portafolio]);
 	}
 
+	public function portafolioUser($user_id)
+	{
+		$portafolio = User::find($user_id)->portafolio()->get();
+
+	    if(empty($portafolio)){
+	        App::abort(404);
+	        return Response::json(['success'=>false]);
+	    }
+		return Response::json(['success'=>true, 'portafolio'=>$portafolio]);
+	}
 
 
 }

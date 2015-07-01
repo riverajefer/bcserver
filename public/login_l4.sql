@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2015 a las 00:56:13
+-- Tiempo de generación: 02-07-2015 a las 00:38:04
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.5.19
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `ahorro` (
   `fecha` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=470 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=544 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `ahorro`
@@ -502,7 +502,81 @@ INSERT INTO `ahorro` (`id`, `consecutivo`, `user_id`, `alcancia_id`, `moneda`, `
 (466, 115, 2, 1, '200', '25 de junio - 17:52', 'jueves, 25 de junio de 2015, Hora 17:52', '2015-06-25 22:52:19', '2015-06-25 22:52:19'),
 (467, 115, 2, 1, '100', '25 de junio - 17:52', 'jueves, 25 de junio de 2015, Hora 17:52', '2015-06-25 22:52:22', '2015-06-25 22:52:22'),
 (468, 115, 2, 1, '1000', '25 de junio - 17:52', 'jueves, 25 de junio de 2015, Hora 17:52', '2015-06-25 22:52:24', '2015-06-25 22:52:24'),
-(469, 115, 2, 1, '500', '25 de junio - 17:52', 'jueves, 25 de junio de 2015, Hora 17:52', '2015-06-25 22:52:27', '2015-06-25 22:52:27');
+(469, 115, 2, 1, '500', '25 de junio - 17:52', 'jueves, 25 de junio de 2015, Hora 17:52', '2015-06-25 22:52:27', '2015-06-25 22:52:27'),
+(470, 116, 2, 1, '500', '26 de junio - 09:46', 'viernes, 26 de junio de 2015, Hora 09:46', '2015-06-26 14:46:50', '2015-06-26 14:46:50'),
+(471, 116, 2, 1, '100', '26 de junio - 09:46', 'viernes, 26 de junio de 2015, Hora 09:46', '2015-06-26 14:46:53', '2015-06-26 14:46:53'),
+(472, 116, 2, 1, '100', '26 de junio - 09:46', 'viernes, 26 de junio de 2015, Hora 09:46', '2015-06-26 14:46:54', '2015-06-26 14:46:54'),
+(473, 116, 2, 1, '200', '26 de junio - 09:46', 'viernes, 26 de junio de 2015, Hora 09:46', '2015-06-26 14:46:56', '2015-06-26 14:46:56'),
+(474, 116, 2, 1, '500', '26 de junio - 09:46', 'viernes, 26 de junio de 2015, Hora 09:46', '2015-06-26 14:46:57', '2015-06-26 14:46:57'),
+(475, 116, 2, 1, '200', '26 de junio - 09:47', 'viernes, 26 de junio de 2015, Hora 09:47', '2015-06-26 14:47:01', '2015-06-26 14:47:01'),
+(476, 116, 2, 1, '200', '26 de junio - 09:47', 'viernes, 26 de junio de 2015, Hora 09:47', '2015-06-26 14:47:02', '2015-06-26 14:47:02'),
+(477, 117, 2, 1, '100', '26 de junio - 09:47', 'viernes, 26 de junio de 2015, Hora 09:47', '2015-06-26 14:47:31', '2015-06-26 14:47:31'),
+(478, 118, 2, 1, '200', '26 de junio - 09:50', 'viernes, 26 de junio de 2015, Hora 09:50', '2015-06-26 14:50:29', '2015-06-26 14:50:29'),
+(479, 118, 2, 1, '100', '26 de junio - 09:50', 'viernes, 26 de junio de 2015, Hora 09:50', '2015-06-26 14:50:34', '2015-06-26 14:50:34'),
+(480, 119, 2, 1, '1000', '26 de junio - 09:52', 'viernes, 26 de junio de 2015, Hora 09:52', '2015-06-26 14:52:30', '2015-06-26 14:52:30'),
+(481, 119, 2, 1, '200', '26 de junio - 09:52', 'viernes, 26 de junio de 2015, Hora 09:52', '2015-06-26 14:52:36', '2015-06-26 14:52:36'),
+(482, 119, 2, 1, '100', '26 de junio - 09:52', 'viernes, 26 de junio de 2015, Hora 09:52', '2015-06-26 14:52:41', '2015-06-26 14:52:41'),
+(483, 119, 2, 1, '100', '26 de junio - 09:52', 'viernes, 26 de junio de 2015, Hora 09:52', '2015-06-26 14:52:43', '2015-06-26 14:52:43'),
+(484, 1, 61, 1, '100', '26 de junio - 10:25', 'viernes, 26 de junio de 2015, Hora 10:25', '2015-06-26 15:25:00', '2015-06-26 15:25:00'),
+(485, 1, 61, 1, '200', '26 de junio - 10:25', 'viernes, 26 de junio de 2015, Hora 10:25', '2015-06-26 15:25:04', '2015-06-26 15:25:04'),
+(486, 1, 61, 1, '500', '26 de junio - 10:25', 'viernes, 26 de junio de 2015, Hora 10:25', '2015-06-26 15:25:08', '2015-06-26 15:25:08'),
+(487, 1, 61, 1, '1000', '26 de junio - 10:25', 'viernes, 26 de junio de 2015, Hora 10:25', '2015-06-26 15:25:11', '2015-06-26 15:25:11'),
+(488, 2, 61, 1, '500', '26 de junio - 10:26', 'viernes, 26 de junio de 2015, Hora 10:26', '2015-06-26 15:26:53', '2015-06-26 15:26:53'),
+(489, 2, 61, 1, '100', '26 de junio - 10:26', 'viernes, 26 de junio de 2015, Hora 10:26', '2015-06-26 15:26:59', '2015-06-26 15:26:59'),
+(490, 2, 61, 1, '1000', '26 de junio - 10:27', 'viernes, 26 de junio de 2015, Hora 10:27', '2015-06-26 15:27:07', '2015-06-26 15:27:07'),
+(491, 2, 61, 1, '200', '26 de junio - 10:27', 'viernes, 26 de junio de 2015, Hora 10:27', '2015-06-26 15:27:11', '2015-06-26 15:27:11'),
+(492, 120, 2, 1, '200', '26 de junio - 11:01', 'viernes, 26 de junio de 2015, Hora 11:01', '2015-06-26 16:01:57', '2015-06-26 16:01:57'),
+(493, 120, 2, 1, '100', '26 de junio - 11:02', 'viernes, 26 de junio de 2015, Hora 11:02', '2015-06-26 16:02:01', '2015-06-26 16:02:01'),
+(494, 120, 2, 1, '500', '26 de junio - 11:02', 'viernes, 26 de junio de 2015, Hora 11:02', '2015-06-26 16:02:04', '2015-06-26 16:02:04'),
+(495, 120, 2, 1, '1000', '26 de junio - 11:02', 'viernes, 26 de junio de 2015, Hora 11:02', '2015-06-26 16:02:07', '2015-06-26 16:02:07'),
+(496, 120, 2, 1, '500', '26 de junio - 11:02', 'viernes, 26 de junio de 2015, Hora 11:02', '2015-06-26 16:02:11', '2015-06-26 16:02:11'),
+(497, 120, 2, 1, '200', '26 de junio - 11:02', 'viernes, 26 de junio de 2015, Hora 11:02', '2015-06-26 16:02:14', '2015-06-26 16:02:14'),
+(498, 120, 2, 1, '100', '26 de junio - 11:02', 'viernes, 26 de junio de 2015, Hora 11:02', '2015-06-26 16:02:17', '2015-06-26 16:02:17'),
+(499, 121, 2, 1, '100', '26 de junio - 14:35', 'viernes, 26 de junio de 2015, Hora 14:35', '2015-06-26 19:35:26', '2015-06-26 19:35:26'),
+(500, 121, 2, 1, '200', '26 de junio - 14:35', 'viernes, 26 de junio de 2015, Hora 14:35', '2015-06-26 19:35:29', '2015-06-26 19:35:29'),
+(501, 121, 2, 1, '500', '26 de junio - 14:35', 'viernes, 26 de junio de 2015, Hora 14:35', '2015-06-26 19:35:30', '2015-06-26 19:35:30'),
+(502, 121, 2, 1, '1000', '26 de junio - 14:35', 'viernes, 26 de junio de 2015, Hora 14:35', '2015-06-26 19:35:31', '2015-06-26 19:35:31'),
+(503, 122, 2, 1, '200', '26 de junio - 16:13', 'viernes, 26 de junio de 2015, Hora 16:13', '2015-06-26 21:13:04', '2015-06-26 21:13:04'),
+(504, 122, 2, 1, '100', '26 de junio - 16:13', 'viernes, 26 de junio de 2015, Hora 16:13', '2015-06-26 21:13:08', '2015-06-26 21:13:08'),
+(505, 122, 2, 1, '1000', '26 de junio - 16:13', 'viernes, 26 de junio de 2015, Hora 16:13', '2015-06-26 21:13:12', '2015-06-26 21:13:12'),
+(506, 122, 2, 1, '500', '26 de junio - 16:13', 'viernes, 26 de junio de 2015, Hora 16:13', '2015-06-26 21:13:12', '2015-06-26 21:13:12'),
+(507, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:16', '2015-06-26 21:14:16'),
+(508, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:17', '2015-06-26 21:14:17'),
+(509, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:18', '2015-06-26 21:14:18'),
+(510, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:20', '2015-06-26 21:14:20'),
+(511, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:21', '2015-06-26 21:14:21'),
+(512, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:23', '2015-06-26 21:14:23'),
+(513, 123, 2, 1, '200', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:24', '2015-06-26 21:14:24'),
+(514, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:27', '2015-06-26 21:14:27'),
+(515, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:27', '2015-06-26 21:14:27'),
+(516, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:30', '2015-06-26 21:14:30'),
+(517, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:33', '2015-06-26 21:14:33'),
+(518, 123, 2, 1, '200', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:34', '2015-06-26 21:14:34'),
+(519, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:36', '2015-06-26 21:14:36'),
+(520, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:36', '2015-06-26 21:14:36'),
+(521, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:38', '2015-06-26 21:14:38'),
+(522, 123, 2, 1, '500', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:41', '2015-06-26 21:14:41'),
+(523, 123, 2, 1, '200', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:42', '2015-06-26 21:14:42'),
+(524, 123, 2, 1, '500', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:44', '2015-06-26 21:14:44'),
+(525, 123, 2, 1, '200', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:45', '2015-06-26 21:14:45'),
+(526, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:47', '2015-06-26 21:14:47'),
+(527, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:48', '2015-06-26 21:14:48'),
+(528, 123, 2, 1, '1000', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:50', '2015-06-26 21:14:50'),
+(529, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:52', '2015-06-26 21:14:52'),
+(530, 123, 2, 1, '200', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:53', '2015-06-26 21:14:53'),
+(531, 123, 2, 1, '100', '26 de junio - 16:14', 'viernes, 26 de junio de 2015, Hora 16:14', '2015-06-26 21:14:55', '2015-06-26 21:14:55'),
+(532, 124, 2, 1, '200', '30 de junio - 17:35', 'martes, 30 de junio de 2015, Hora 17:35', '2015-06-30 22:35:02', '2015-06-30 22:35:02'),
+(533, 124, 2, 1, '100', '30 de junio - 17:35', 'martes, 30 de junio de 2015, Hora 17:35', '2015-06-30 22:35:06', '2015-06-30 22:35:06'),
+(534, 124, 2, 1, '200', '30 de junio - 17:35', 'martes, 30 de junio de 2015, Hora 17:35', '2015-06-30 22:35:10', '2015-06-30 22:35:10'),
+(535, 124, 2, 1, '500', '30 de junio - 17:35', 'martes, 30 de junio de 2015, Hora 17:35', '2015-06-30 22:35:15', '2015-06-30 22:35:15'),
+(536, 124, 2, 1, '1000', '30 de junio - 17:35', 'martes, 30 de junio de 2015, Hora 17:35', '2015-06-30 22:35:16', '2015-06-30 22:35:16'),
+(537, 124, 2, 1, '200', '30 de junio - 17:35', 'martes, 30 de junio de 2015, Hora 17:35', '2015-06-30 22:35:22', '2015-06-30 22:35:22'),
+(538, 124, 2, 1, '500', '30 de junio - 17:35', 'martes, 30 de junio de 2015, Hora 17:35', '2015-06-30 22:35:23', '2015-06-30 22:35:23'),
+(539, 124, 2, 1, '100', '30 de junio - 17:35', 'martes, 30 de junio de 2015, Hora 17:35', '2015-06-30 22:35:24', '2015-06-30 22:35:24'),
+(540, 125, 2, 1, '200', '01 de julio - 12:13', 'miércoles, 01 de julio de 2015, Hora 12:13', '2015-07-01 17:13:08', '2015-07-01 17:13:08'),
+(541, 125, 2, 1, '100', '01 de julio - 12:13', 'miércoles, 01 de julio de 2015, Hora 12:13', '2015-07-01 17:13:18', '2015-07-01 17:13:18'),
+(542, 125, 2, 1, '500', '01 de julio - 12:13', 'miércoles, 01 de julio de 2015, Hora 12:13', '2015-07-01 17:13:23', '2015-07-01 17:13:23'),
+(543, 125, 2, 1, '200', '01 de julio - 12:13', 'miércoles, 01 de julio de 2015, Hora 12:13', '2015-07-01 17:13:31', '2015-07-01 17:13:31');
 
 -- --------------------------------------------------------
 
@@ -551,7 +625,7 @@ CREATE TABLE IF NOT EXISTS `estado_puerta` (
 --
 
 INSERT INTO `estado_puerta` (`id`, `user_id`, `alcancia_id`, `token`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, '123456', 0, '2015-06-25 05:00:00', '2015-06-25 22:53:28');
+(1, 2, 1, '123456', 0, '2015-06-25 05:00:00', '2015-06-26 14:47:16');
 
 -- --------------------------------------------------------
 
@@ -600,7 +674,8 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2015_06_09_142556_create_portafolios_table', 5),
 ('2015_06_22_100105_create_tokens_table', 6),
 ('2015_06_22_104807_add_api_token_users_table', 7),
-('2015_06_25_165851_crate_table_estado_puerta', 8);
+('2015_06_25_165851_crate_table_estado_puerta', 8),
+('2015_07_01_121240_create_rentabilidad_table', 9);
 
 -- --------------------------------------------------------
 
@@ -629,6 +704,47 @@ INSERT INTO `portafolios` (`id`, `nombre`, `descripcion`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `rentabilidad`
+--
+
+CREATE TABLE IF NOT EXISTS `rentabilidad` (
+`id` int(10) unsigned NOT NULL,
+  `portafolio_id` int(11) NOT NULL,
+  `renta` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `rentabilidad`
+--
+
+INSERT INTO `rentabilidad` (`id`, `portafolio_id`, `renta`, `fecha`, `created_at`, `updated_at`) VALUES
+(1, 1, '0.0', '2015-06-22', '2015-07-01 20:08:09', '2015-07-01 20:08:09'),
+(2, 2, '0.0', '2015-06-22', '2015-07-01 20:08:09', '2015-07-01 20:08:09'),
+(3, 3, '0.0', '2015-06-22', '2015-07-01 20:08:09', '2015-07-01 20:08:09'),
+(4, 4, '0.0', '2015-06-22', '2015-07-01 20:08:09', '2015-07-01 20:08:09'),
+(5, 1, '0.101', '2015-06-23', '2015-07-01 20:08:36', '2015-07-01 20:08:36'),
+(6, 2, '0.356', '2015-06-23', '2015-07-01 20:08:36', '2015-07-01 20:08:36'),
+(7, 3, '0.652', '2015-06-23', '2015-07-01 20:08:36', '2015-07-01 20:08:36'),
+(8, 4, '0.965', '2015-06-23', '2015-07-01 20:08:36', '2015-07-01 20:08:36'),
+(9, 1, '0.202', '2015-06-24', '2015-07-01 20:09:34', '2015-07-01 20:09:34'),
+(10, 2, '0.421', '2015-06-24', '2015-07-01 20:09:34', '2015-07-01 20:09:34'),
+(11, 3, '0.721', '2015-06-24', '2015-07-01 20:09:34', '2015-07-01 20:09:34'),
+(12, 4, '1.253', '2015-06-24', '2015-07-01 20:09:34', '2015-07-01 20:09:34'),
+(13, 1, '0.192', '2015-06-25', '2015-07-01 20:10:27', '2015-07-01 20:10:27'),
+(14, 2, '0.526', '2015-06-25', '2015-07-01 20:10:27', '2015-07-01 20:10:27'),
+(15, 3, '0.826', '2015-06-25', '2015-07-01 20:10:27', '2015-07-01 20:10:27'),
+(16, 4, '0.7268', '2015-06-25', '2015-07-01 20:10:27', '2015-07-01 20:10:27'),
+(17, 1, '0.199', '2015-06-26', '2015-07-01 20:12:20', '2015-07-01 20:12:20'),
+(18, 2, '0.512', '2015-06-26', '2015-07-01 20:12:20', '2015-07-01 20:12:20'),
+(19, 3, '0.789', '2015-06-26', '2015-07-01 20:12:20', '2015-07-01 20:12:20'),
+(20, 4, '1.587', '2015-06-26', '2015-07-01 20:12:20', '2015-07-01 20:12:20');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `throttle`
 --
 
@@ -642,7 +758,7 @@ CREATE TABLE IF NOT EXISTS `throttle` (
   `last_attempt_at` timestamp NULL DEFAULT NULL,
   `suspended_at` timestamp NULL DEFAULT NULL,
   `banned_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `throttle`
@@ -669,7 +785,10 @@ INSERT INTO `throttle` (`id`, `user_id`, `ip_address`, `attempts`, `suspended`, 
 (18, 2, '192.168.1.22', 0, 0, 0, NULL, NULL, NULL),
 (19, 57, NULL, 0, 0, 0, NULL, NULL, NULL),
 (20, 55, '192.168.1.21', 0, 0, 0, NULL, NULL, NULL),
-(21, 55, '192.168.1.22', 0, 0, 0, NULL, NULL, NULL);
+(21, 55, '192.168.1.22', 0, 0, 0, NULL, NULL, NULL),
+(22, 58, NULL, 0, 0, 0, NULL, NULL, NULL),
+(23, 60, NULL, 0, 0, 0, NULL, NULL, NULL),
+(24, 61, NULL, 0, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -685,7 +804,7 @@ CREATE TABLE IF NOT EXISTS `tokens` (
   `client` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `tokens`
@@ -695,7 +814,11 @@ INSERT INTO `tokens` (`id`, `user_id`, `api_token`, `expires_on`, `client`, `cre
 (5, 2, '4e3d66bf14345a67f2379299393f7698b7fbad5a7e5c5ca7a3144653f193ead3', '2015-07-25 21:01:37', '1||||Safari|4|||AndroidOS||||||A|3|1', '2015-06-25 21:01:37', '2015-06-25 21:01:37'),
 (6, 2, 'dcde6a17b22a126ede2f2f509cd42298f8d39babf5212977399910f155cfaac9', '2015-07-25 21:02:04', '||1||Chrome||||Win8.1|||||||1|1', '2015-06-25 21:02:04', '2015-06-25 21:02:04'),
 (7, 55, '8c96746e2a00575aefa5a8d78194eaa560db54cfb2b16ed94e054aa2179bb562', '2015-07-25 21:04:21', '||1||Chrome||||Win8.1|||||||1|1', '2015-06-25 21:04:21', '2015-06-25 21:04:21'),
-(8, 55, '376e75f16dfa632a0bc0384898e87abce3ac4ac3d40b5c42f78ff7ac885aebe1', '2015-07-25 21:07:49', '1||||Safari|4|||AndroidOS||||||A|3|1', '2015-06-25 21:07:49', '2015-06-25 21:07:49');
+(8, 55, '376e75f16dfa632a0bc0384898e87abce3ac4ac3d40b5c42f78ff7ac885aebe1', '2015-07-25 21:07:49', '1||||Safari|4|||AndroidOS||||||A|3|1', '2015-06-25 21:07:49', '2015-06-25 21:07:49'),
+(9, 58, '8e055fb7dde5c732cceb8f348f41c6d85be39f568f66f220ba2da73a6eebdf97', '2015-07-26 15:02:16', '||1||Chrome||||Win8.1|||||||1|1', '2015-06-26 15:02:16', '2015-06-26 15:02:16'),
+(10, 59, '9f9e5e1da4edc62e72b8fb03a2d137fedf9676d31a5d4418d52005b0514987e5', '2015-07-26 15:15:06', '||1||Chrome||||Win8.1|||||||1|1', '2015-06-26 15:15:06', '2015-06-26 15:15:06'),
+(11, 60, '2f7f6d832047109b8668766804c278152d28682f78f4eef657726d58648042c7', '2015-07-26 15:19:07', '||1||Chrome||||Win8.1|||||||1|1', '2015-06-26 15:19:07', '2015-06-26 15:19:07'),
+(12, 61, 'bdc82cab8ea4b36ddc5855ce69f947249ba5354ccaf3b1e247ae52460968dba2', '2015-07-26 15:21:03', '||1||Chrome||||Win8.1|||||||1|1', '2015-06-26 15:21:03', '2015-06-26 15:21:03');
 
 -- --------------------------------------------------------
 
@@ -721,14 +844,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `reset_password_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `tag`, `portafolio_id`, `first_name`, `last_name`, `email`, `cedula`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `created_at`, `updated_at`) VALUES
-(2, '1491825229', 4, 'Jefferson', 'Rivera', 'jefersonpatino@yahoo.es', '', '$2y$10$Goq5HMfIgJfzwjCIjJUCU.bQ4RQQ3pIAEGNqNJM2Zh6WPc81v/vwW', NULL, 1, NULL, NULL, '2015-06-25 22:52:29', '$2y$10$Kt5njDXQi.LksEtAcHwmY.heGwh8dkZNCH46leZDoG0m5XKIVTd4i', NULL, '2015-06-04 22:31:09', '2015-06-25 22:52:29'),
+(2, '1491825229', 4, 'Jefferson', 'Rivera', 'jefersonpatino@yahoo.es', '', '$2y$10$Goq5HMfIgJfzwjCIjJUCU.bQ4RQQ3pIAEGNqNJM2Zh6WPc81v/vwW', NULL, 1, NULL, NULL, '2015-07-01 22:36:42', '$2y$10$FOCHp13w4h8CoJ5PgYw76..d2y/v.0U2v2fI/p1tTI1SsJzCEa6Ty', NULL, '2015-06-04 22:31:09', '2015-07-01 22:36:42'),
 (3, '5197231978', 0, 'Alberto', 'Gonzales', 'a@b.c', '', '$2y$10$fzRT0VAbOxCKGSkHOTU25ehjpuhxpCcMUA/5TfdStLhko9Le3z.Jy', NULL, 1, NULL, NULL, '2015-06-25 19:36:29', '$2y$10$dvABZy9rBdfm3RpE1dg1S./QSN3X1SDJANhzvoBtEaeQeN1HXq9g2', NULL, '2015-06-04 21:35:20', '2015-06-25 19:36:29'),
 (10, '', 0, 'Angie', 'Diaz Galeano', 'riverajefer@gmail.com', '1032461591', '$2y$10$N5A9AZtdb66paxaMoMlORuH0Cs2WoLp0ih1wP/.GQibQdruMEJjJ2', NULL, 1, NULL, NULL, '2015-06-05 16:47:21', '$2y$10$Vlix.VNi7O0qVkXvEwfu2eQCilVvAWd.Dg/MutXAXy1dK6hsjO8uW', NULL, '2015-06-05 16:47:21', '2015-06-05 16:47:21'),
 (11, '', 0, 'juan', 'gomez', 'jg@gg.com', '1239', '$2y$10$PbS4CG358pGXbsFwxycoW.VMasa7SlRV2Bb8o5GGTOdS7gArd2hle', NULL, 1, NULL, NULL, '2015-06-05 19:59:32', '$2y$10$Q.4dyKGCtejp3vFmC6.ZEOJb64GgWbfKcJbSQNCy28tZlJ1a3FnNW', NULL, '2015-06-05 19:59:32', '2015-06-05 19:59:32'),
@@ -770,9 +893,13 @@ INSERT INTO `users` (`id`, `tag`, `portafolio_id`, `first_name`, `last_name`, `e
 (52, '1364171145', 1, 'dario', 'laguado', 'a@a.com', '80083899', '$2y$10$s5Pnwg4iebVuqVd/2.VoOOpN8Gmo61UBMwcOLu9nhX50F/VuqOsaO', NULL, 1, NULL, NULL, '2015-06-18 22:25:46', '$2y$10$iED.9/6oDq8BqsOx/kc09Og4akR6fA/N0hboQ36R5Vz2Z5LXieOke', NULL, '2015-06-18 22:25:45', '2015-06-18 22:26:03'),
 (53, '121123121212', 4, 'Angie', 'Diaz Galeano', 'riverajeferw@gmail.comqqqqq', '1032461591', '$2y$10$aIqljB.c.sTrKmxY.Br7Tu0OuWokiRz0RyPVHU3wQ5FccokeNr5Rm', NULL, 1, NULL, NULL, '2015-06-18 22:32:21', '$2y$10$hIw3QSAAnnTYyLyBYir26eSC2wKWmxypNBaIS8KMyF6fMUrfU6zaq', NULL, '2015-06-18 22:32:21', '2015-06-18 22:32:31'),
 (54, '854874', 1, 'Angie', 'Diaz Galeano', 'jefersonpatino@yahoo.esa', '1032461591', '$2y$10$bRPbV85ciG.XHaRPzASWCeG5kLIfI0bHdpH3B8tUEy6pGjEzrdHYO', NULL, 1, NULL, NULL, '2015-06-19 16:27:28', '$2y$10$qbgZ9tNf9yjJzcy1fGIpJOBECud2A06y4dtVe0HB0IVO4irh99L12', NULL, '2015-06-19 16:27:28', '2015-06-19 16:27:33'),
-(55, '519723197', 3, 'Pedro', 'Lopez', 'plopez@yahoo.es', '1032461591', '$2y$10$f947hRiY1VtqHRYvALHnxOcgP3oMzaYEOFzIDTTH50zuN5JW.WJMW', NULL, 1, NULL, NULL, '2015-06-25 21:09:55', '$2y$10$Y2akW9Q5zErn9vIPr473SOMbZBOgMok48A8SibhDPZPj0Sq5X5COq', NULL, '2015-06-19 16:38:22', '2015-06-25 21:09:55'),
+(55, '5197231970', 3, 'Pedro', 'Lopez', 'plopez@yahoo.es', '1032461591', '$2y$10$f947hRiY1VtqHRYvALHnxOcgP3oMzaYEOFzIDTTH50zuN5JW.WJMW', NULL, 1, NULL, NULL, '2015-06-25 21:09:55', '$2y$10$Y2akW9Q5zErn9vIPr473SOMbZBOgMok48A8SibhDPZPj0Sq5X5COq', NULL, '2015-06-19 16:38:22', '2015-06-25 21:09:55'),
 (56, '123454', 2, 'Antonio', 'Lopez', 'alopez@yahoo.es', '1032461589', '$2y$10$6qjW9nK6eqwoV8U3Ig.fKePYD9QxzVHXauHFrDlkN.Sl7l4K5Ndw2', NULL, 1, NULL, NULL, '2015-06-22 20:34:02', '$2y$10$jACYGg0ckSmRYBUjH1np6uYW8Sa4iR8mFp9HrQUzGqVvqPfzzkk4S', NULL, '2015-06-22 20:34:02', '2015-06-22 20:34:21'),
-(57, '3434343434', 3, 'Alejandra', 'Lopez', 'alejalopez@yahoo.es', '1032461591', '$2y$10$pXCq5S26elymr9ckPhayEepm1PksbEJfOu2iBlDooTNd12javbS.q', NULL, 1, NULL, NULL, '2015-06-25 20:51:10', '$2y$10$aWguitWI0.h5uRX8vOzRDeJg0pBFObkN.9ngDiq8HR.RdSlwMQqNm', NULL, '2015-06-22 20:36:15', '2015-06-25 20:51:10');
+(57, '3434343434', 3, 'Alejandra', 'Lopez', 'alejalopez@yahoo.es', '1032461591', '$2y$10$pXCq5S26elymr9ckPhayEepm1PksbEJfOu2iBlDooTNd12javbS.q', NULL, 1, NULL, NULL, '2015-06-25 20:51:10', '$2y$10$aWguitWI0.h5uRX8vOzRDeJg0pBFObkN.9ngDiq8HR.RdSlwMQqNm', NULL, '2015-06-22 20:36:15', '2015-06-25 20:51:10'),
+(58, '51972319721', 2, 'Mario', 'Gonzales', 'mg@yahoo.es', '1032461591', '$2y$10$TwutiSzVXOOr7sdlPqKKMeNOSe1JNoudqbnZ18a7vQ82LjbEjbeW6', NULL, 1, NULL, NULL, '2015-06-26 15:14:35', '$2y$10$Q1/lUPWSzhkOw7O.Ww3s4eI/HDhMA0odUKEfD/I0nc3x.S6P084PS', NULL, '2015-06-26 15:02:16', '2015-06-26 15:14:35'),
+(59, '', 0, 'Angie', 'Diaz Galeano', 'riverajefer@gmail.comsss', '1032461591', '$2y$10$1Zy3.lbnYqc/3n9xi3fKM.G03shM752rNCg/lUCcT7/7hGiaZDT1K', NULL, 1, NULL, NULL, '2015-06-26 15:15:06', '$2y$10$jIA16qrMluuEpv5LdS1p4Ou1DxVsmCMOpq0dyVQALcf6mbYO4kGGK', NULL, '2015-06-26 15:15:06', '2015-06-26 15:15:06'),
+(60, '787893216819', 3, 'Angie', 'Diaz Galeano', 'riverajefer@gmail.comecvg', '1032461591', '$2y$10$87FzSUAEprEmUxUkY6fgHOYdr7gu9OqX46Hjl7tf6GXgxKHWcBdDG', NULL, 1, NULL, NULL, '2015-06-26 15:20:22', '$2y$10$q1OZSDdsr1wGz9/1cQb9..hUHH0SC1minpDfilx3H1U.a7dUxgGPu', NULL, '2015-06-26 15:19:06', '2015-06-26 15:20:22'),
+(61, '519723197', 3, 'Jose', 'Morales', 'jmorales@yahoo.es', '2854158674', '$2y$10$cg26tHPqphqgkUwy99XJ8e0ag012mz5KxZgZs9VvDIW1Piu2GBQ1K', NULL, 1, NULL, NULL, '2015-06-26 16:25:26', '$2y$10$BDdkR1RKID9cGEGBbUUcEOjKgf86sCkQ3V5R3yB2h3SHylgoPDYPi', NULL, '2015-06-26 15:21:03', '2015-06-26 16:25:26');
 
 -- --------------------------------------------------------
 
@@ -828,6 +955,12 @@ ALTER TABLE `portafolios`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `rentabilidad`
+--
+ALTER TABLE `rentabilidad`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `throttle`
 --
 ALTER TABLE `throttle`
@@ -859,7 +992,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT de la tabla `ahorro`
 --
 ALTER TABLE `ahorro`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=470;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=544;
 --
 -- AUTO_INCREMENT de la tabla `alcancias`
 --
@@ -881,20 +1014,25 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 ALTER TABLE `portafolios`
 MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT de la tabla `rentabilidad`
+--
+ALTER TABLE `rentabilidad`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+--
 -- AUTO_INCREMENT de la tabla `throttle`
 --
 ALTER TABLE `throttle`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `tokens`
 --
 ALTER TABLE `tokens`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
