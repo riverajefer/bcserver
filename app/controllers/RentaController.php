@@ -34,24 +34,41 @@ class RentaController extends BaseController {
 	public function getAll()
 	{
 			$portafolios = Portafolio::all();
+			
 			$arreglo = [];
+			$fechas = [];
+			$renta = [];
+			$rentam = [];
+			$output = [];
+			$arra = [];
+			$valor =[];
+			$mas = [];
 
-			foreach($portafolios as $portafolio) {
 
-				$arreglo[preg_replace('[\s+]',"", $portafolio->nombre)] = $portafolio->renta()->get();
+			$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'fecha')->orderBy('portafolio_id')->get();
+
+			//return $lista_renta;
+
+
+			foreach($portafolios as $portafolio) 
+			{
+
+				$valor[$portafolio->id] = $portafolio->renta()->get();
+				
+				foreach ($valor[$portafolio->id] as $key => $value) {
+					$renta[] = $value->renta;
+					$mas['portafolio'.$portafolio->id][] = floatval($value->renta);
+				}
 
 			}
-			foreach ($arreglo['Moderado'] as $key => $moderado) {
 
-				$originalDate = "2010-03-21";
-				$newDate = date("Y,m,d", strtotime($moderado->fecha));				
-				$fecha = $moderado->fecha;
+
+			$fechas2 = Renta::groupBy('fecha')->get();
+			foreach ($fechas2 as $key => $value) {
+				$fechas[$key] = strftime("%d,%b", utf8_encode(strtotime($value->fecha)));
 			}
-			return $fecha;
 
-
-			return Response::json(['success'=>true, 'portafolio'=>$arreglo]);
-
+			return Response::json(['success'=>true, 'fechas'=>$fechas, 'renta'=>$mas]);
 	}
 
 
