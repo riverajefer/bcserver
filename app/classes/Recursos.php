@@ -1,10 +1,65 @@
 <?php
+
 class Recursos {
 
     public static function hola() 
     {
         return "Hola Mundo de los recursos";
     }
+
+
+
+	// último día habíl dese
+	public static function ultimoDiaHabilDesde($date, $dias){
+	    $workdays = array();
+	    $holidays = self::getHolidays();
+	    $date     = strtotime($date);
+
+	    while(count($workdays) < $dias){
+	        $date = strtotime("-1 day", $date);
+
+	        if(date('N',$date) < 6 && !in_array(date('Y-m-d',$date), $holidays))
+	            $workdays[] = date('Y-m-d', $date);
+	    }
+
+	    krsort($workdays);
+	    return reset($workdays);
+	}
+
+	public static function getHolidays(){
+	    $holidays = array(
+	        '2015-05-01',
+	    );
+	    $variable = $holidays;
+	    return $variable;
+	}
+
+
+	// Previous and Next 3 working days
+	public static function getWorkingDays2($date){
+	    $workdays['prev'] = $workdays['next'] = array();
+	    $holidays = self::getHolidays();
+	    $date     = strtotime($date);
+
+	    $start_date = $date;
+	    while(count($workdays['prev']) < 10){
+	        $date = strtotime("-1 day", $date);
+
+	        if(date('N',$date) < 6 && !in_array(date('Y-m-d',$date),$holidays))
+	            $workdays['prev'][] = date('Y-m-d',$date);
+	    }
+	    $date = $start_date;
+	    while(count($workdays['next']) < 10){
+	        $date = strtotime("+1 day", $date);
+
+	        if(date('N',$date) < 6 && !in_array(date('Y-m-d',$date),$holidays))
+	            $workdays['next'][] = date('Y-m-d',$date);
+	    }
+
+	    krsort($workdays['prev']);
+	    return $workdays;
+	}
+
 
 	public static function sanear_string($string)
 	{

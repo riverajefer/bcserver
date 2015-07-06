@@ -59,68 +59,23 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('rpi/cerrar_puerta', 'RpiController@cerrarPuerta');
 
-	Route::get('renta_all', 'RentaController@getAll');
+	Route::get('renta_semana', 'RentaController@getSemana');
 
 }); 
 
 
+
 Route::get('hola', function(){
 
-// -----------------------
-// Previous 3 working days # this is almost the same that someone already posted
-function getWorkingDays($date){
-    $workdays = array();
-    $holidays = getHolidays();
-    $date     = strtotime($date);
 
-    while(count($workdays) < 3){
-        $date = strtotime("-1 day", $date);
+$date = new DateTime(NULL, new DateTimeZone('UTC'));
+$date->setDate(2015, 07, 06);
+echo $ts = $date->getTimestamp();
+echo "<br>";
+echo '1438819200000';
 
-        if(date('N',$date) < 6 && !in_array(date('Y-m-d',$date),$holidays))
-            $workdays[] = date('Y-m-d',$date);
-    }
+	return;
 
-    krsort($workdays);
-    return $workdays;
-}
-// --------------------------------
-// Previous and Next 3 working days
-function getWorkingDays2($date){
-    $workdays['prev'] = $workdays['next'] = array();
-    $holidays = getHolidays();
-    $date     = strtotime($date);
-
-    $start_date = $date;
-    while(count($workdays['prev']) < 3){
-        $date = strtotime("-1 day", $date);
-
-        if(date('N',$date) < 6 && !in_array(date('Y-m-d',$date),$holidays))
-            $workdays['prev'][] = date('Y-m-d',$date);
-    }
-    $date = $start_date;
-    while(count($workdays['next']) < 3){
-        $date = strtotime("+1 day", $date);
-
-        if(date('N',$date) < 6 && !in_array(date('Y-m-d',$date),$holidays))
-            $workdays['next'][] = date('Y-m-d',$date);
-    }
-
-    krsort($workdays['prev']);
-    return $workdays;
-}
-
-function getHolidays(){
-    $holidays = array(
-        '2015-06-29',
-        '2015-06-30'
-    );
-    return $holidays;
-}
-
-echo '<pre>';
-print_r( getWorkingDays( '2015-07-03' ) );
-print_r( getWorkingDays2( '2015-07-03' ) );
-echo '</pre>';
 });
 
 
@@ -129,6 +84,7 @@ Route::get('renta', 'RentaController@vista');
 Route::post('renta', 'RentaController@save');
 
 Route::get('renta_all', 'RentaController@getAll');
+Route::get('renta_semana', 'RentaController@getSemana');
 
 
 
