@@ -115,10 +115,10 @@ class RentaController extends BaseController {
 
 			
 
-			$hoy = date('2015-06-29');
+			$hoy = date('2015-06-30');
 			//$hoy = date('Y-m-d');
-			$fecha_inicio = Recursos::ultimoDiaHabilDesde($hoy, 6);
-
+			$fecha_inicio = Recursos::ultimoDiaHabilDesde($hoy, 5);
+			
 			$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'fecha')->orderBy('portafolio_id')->get();
 
 			foreach($portafolios as $keyi => $portafolio) 
@@ -128,19 +128,21 @@ class RentaController extends BaseController {
 				
 				foreach ($valor[$portafolio->id] as $key => $value) {
 					
-					$dater = $value->fecha;
+					$fecha = $value->fecha;
+					$date = new DateTime($fecha);
+
+					$date->modify('+1 day');
+					$fecha = $date->format('Y-m-d');
+
 					date_default_timezone_set('UTC');
-					$datek =  (strtotime($dater) * 1000) - (strtotime('02-01-1970 00:00:00') * 1000);					
-					//$renta['portafolio'.($keyi+1)][] = $datek;
-					//$renta['portafolio'.($keyi+1)][] = floatval($value->renta);
-					$renta['portafolio'.($keyi+1)][] = array($datek, floatval(floatval($value->renta)));
-					//$renta = array("portafolio"=>array($datek, floatval(floatval($value->renta))));
+					$fechaUTC =  (strtotime($fecha) * 1000) - (strtotime('02-01-1970 00:00:00') * 1000);					
+					$renta['portafolio'.($keyi+1)][] = array($fechaUTC, floatval(floatval($value->renta)));
 
 				}
 
 			}
 			//return $renta;
-			return Response::json(['success'=>false,  'renta'=>$renta]);
+			return Response::json(['success'=>true,  'renta'=>$renta]);
 
 
 
