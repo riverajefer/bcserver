@@ -106,25 +106,34 @@ class RentaController extends BaseController {
 	public function getSemana()
 	{
 
-
 			$portafolios = Portafolio::all();
-			
-			$fechas = [];
+
 			$valor  = [];
 			$renta  = [];
-
-			
+			$promedio = [];
+			$portafoliosArray = [];
+			$colores = ['#DF7401', '#088A85', '#8A0868', '#04B404'];
 
 			$hoy = date('2015-06-30');
 			//$hoy = date('Y-m-d');
-			$fecha_inicio = Recursos::ultimoDiaHabilDesde($hoy, 5);
+			$fecha_inicio = Recursos::ultimoDiaHabilDesde($hoy, 6);
 			
 			$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'fecha')->orderBy('portafolio_id')->get();
+			
 
 			foreach($portafolios as $keyi => $portafolio) 
 			{
 
 				$valor[$portafolio->id] = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio, $hoy))->get();
+				$promedio = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio, $hoy))->avg('renta');
+
+				$portafoliosArray[($keyi+1)]['promedio']      = $promedio;
+				$portafoliosArray[($keyi+1)]['nombre']        = $portafolio->nombre;
+				$portafoliosArray[($keyi+1)]['id']       	  = $portafolio->id;
+				$portafoliosArray[($keyi+1)]['descripcion']   = $portafolio->descripcion;
+				$portafoliosArray[($keyi+1)]['color']         = $colores[$keyi];
+
+				//return $promedio;
 				
 				foreach ($valor[$portafolio->id] as $key => $value) {
 					
@@ -136,123 +145,15 @@ class RentaController extends BaseController {
 
 					date_default_timezone_set('UTC');
 					$fechaUTC =  (strtotime($fecha) * 1000) - (strtotime('02-01-1970 00:00:00') * 1000);					
-					$renta['portafolio'.($keyi+1)][] = array($fechaUTC, floatval(floatval($value->renta)));
+					//$renta['portafolio'.($keyi+1)][] = array($fechaUTC, floatval(floatval($value->renta)));
+					$portafoliosArray[($keyi+1)]['renta'][] = array($fechaUTC, floatval(floatval($value->renta)));
 
 				}
 
 			}
-			//return $renta;
-			return Response::json(['success'=>true,  'renta'=>$renta]);
 
+			return Response::json(['success'=>true, 'portafolios'=>$portafoliosArray]);
 
-
-
-		$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'created_at', 'fecha')->groupBy('fecha')->orderBy('portafolio_id')->get();
-		//return $lista_renta;
-		$arr = [];
-		$output = [];
-		$fechas = [];
-		foreach($lista_renta as $key => $renta) 
-			{
-
-					$dater = $renta->fecha;
-					date_default_timezone_set('UTC');
-					$datek =   (strtotime($dater) * 1000) - (strtotime('02-01-1970 00:00:00') * 1000);
-				    $pos = $renta->renta;
-				    $arr = array($datek, floatval($pos));
-				    array_push($output, $arr);  
-			}
-
-			//return $output;
-
-
-return Response::json(['success'=>false,  'renta'=>$output]);
-
-
-		/*
-		$array = array(
-				'[Date.UTC(2013,5,2),0.7695]',
-				'[Date.UTC(2013,5,3),0.7648]',
-				'[Date.UTC(2013,5,4),0.7645]',
-				'[Date.UTC(2013,5,5),0.7638]',
-				'[Date.UTC(2013,5,6),0.7549]',
-				'[Date.UTC(2013,5,7),0.7562]',
-				'[Date.UTC(2013,5,9),0.7574]'
-				);
-		return $array;
-
-$output = [];
-$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'fecha')->orderBy('portafolio_id')->get();
-while ($item = mysql_fetch_assoc($result)) {            
-    $name = $item['Item1'];
-    $date = str_replace("-",",",$item['Item2']);
-    $pos = $item['Item3'];
-
-    //I don't think there's supposed to be a comma after this square bracket
-    $arr = array("name"=>$name,"data"=>"[Date.UTC(".$date."), ".$pos." ]");
-    array_push($output, json_encode($arr));  	   
-}
-
-echo "[";
-foreach($output as $val){
-    echo $val;
-    if($val != end($output)) echo ",";
-}
-echo "]";
-*/
-
-
-			$portafolios = Portafolio::all();
-			
-			$fechas = [];
-			$valor  = [];
-			$renta  = [];
-			$mas  = [];
-			$output = [];
-			
-
-			$hoy = date('2015-06-29');
-			//$hoy = date('Y-m-d');
-			$fecha_inicio = Recursos::ultimoDiaHabilDesde($hoy, 6);
-
-			$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'fecha')->orderBy('portafolio_id')->get();
-
-			foreach($portafolios as $keyi => $portafolio) 
-			{
-
-				$valor[$portafolio->id] = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio, $hoy))->get();
-				
-				foreach ($valor[$portafolio->id] as $key => $value) {
-					//$renta['portafolio'.($keyi+1)][] = $value->fecha;
-					$date = str_replace("-",",",$value->fecha);
-					$renta['portafolio'.($keyi+1)][] = $date;
-					$renta['portafolio'.($keyi+1)][] = floatval($value->renta);
-
-					$arr = array("data"=>"[Date.UTC(".$date."), ".$value->renta." ]");
-					//$arr = array("data"=>"[Date.UTC(".$date."), ".floatval($value->renta."]");
-					array_push($output, json_encode($arr));     
-				}
-
-			}
-
-echo "[";
-foreach($output as $val){
-    echo $val;
-    if($val != end($output)) echo ",";
-}
-echo "]";
-return;
-
-			$fechas2 = Renta::groupBy('fecha')->whereBetween('fecha', array($fecha_inicio, $hoy))->get();
-
-			foreach ($fechas2 as $key => $value) {
-				$fechas[$key] = strftime("%d,%b,%y", utf8_encode(strtotime($value->fecha))); // retorno la fecha en formato "22,Jun"
-			}
-
-			return Response::json(['success'=>true, 'fechas'=>$fechas, 'renta'=>$renta]);
 	}
 
-
-	
 }
-
