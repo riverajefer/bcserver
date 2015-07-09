@@ -67,14 +67,41 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 Route::get('hola', function(){
 
+function random_float ($min,$max) {
+   return ( number_format ($min+lcg_value()*(abs($max-$min)), 4) );
+}
 
-$date = new DateTime(NULL, new DateTimeZone('UTC'));
-$date->setDate(2015, 07, 06);
-echo $ts = $date->getTimestamp();
-echo "<br>";
-echo '1438819200000';
+	$fechas = Recursos::getFechasArray('2015-07-10', 90);
+	$fechas = array_reverse(array_reverse($fechas)); 
+	//echo 
+	//echo array_reverse($fechas); 
+	foreach ($fechas as $key => $fecha) {
+		for($j=1; $j<=4; $j++){
+           
+           switch ($j) {
+		    case 1:
+		    	$R = random_float(0,1);
+		        break;
+		    case 2:
+		        $R = random_float(0,1.4);
+		        break;
+		    case 3:
+		        $R = random_float(0,2.2);
+		        break;
+		    case 4:
+		        $R = random_float(-1.2,3.3);
+		        break;		        
+		}
 
-	return;
+		    $renta = new Renta();
+			$renta->portafolio_id  = $j;
+			$renta->renta 		   = $R;
+			$renta->fecha 		   = $fecha;
+			$renta->save();	
+
+		}
+	}
+	return $renta;
 
 });
 

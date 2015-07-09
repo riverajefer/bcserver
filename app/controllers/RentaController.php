@@ -112,11 +112,11 @@ class RentaController extends BaseController {
 			$renta  = [];
 			$promedio = [];
 			$portafoliosArray = [];
-			$colores = ['#DF7401', '#088A85', '#8A0868', '#04B404'];
+			$colores = ['#DF7401', '#088A85', '#DF7401', '#04B404'];
 
-			$hoy = date('2015-06-30');
+			$hoy = date('2015-07-09');
 			//$hoy = date('Y-m-d');
-			$fecha_inicio = Recursos::ultimoDiaHabilDesde($hoy, 6);
+			$fecha_inicio = Recursos::ultimoDiaHabilDesde($hoy, 100);
 			
 			$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'fecha')->orderBy('portafolio_id')->get();
 			
@@ -124,7 +124,7 @@ class RentaController extends BaseController {
 			foreach($portafolios as $keyi => $portafolio) 
 			{
 
-				$valor[$portafolio->id] = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio, $hoy))->get();
+				$valor[$portafolio->id] = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio, $hoy))->orderBy('fecha')->get();
 				$promedio = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio, $hoy))->avg('renta');
 
 				$portafoliosArray[($keyi+1)]['promedio']      = $promedio;

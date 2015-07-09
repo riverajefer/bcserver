@@ -26,13 +26,62 @@ class Recursos {
 	    return reset($workdays);
 	}
 
+	// Array rango de fechas
+	public static function getFechasArray($date, $dias){
+	    $workdays = array();
+	    $holidays = self::getHolidays();
+	    $date     = strtotime($date);
+
+	    while(count($workdays) < $dias){
+	        $date = strtotime("-1 day", $date);
+
+	        if(date('N',$date) < 6 && !in_array(date('Y-m-d',$date), $holidays))
+	            $workdays[] = date('Y-m-d', $date);
+	    }
+
+	    krsort($workdays);
+	    return $workdays;
+	}
+
+
 	public static function getHolidays(){
 	    $holidays = array(
-	        '2015-05-01',
+	    	'2015-01-01',
+	    	'2015-01-15',
+
+	    	'2015-03-23',
+
+	    	'2015-04-02',
+	    	'2015-04-03',
+
+	    	'2015-05-01',
+	    	'2015-05-18',
+
+	    	'2015-06-08',
+	    	'2015-06-15',
+	    	'2015-06-29',
+
+	    	'2015-07-20',
+
+	    	'2015-08-07',
+	    	'2015-08-17',
+
+	    	'2015-10-12',
+
+	    	'2015-11-02',
+	    	'2015-11-16',
+
+	    	'2015-12-08',
+	    	'2015-12-25',
 	    );
 	    $variable = $holidays;
 	    return $variable;
 	}
+
+
+
+
+
 
 
 	// Previous and Next 3 working days
