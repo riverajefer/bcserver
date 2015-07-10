@@ -59,7 +59,7 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('rpi/cerrar_puerta', 'RpiController@cerrarPuerta');
 
-	Route::get('renta_semana', 'RentaController@getSemana');
+	Route::get('renta/all', 'RentaController@getAll');
 
 }); 
 

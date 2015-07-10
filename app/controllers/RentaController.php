@@ -31,79 +31,8 @@ class RentaController extends BaseController {
 
 	}
 
+
 	public function getAll()
-	{
-			$portafolios = Portafolio::all();
-			
-			$fechas = [];
-			$renta = [];
-			$valor =[];
-			$mas = [];
-
-
-			$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'fecha')->orderBy('portafolio_id')->get();
-
-			foreach($portafolios as $portafolio) 
-			{
-
-				$valor[$portafolio->id] = $portafolio->renta()->whereBetween('fecha', array('2015-06-22', '2015-06-26'))->get();
-				
-				foreach ($valor[$portafolio->id] as $key => $value) {
-					$renta[] = $value->renta;
-					$mas['portafolio'.$portafolio->id][] = floatval($value->renta);
-				}
-
-			}
-
-
-			$fechas2 = Renta::groupBy('fecha')->whereBetween('fecha', array('2015-06-22', '2015-06-26'))->get();
-			foreach ($fechas2 as $key => $value) {
-				$fechas[$key] = strftime("%d,%b", utf8_encode(strtotime($value->fecha)));
-			}
-
-			return Response::json(['success'=>true, 'fechas'=>$fechas, 'renta'=>$mas]);
-	}
-
-
-	public function getSemanaOriginal()
-	{
-			$portafolios = Portafolio::all();
-			
-			$fechas = [];
-			$valor  = [];
-			$renta  = [];
-
-			
-
-			$hoy = date('2015-06-29');
-			//$hoy = date('Y-m-d');
-			$fecha_inicio = Recursos::ultimoDiaHabilDesde($hoy, 6);
-
-			$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'fecha')->orderBy('portafolio_id')->get();
-
-			foreach($portafolios as $keyi => $portafolio) 
-			{
-
-				$valor[$portafolio->id] = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio, $hoy))->get();
-				
-				foreach ($valor[$portafolio->id] as $key => $value) {
-					$renta['portafolio'.($keyi+1)][] = floatval($value->renta);
-
-				}
-
-			}
-
-			$fechas2 = Renta::groupBy('fecha')->whereBetween('fecha', array($fecha_inicio, $hoy))->get();
-
-			foreach ($fechas2 as $key => $value) {
-				$fechas[$key] = strftime("%d,%b,%y", utf8_encode(strtotime($value->fecha))); // retorno la fecha en formato "22,Jun"
-			}
-
-			return Response::json(['success'=>true, 'fechas'=>$fechas, 'renta'=>$renta]);
-	}
-
-
-	public function getSemana()
 	{
 
 			$portafolios = Portafolio::all();
@@ -114,9 +43,10 @@ class RentaController extends BaseController {
 			$portafoliosArray = [];
 			$colores = ['#DF7401', '#088A85', '#DF7401', '#04B404'];
 
-			$hoy = date('2015-07-09');
-			//$hoy = date('Y-m-d');
+			//$hoy = date('2015-07-09');
+			$hoy = date('Y-m-d');
 			$fecha_inicio = Recursos::ultimoDiaHabilDesde($hoy, 100);
+			$fecha_inicio_semana = Recursos::ultimoDiaHabilDesde($hoy, 7);
 			
 			$lista_renta = DB::table('rentabilidad')->select('portafolio_id', 'renta', 'fecha')->orderBy('portafolio_id')->get();
 			
@@ -125,7 +55,7 @@ class RentaController extends BaseController {
 			{
 
 				$valor[$portafolio->id] = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio, $hoy))->orderBy('fecha')->get();
-				$promedio = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio, $hoy))->avg('renta');
+				$promedio = $portafolio->renta()->whereBetween('fecha', array($fecha_inicio_semana, $hoy))->avg('renta');
 
 				$portafoliosArray[($keyi+1)]['promedio']      = $promedio;
 				$portafoliosArray[($keyi+1)]['nombre']        = $portafolio->nombre;
