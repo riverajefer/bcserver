@@ -41,7 +41,7 @@ class RentaController extends BaseController {
 			$renta  = [];
 			$promedio = [];
 			$portafoliosArray = [];
-			$colores = ['#DF7401', '#088A85', '#DF7401', '#04B404'];
+			$colores = ['#DF7401', '#088A85', '#2E64FE', '#04B404'];
 
 			//$hoy = date('2015-07-09');
 			$hoy = date('Y-m-d');
@@ -60,7 +60,7 @@ class RentaController extends BaseController {
 				$portafoliosArray[($keyi+1)]['promedio']      = $promedio;
 				$portafoliosArray[($keyi+1)]['nombre']        = $portafolio->nombre;
 				$portafoliosArray[($keyi+1)]['id']       	  = $portafolio->id;
-				$portafoliosArray[($keyi+1)]['descripcion']   = $portafolio->descripcion;
+				//$portafoliosArray[($keyi+1)]['descripcion']   = $portafolio->descripcion;
 				$portafoliosArray[($keyi+1)]['color']         = $colores[$keyi];
 
 				//return $promedio;
@@ -76,7 +76,7 @@ class RentaController extends BaseController {
 					date_default_timezone_set('UTC');
 					$fechaUTC =  (strtotime($fecha) * 1000) - (strtotime('02-01-1970 00:00:00') * 1000);					
 					//$renta['portafolio'.($keyi+1)][] = array($fechaUTC, floatval(floatval($value->renta)));
-					$portafoliosArray[($keyi+1)]['renta'][] = array($fechaUTC, floatval(floatval($value->renta)));
+					$portafoliosArray[($keyi+1)]['renta'][] = array($fechaUTC, $value->renta );
 
 				}
 

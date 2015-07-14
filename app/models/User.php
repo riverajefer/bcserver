@@ -41,4 +41,11 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 		return $this->belongsTo('Portafolio');
 	}
 	
+
+	public function porcentaje()
+	{
+		return $this->hasOne('UserPorcentaje');
+	}
+
+
 }

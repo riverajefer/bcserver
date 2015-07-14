@@ -30,6 +30,10 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.login'), function() {
 
 }); 
 
+
+// provisonal
+Route::get('porcentaje/valor/{user_id}', 'PorcentajeController@getValor');
+
 Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('portafolios', 'PortafolioController@lista');
@@ -61,11 +65,22 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('renta/all', 'RentaController@getAll');
 
+	Route::get('porcentaje/valor/{user_id}', 'PorcentajeController@getValor');
+
 }); 
 
 
-
 Route::get('hola', function(){
+
+$porcentaje = Porcentaje::all();
+return $porcentaje; 
+
+
+});
+
+
+
+Route::get('registro_masivo', function(){
 
 function random_float ($min,$max) {
    return ( number_format ($min+lcg_value()*(abs($max-$min)), 4) );
