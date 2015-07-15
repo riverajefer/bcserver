@@ -13,7 +13,6 @@ Route::get('/', function()
 Route::get('rpi/user/{tag}', 'RpiController@getUser');
 Route::get('rpi/user_id/{tag}', 'RpiController@getUserId');
 Route::get('rpi/consecutivo/{id}', 'RpiController@getConsecutivo');
-Route::get('rpi/estado_puerta/', 'RpiController@getEstadoPuerta');
 Route::post('rpi/ahorro', 'AhorroController@postAhorro');
 
 
@@ -33,6 +32,9 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.login'), function() {
 
 // provisonal
 Route::get('porcentaje/valor/{user_id}', 'PorcentajeController@getValor');
+Route::get('renta/resultados/{user_id}', 'RentaController@getResultado');
+Route::get('portafolio/user/{id}', 'PortafolioController@portafolioUser');
+
 
 Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
@@ -65,18 +67,68 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('renta/all', 'RentaController@getAll');
 
+	Route::get('renta/resultados/{user_id}', 'RentaController@getResultado');
+
 	Route::get('porcentaje/valor/{user_id}', 'PorcentajeController@getValor');
 
 }); 
 
 
 Route::get('hola', function(){
+	//C:\xampp\htdocs\proyectos_laravel\laravel4\vendor\cartalyst\sentry\src\Cartalyst\Sentry\Users\Eloquent\User.php
+	// linea 824, para cambiar la longitud del codigo
+try
+{
+    // Find the user using the user email address
+    $user = Sentry::findUserByLogin('jefersonpatino@yahoo.es');
 
-$porcentaje = Porcentaje::all();
-return $porcentaje; 
+    // Get the password reset code
+    $resetCode = $user->getResetPasswordCode(5);
+    return $resetCode;
+
+    // Now you can send this code to your user via email for example.
+}
+catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+{
+    echo 'User was not found.';
+}
 
 
 });
+
+
+Route::get('hola2', function(){
+try
+{
+    // Find the user using the user id
+    $user = Sentry::findUserById(2);
+
+    // Check if the reset password code is valid
+    if ($user->checkResetPasswordCode('3LVy3'))
+    {
+        // Attempt to reset the user password
+        if ($user->attemptResetPassword('3LVy3', '320542'))
+        {
+            // Password reset passed
+            return "Todo, bien, password cambiado";
+        }
+        else
+        {
+            return "Ummmmm algo paso, no se pudo cambiar el password";
+        }
+    }
+    else
+    {
+        return  "The provided password reset code is Invalid";
+    }
+}
+catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+{
+    echo 'User was not found.';
+}
+
+});
+
 
 
 

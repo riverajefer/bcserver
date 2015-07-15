@@ -51,7 +51,7 @@ class PortafolioController extends BaseController {
 
 	public function portafolioUser($user_id)
 	{
-		$portafolio = User::find($user_id)->portafolio()->get();
+		$portafolio = User::findOrFail($user_id)->portafolio()->get();
 
 	    if(empty($portafolio)){
 	        App::abort(404);
