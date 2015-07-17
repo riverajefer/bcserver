@@ -27,6 +27,11 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.login'), function() {
 
     Route::get('login', 'AuthController@postLogin');
 
+	// Rutas para el restablecer la contraseña
+	Route::post('resetpw/{email}', 'ResetPwController@getCodigo');
+	Route::post('valida_codigo/{codigo}', 'ResetPwController@validaCodigo');
+	Route::post('cambio_pw/{codigo}', 'ResetPwController@cambioPw');
+
 }); 
 
 
@@ -34,6 +39,7 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.login'), function() {
 Route::get('porcentaje/valor/{user_id}', 'PorcentajeController@getValor');
 Route::get('renta/resultados/{user_id}', 'RentaController@getResultado');
 Route::get('portafolio/user/{id}', 'PortafolioController@portafolioUser');
+
 
 
 Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
@@ -71,12 +77,13 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('porcentaje/valor/{user_id}', 'PorcentajeController@getValor');
 
+
 }); 
 
 
 Route::get('hola', function(){
 	//C:\xampp\htdocs\proyectos_laravel\laravel4\vendor\cartalyst\sentry\src\Cartalyst\Sentry\Users\Eloquent\User.php
-	// linea 824, para cambiar la longitud del codigo
+	// linea 824, 423,  para cambiar la longitud del codigo
 try
 {
     // Find the user using the user email address
