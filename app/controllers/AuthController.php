@@ -63,6 +63,9 @@ class AuthController extends BaseController {
             $user_ahorro  = User::find($user_login->id);
             $ahorro = $user_ahorro->ahorro->sum('moneda');
 
+
+            $porcentaje = Recursos::getPorcentajeUser($user_login->id);
+            $ahorro = $ahorro - ($ahorro*$porcentaje);
             return Response::json(['success'=>true, 'user'=>$user_login, 'ahorro' => $ahorro, 'token' => $token->api_token]);
 
         }

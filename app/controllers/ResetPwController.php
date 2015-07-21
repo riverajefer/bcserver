@@ -17,6 +17,14 @@ class ResetPwController extends BaseController {
 
 		    $resetCode = $user->getResetPasswordCode(5);
 
+		    $data  = array('codigo'=>$resetCode);
+
+			Mail::queue('emails.resetpw', $data, function($message) use ($user)
+			{
+			    $message->from('info@bancoink.com', 'Bancoink');
+			    $message->to($user->email, $user->first_name)->subject('Reset Password!');
+			});		
+
 		    return Response::json(['success'=>true, 'codigo'=>$resetCode]);
 
 		}
@@ -37,6 +45,16 @@ class ResetPwController extends BaseController {
 		try
 		{
 		    $user = Sentry::findUserByResetPasswordCode($codigo);
+
+		    $data  = array('codigo'=>$codigo);
+
+			Mail::send('emails.resetpw', $data, function($message)
+			{
+			    $message->from('info@bancoink.com', 'Bancoink');
+
+			    $message->to($user->email, $user->first_name);
+
+			});		    
 
 		    return Response::json(['success'=>true, 'codigo'=>$codigo]);
 

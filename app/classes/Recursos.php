@@ -2,6 +2,34 @@
 
 class Recursos {
 
+
+    public static function getPorcentajeUser($user_id) 
+    {
+
+
+	    $porcentaje_general = Porcentaje::take(1)->get();
+
+	    $user = User::findOrFail($user_id);
+
+	   	$user_porcentaje = $user->porcentaje;	
+
+	   	$ValorPorcentaje = '';
+
+		if($user_porcentaje)
+		{
+			$ValorPorcentaje = $user_porcentaje;
+		}
+
+		else{
+
+			$ValorPorcentaje = $porcentaje_general;
+		}
+
+		return $ValorPorcentaje->valor;
+
+    }
+
+
     public static function hola() 
     {
         return "Hola Mundo de los recursos";

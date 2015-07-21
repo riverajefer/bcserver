@@ -84,23 +84,10 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 Route::get('hola', function(){
 	//C:\xampp\htdocs\proyectos_laravel\laravel4\vendor\cartalyst\sentry\src\Cartalyst\Sentry\Users\Eloquent\User.php
 	// linea 824, 423,  para cambiar la longitud del codigo
-try
-{
-    // Find the user using the user email address
-    $user = Sentry::findUserByLogin('jefersonpatino@yahoo.es');
-
-    // Get the password reset code
-    $resetCode = $user->getResetPasswordCode(5);
-    return $resetCode;
-
-    // Now you can send this code to your user via email for example.
-}
-catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
-{
-    echo 'User was not found.';
-}
 
 
+$porcentaje = Recursos::getPorcentajeUser(2);
+return $porcentaje;
 });
 
 

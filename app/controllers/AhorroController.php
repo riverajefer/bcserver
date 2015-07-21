@@ -53,8 +53,13 @@ class AhorroController extends BaseController {
 	        $ahorro->save();
 
 			$usuario = User::find($user_id);
+			// get porcentaje user
+			$porcentaje = Recursos::getPorcentajeUser($user_id);
+
 			$ahorro = $usuario->ahorro;
+
 			$suma = $ahorro->sum('moneda');
+			$suma = $suma - ($suma*$porcentaje);
 
 		    Pusherer::trigger('Canal_moneda'.$usuario->email, 'my_event-'.$usuario->email, array( 'moneda' => $moneda, 'suma'=>$suma ));
 	        
@@ -76,10 +81,43 @@ class AhorroController extends BaseController {
 		$user_id = Input::get('user_id');
 
 		$usuario = User::find($user_id);
+
+		// get porcentaje user
+		$porcentaje = Recursos::getPorcentajeUser($user_id);
+
 		$ahorro = $usuario->ahorro;
+
 		$suma = $ahorro->sum('moneda');
+		$suma = $suma - ($suma*$porcentaje);
 		return Response::json(['success'=>true, 'suma'=>$suma]);	
 	}
+
+	/**********************************************************************
+	  Retorna el historial, de los últimos 30 dias por usuario, agrupados por su consecutivo
+	***********************************************************************/	
+
+	public function getHistorialLast30($id)
+	{
+
+		$user = User::find($id);
+
+		$hoy = date('Y-m-d');
+		$hace_30_dias = date('Y-m-d', strtotime('today - 30 days')); 
+		$date = new DateTime($hoy);
+
+		$date->modify('+1 day');
+		$hoy =  $date->format('Y-m-d');
+		
+		$ahorro_30dias = $user->ahorro()->whereBetween('ahorro.created_at', array($hace_30_dias, $hoy))->sum('moneda');
+
+		// get porcentaje user
+		$porcentaje = Recursos::getPorcentajeUser($id);
+		$ahorro_30dias = $ahorro_30dias - ($ahorro_30dias*$porcentaje);		
+
+		return Response::json(['success'=>true, 'ahorro_30d'=>$ahorro_30dias]);
+
+	}
+
 
 	/**********************************************************************
 	  Retorna Todo el historial por usuario, agrupados por su consecutivo
@@ -157,7 +195,7 @@ class AhorroController extends BaseController {
 		    ->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))
 		    ->groupBy('ahorro.consecutivo')
 		    ->orderBy('ahorro.id', 'desc')
-		    ->take(1)->skip($skip)
+		    ->take(3)->skip($skip)
 		    ->get();
 
 		return Response::json(['success'=>true, 'historial'=>$historial]);
@@ -187,7 +225,7 @@ class AhorroController extends BaseController {
 		    ->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))
 		    ->groupBy('ahorro.consecutivo')
 		    ->orderBy('ahorro.id', 'desc')
-		    ->take(10)->skip(0)
+		    ->take(15)->skip(0)
 		    ->get();
 
 
@@ -211,8 +249,10 @@ class AhorroController extends BaseController {
 	public function getLastRowHistorialMes($id, $mas)
 	{
 
-		$skip_ini = 9; 
+		$skip_ini = 14;
+		//$mas = $mas + 4; 
 		$skip = $skip_ini + $mas;
+		//$skip = $skip + 5;
 
 		$primer_dia = new DateTime("first day of this month");
 		$ultimo_dia = new DateTime("last day of this month");
@@ -227,7 +267,7 @@ class AhorroController extends BaseController {
 		    ->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))
 		    ->groupBy('ahorro.consecutivo')
 		    ->orderBy('ahorro.id', 'desc')
-		    ->take(1)->skip($skip)
+		    ->take(3)->skip($skip)
 		    ->get();
 
 		return Response::json(['success'=>true, 'historial'=>$historial]);
@@ -310,32 +350,6 @@ class AhorroController extends BaseController {
 
 	}	
 
-	/**********************************************************************
-	  Retorna el historial, de los últimos 30 dias por usuario, agrupados por su consecutivo
-	***********************************************************************/	
 
-	public function getHistorialLast30($id)
-	{
-
-		$user = User::find($id);
-
-		$hoy = date('Y-m-d');
-		$hace_30_dias = date('Y-m-d', strtotime('today - 30 days')); 
-		$date = new DateTime($hoy);
-
-		$date->modify('+1 day');
-		$hoy =  $date->format('Y-m-d');
-		
-		/*echo "Hoy: ".$hoy;
-		echo "<br>";
-		echo "hace_30_dias: ".$hace_30_dias;
-		*/
-		//return;
-
-		$ahorro_30dias = $user->ahorro()->whereBetween('ahorro.created_at', array($hace_30_dias, $hoy))->sum('moneda');
-
-		return Response::json(['success'=>true, 'ahorro_30d'=>$ahorro_30dias]);
-
-	}
 
 }

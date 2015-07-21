@@ -124,6 +124,10 @@ Route::filter('auth.login', function($route, $request)
 	        $token = $consulta_token->first();
 	        $user_ahorro  = User::find($user_id);  
 	        $ahorro = $user_ahorro->ahorro->sum('moneda');
+	        
+	        // porcetaje de descuento del usuario
+            $porcentaje = Recursos::getPorcentajeUser($user_id);
+            $ahorro = $ahorro - ($ahorro*$porcentaje);	        
 	        return Response::json(['success'=>True, 'user' => $user, 'ahorro' => $ahorro, 'token' => $token->api_token]);   
 
 			$error = '';

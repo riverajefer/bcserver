@@ -15,12 +15,6 @@ class RpiController extends BaseController {
 		$apellido =Recursos::sanear_string($user->last_name);
 		$nombre_completo = $nombre.' '.$apellido;
 
-		$cambio_estado = Puerta::find(1);
-		$cambio_estado->estado = 0;
-		$cambio_estado->save();
-
-		$mensaje = 'Hola apertura';
-		//Pusherer::trigger('Canal_Apertura'.$user->email, 'my_event-'.$user->email, array( 'message' => $mensaje ));
 	    return $nombre_completo;
 	    
 	}
