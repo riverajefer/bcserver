@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default' => 'sync',
+	'default' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -30,6 +30,12 @@ return array(
 
 	'connections' => array(
 
+	    'mysql' => array(
+	        'driver' => 'mysql',
+	        'queue'  => 'default', // Optional
+	        'table'  => 'queue',  // Optional
+	    ),
+    
 		'sync' => array(
 			'driver' => 'sync',
 		),

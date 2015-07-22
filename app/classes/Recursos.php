@@ -17,12 +17,12 @@ class Recursos {
 
 		if($user_porcentaje)
 		{
-			$ValorPorcentaje = $user_porcentaje;
+			$ValorPorcentaje = $user_porcentaje->valor;
 		}
 
 		else{
 
-			$ValorPorcentaje = $porcentaje_general;
+			$ValorPorcentaje = $porcentaje_general[0]->valor;
 		}
 
 		return $ValorPorcentaje->valor;

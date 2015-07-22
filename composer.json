@@ -9,7 +9,8 @@
 		"hisorange/browser-detect": "1.*",
 		"artdarek/pusherer": "1.0.*",
 		"moura137/laravel-elephantio": "~0.1",
-        "nesbot/Carbon": "*"
+        "nesbot/Carbon": "*",
+        "shamiao/l4mysqlqueue": "~1.0"
 	},
 	"autoload": {
 

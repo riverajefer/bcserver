@@ -84,7 +84,8 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 Route::get('hola', function(){
 	//C:\xampp\htdocs\proyectos_laravel\laravel4\vendor\cartalyst\sentry\src\Cartalyst\Sentry\Users\Eloquent\User.php
 	// linea 824, 423,  para cambiar la longitud del codigo
-
+$porcentaje_general = Porcentaje::take(1)->get();
+return $porcentaje_general[0]->valor;
 
 $porcentaje = Recursos::getPorcentajeUser(2);
 return $porcentaje;

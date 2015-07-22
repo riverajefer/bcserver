@@ -17,18 +17,16 @@ class PorcentajeController extends BaseController {
 
 		if($user_porcentaje)
 		{
-			$ValorPorcentaje = $user_porcentaje;
+			$ValorPorcentaje = $user_porcentaje->valor;
 		}
 
 		else{
 
-			$ValorPorcentaje = $porcentaje_general;
+			$ValorPorcentaje = $porcentaje_general[0]->valor;
 		}
 
-		return Response::json(['success'=>true, 'porcentaje'=>$ValorPorcentaje]);
+		return Response::json(['success'=>true, 'porcentaje'=> floatval($ValorPorcentaje)]);
 
 
 	}
 
-
-}
