@@ -61,9 +61,44 @@ class AhorroController extends BaseController {
 			$suma = $ahorro->sum('moneda');
 			$suma = $suma - ($suma*$porcentaje);
 
-		    Pusherer::trigger('Canal_moneda'.$usuario->email, 'my_event-'.$usuario->email, array( 'moneda' => $moneda, 'suma'=>$suma ));
+		    //Pusherer::trigger('Canal_moneda'.$usuario->email, 'my_event-'.$usuario->email, array( 'moneda' => $moneda, 'suma'=>$suma ));
 	        
 	        return "Ahorro Guardado Ok";
+	    }
+
+	    else{
+	        return "No logueado";
+	    }
+
+	}
+
+	/****************************************************
+	  Guarda los registros de las monedas rechazadas
+	*****************************************************/
+
+	public function postRejected()
+	{
+
+	    $email       = Input::get('email');
+	    $password    = Input::get('password');
+	    $user_id     = Input::get('user_id');
+
+	    Auth::attempt(array(
+	        'email'     => $email ,
+	        'password'  => $password,
+	    ));
+
+	    if(Auth::check())
+	    {
+
+	    	$alcancia_id = Auth::User()->id;
+	        
+	        $rejected = new Rejected();
+	        $rejected->user_id      = $user_id; 
+	        $rejected->alcancia_id  = $alcancia_id;
+	        $rejected->save();
+
+	        return "Rejected Guardado Ok";
 	    }
 
 	    else{
@@ -92,11 +127,12 @@ class AhorroController extends BaseController {
 		return Response::json(['success'=>true, 'suma'=>$suma]);	
 	}
 
+
 	/**********************************************************************
-	  Retorna el historial, de los últimos 30 dias por usuario, agrupados por su consecutivo
+	  Retorna el ahorro, de los últimos 30 dias por usuario
 	***********************************************************************/	
 
-	public function getHistorialLast30($id)
+	public function getAhorro30dias($id)
 	{
 
 		$user = User::find($id);
@@ -117,239 +153,6 @@ class AhorroController extends BaseController {
 		return Response::json(['success'=>true, 'ahorro_30d'=>$ahorro_30dias]);
 
 	}
-
-
-	/**********************************************************************
-	  Retorna Todo el historial por usuario, agrupados por su consecutivo
-	***********************************************************************/	
-
-	public function getHistorial($id)
-	{
-
-		$historial = DB::table('alcancias')
-            ->join('ahorro', 'alcancias.id', '=', 'ahorro.alcancia_id')
-            ->select(DB::raw('sum(ahorro.moneda) as suma, ahorro.consecutivo, ahorro.fecha_corta as fecha,  ahorro.fecha as fecha_letra, alcancias.nombre, alcancias.ubicacion'))
-            ->where('ahorro.user_id', $id)
-            ->groupBy('ahorro.consecutivo')
-            ->orderBy('ahorro.id', 'desc')
-            ->get();
-
-		return Response::json(['success'=>true, 'historial'=>$historial]);
-
-	}
-
-
-	/******************************************************************************
-	  Retorna El historial de la semana, por usuario, agrupados por su consecutivo
-	*******************************************************************************/	
-
-	public function getHistorialSemana($id)
-	{
-
-		$fecha = new DateTime();
-
-		$fecha->setISODate(date("Y"), date("W"))->format('Y-m-d');
-		$fecha_inicio = $fecha->format('Y-m-d');
-
-		$fecha_fin =  $fecha->add(new DateInterval('P1W'))->format('Y-m-d');
-
-		$historial = DB::table('alcancias')
-		    ->join('ahorro', 'alcancias.id', '=', 'ahorro.alcancia_id')
-		    ->select(DB::raw('sum(ahorro.moneda) as suma, ahorro.consecutivo, ahorro.fecha_corta as fecha,  ahorro.fecha as fecha_letra, alcancias.nombre, alcancias.ubicacion'))
-		    ->where('ahorro.user_id', $id)
-		    ->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))
-		    ->groupBy('ahorro.consecutivo')
-		    ->orderBy('ahorro.id', 'desc')
-		    ->take(10)->skip(0)
-		    ->get();
-
-		$user = User::find($id);
-		$ahorro_semana = $user->ahorro()->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))->sum('moneda');
-
-		return Response::json(['success'=>true, 'historial'=>$historial, 'ahorro_semana'=>$ahorro_semana]);
-
-	}
-
-
-	/***********************************************************************************
-	  Retorna El último registro de la semana, por usuario, agrupado por su consecutivo
-	************************************************************************************/	
-
-	public function getLastRowHistorialSemana($id, $mas)
-	{
-
-		$skip_ini = 9; 
-		$skip = $skip_ini + $mas;
-
-		$fecha = new DateTime();
-
-		$fecha->setISODate(date("Y"), date("W"))->format('Y-m-d');
-		$fecha_inicio = $fecha->format('Y-m-d');
-
-		$fecha_fin =  $fecha->add(new DateInterval('P1W'))->format('Y-m-d');
-
-		$historial = DB::table('alcancias')
-		    ->join('ahorro', 'alcancias.id', '=', 'ahorro.alcancia_id')
-		    ->select(DB::raw('sum(ahorro.moneda) as suma, ahorro.consecutivo, ahorro.fecha_corta as fecha,  ahorro.fecha as fecha_letra, alcancias.nombre, alcancias.ubicacion'))
-		    ->where('ahorro.user_id', $id)
-		    ->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))
-		    ->groupBy('ahorro.consecutivo')
-		    ->orderBy('ahorro.id', 'desc')
-		    ->take(3)->skip($skip)
-		    ->get();
-
-		return Response::json(['success'=>true, 'historial'=>$historial]);
-
-	}	
-
-
-
-
-	/******************************************************************************
-	  Retorna El historial del mes, por usuario, agrupados por su consecutivo
-	*******************************************************************************/
-
-	public function getHistorialMes($id)
-	{
-
-		$primer_dia = new DateTime("first day of this month");
-		$ultimo_dia = new DateTime("last day of this month");
-
-		$fecha_inicio = $primer_dia->format('Y-m-d');
-		$fecha_fin = $ultimo_dia->format('Y-m-d');
-
-		$historial = DB::table('alcancias')
-		    ->join('ahorro', 'alcancias.id', '=', 'ahorro.alcancia_id')
-		    ->select(DB::raw('sum(ahorro.moneda) as suma, ahorro.consecutivo, ahorro.fecha_corta as fecha,  ahorro.fecha as fecha_letra, alcancias.nombre, alcancias.ubicacion'))
-		    ->where('ahorro.user_id', $id)
-		    ->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))
-		    ->groupBy('ahorro.consecutivo')
-		    ->orderBy('ahorro.id', 'desc')
-		    ->take(15)->skip(0)
-		    ->get();
-
-
-		// envio el mes, para mostrarlo el la app    
-		setlocale(LC_TIME, "esp");
-		$mes =  ucwords(strftime("%B"));
-
-		$user = User::find($id);
-		$ahorro_mes = $user->ahorro()->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))->sum('moneda');
-
-		return Response::json(['success'=>true, 'historial'=>$historial, 'ahorro_mes'=>$ahorro_mes, 'mes'=>$mes]);
-
-
-	}
-
-
-	/***********************************************************************************
-	  Retorna El último registro del mes, por usuario, agrupado por su consecutivo
-	************************************************************************************/	
-
-	public function getLastRowHistorialMes($id, $mas)
-	{
-
-		$skip_ini = 14;
-		//$mas = $mas + 4; 
-		$skip = $skip_ini + $mas;
-		//$skip = $skip + 5;
-
-		$primer_dia = new DateTime("first day of this month");
-		$ultimo_dia = new DateTime("last day of this month");
-
-		$fecha_inicio = $primer_dia->format('Y-m-d');
-		$fecha_fin = $ultimo_dia->format('Y-m-d');
-
-		$historial = DB::table('alcancias')
-		    ->join('ahorro', 'alcancias.id', '=', 'ahorro.alcancia_id')
-		    ->select(DB::raw('sum(ahorro.moneda) as suma, ahorro.consecutivo, ahorro.fecha_corta as fecha,  ahorro.fecha as fecha_letra, alcancias.nombre, alcancias.ubicacion'))
-		    ->where('ahorro.user_id', $id)
-		    ->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))
-		    ->groupBy('ahorro.consecutivo')
-		    ->orderBy('ahorro.id', 'desc')
-		    ->take(3)->skip($skip)
-		    ->get();
-
-		return Response::json(['success'=>true, 'historial'=>$historial]);
-
-	}
-
-
-
-
-	/**********************************************************************
-	  Retorna Detalles del ahorro por consecutivo
-	***********************************************************************/	
-
-	public function getHistorialDetalles($user_id, $consecutivo)
-	{
-
-		$detalles = DB::table('ahorro')->where('user_id', $user_id)->where('consecutivo', $consecutivo);
-		$registros =  $detalles->get();
-
-		$alcancia = $detalles->first()->alcancia_id;
-		$ubicacion = Alcancia::find($alcancia)->ubicacion;
-
- 		return Response::json(['success'=>true, 'ubicacion' =>$ubicacion, 'detalles'=>$registros]);            
-
-	}		
-
-
-
-	/******************************************************************************
-	  Retorna El historial entre un rango de fechas para un user
-	*******************************************************************************/
-
-	public function getHistorialRango($id)
-	{
-
-		$fecha_inicio = Input::get('fecha_inicio');
-		$fecha_fin = Input::get('fecha_fin');
-
-		$historial = DB::table('alcancias')
-		    ->join('ahorro', 'alcancias.id', '=', 'ahorro.alcancia_id')
-		    ->select(DB::raw('sum(ahorro.moneda) as suma, ahorro.consecutivo, ahorro.fecha_corta as fecha,  ahorro.fecha as fecha_letra, alcancias.nombre, alcancias.ubicacion'))
-		    ->where('ahorro.user_id', $id)
-		    ->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))
-		    ->groupBy('ahorro.consecutivo')
-		    ->orderBy('ahorro.id', 'desc')
-		    //->take(30)->skip(0)
-		    ->get();
-
-		$user = User::find($id);
-		$ahorro = $user->ahorro()->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))->sum('moneda');
-
-		return Response::json(['success'=>true, 'historial'=>$historial, 'ahorro'=>$ahorro]);
-
-	}
-
-	/***********************************************************************************
-	  Retorna el siguiente registro para el scroll infinito, por rango de fecha
-	************************************************************************************/	
-
-	public function getLastRowHistorialRango($id, $mas)
-	{
-
-		$skip_ini = 29; 
-		$skip = $skip_ini + $mas;
-
-		$fecha_inicio = Input::get('fecha_inicio');
-		$fecha_fin    = Input::get('fecha_fin');
-
-		$historial = DB::table('alcancias')
-		    ->join('ahorro', 'alcancias.id', '=', 'ahorro.alcancia_id')
-		    ->select(DB::raw('sum(ahorro.moneda) as suma, ahorro.consecutivo, ahorro.fecha_corta as fecha,  ahorro.fecha as fecha_letra, alcancias.nombre, alcancias.ubicacion'))
-		    ->where('ahorro.user_id', $id)
-		    ->whereBetween('ahorro.created_at', array($fecha_inicio, $fecha_fin))
-		    ->groupBy('ahorro.consecutivo')
-		    ->orderBy('ahorro.id', 'desc')
-		    ->take(1)->skip($skip)
-		    ->get();
-
-		return Response::json(['success'=>true, 'historial'=>$historial]);
-
-	}	
-
 
 
 }

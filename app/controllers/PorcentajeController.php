@@ -30,3 +30,4 @@ class PorcentajeController extends BaseController {
 
 	}
 
+}

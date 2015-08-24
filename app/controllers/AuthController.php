@@ -22,8 +22,10 @@ class AuthController extends BaseController {
             'apellido'  => 'required',
             'cedula'    => 'required|numeric',
             'email'     => 'required|email|unique:users',
-            'password'  => 'required|min:3|confirmed',
-            'password_confirmation' => 'required|min:3'
+            'pin'       => 'required|numeric|digits_between:0,4',
+            'password'  => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6',
+            
         );
 
        $validation = Validator::make($input, $reglas);
@@ -43,7 +45,8 @@ class AuthController extends BaseController {
                 'last_name'  => Input::get('apellido'),
                 'email'      => Input::get('email'),
                 'cedula'     => Input::get('cedula'),
-                'password'   => Input::get('password'),             
+                'password'   => Input::get('password'),
+                'pin'        => Input::get('pin'),
                 'activated'  => true,
             ));
             $userId = $user->getId();

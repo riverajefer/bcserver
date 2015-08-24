@@ -25,7 +25,7 @@ class Recursos {
 			$ValorPorcentaje = $porcentaje_general[0]->valor;
 		}
 
-		return $ValorPorcentaje->valor;
+		return $ValorPorcentaje;
 
     }
 

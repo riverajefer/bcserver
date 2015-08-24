@@ -52,7 +52,7 @@ class ResetPwController extends BaseController {
 			{
 			    $message->from('info@bancoink.com', 'Bancoink');
 
-			    $message->to($user->email, $user->first_name);
+			    //$message->to($user->email, $user->first_name);
 
 			});		    
 
