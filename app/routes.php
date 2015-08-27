@@ -64,6 +64,10 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 	Route::post('perfil/modificar/{user_id}', 'UsersController@postModificarPerfil');
 
 
+	/** Rutas Retiros y Transacciones **/
+	Route::get('ryt/buscar/{email}/{mi_email}', 'RyTController@buscarUserbyEmail');
+	Route::post('ryt/agregar_user', 'RyTController@addUserBancoink');
+
 }); 
 
 
