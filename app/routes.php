@@ -67,6 +67,7 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 	/** Rutas Retiros y Transacciones **/
 	Route::get('ryt/buscar/{email}/{mi_email}', 'RyTController@buscarUserbyEmail');
 	Route::post('ryt/agregar_user', 'RyTController@addUserBancoink');
+	Route::post('ryt/transferencia_bancoink', 'RyTController@TransferenciaBancoink');
 
 }); 
 
