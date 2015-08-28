@@ -73,6 +73,8 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 
 Route::get('hola', function(){
+	return $userbancoink = UsuariosBancoink::find(53)->user_id_t;
+
 	return "Hola";
 });
 

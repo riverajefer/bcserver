@@ -65,7 +65,35 @@ class RyTController extends BaseController {
 
             if($user->checkPassword( Input::get('pw') ))
             {
-                return Response::json(['success'=>true, 'valida_input'=>true, 'msg'=>'Todo ok, por ahora']);
+
+                $transferencia = new UserBancoinkTransferencia();
+
+                $transferencia->usuariobancoink_id = Input::get('id');
+                $transferencia->descripcion        = Input::get('descripcion');
+                $transferencia->valor              = Input::get('valor');
+                $transferencia->save();
+
+                // 
+                $userbancoink = UsuariosBancoink::find(Input::get('id'));
+
+                $transaccion = new Transacciones();
+
+                $transaccion->user_id  = $userbancoink->user_id;
+                $transaccion->valor    = Input::get('valor')*(-1); // se vuelve negativo
+                $transaccion->tipo     = 3;
+                $transaccion->origen   = 'UsuarioBancoink';
+                $transaccion->save();
+
+                $transaccion2 = new Transacciones();
+
+                $transaccion2->user_id  = $userbancoink->user_id_t;
+                $transaccion2->valor    = Input::get('valor');
+                $transaccion2->tipo     = 2;
+                $transaccion2->origen   = 'UsuarioBancoink';
+                $transaccion2->save();                
+
+                return Response::json(['success'=>true, 'valida_input'=>true, 'msg'=>'La transferencia de realizo correctamente']);
+
             }
             else
             {
