@@ -82,6 +82,7 @@ class RyTController extends BaseController {
                 $transaccion->valor    = Input::get('valor')*(-1); // se vuelve negativo
                 $transaccion->tipo     = 3;
                 $transaccion->origen   = 'UsuarioBancoink';
+                $transaccion->transferencia_id   = $transferencia->id;
                 $transaccion->save();
 
                 $transaccion2 = new Transacciones();
@@ -90,6 +91,7 @@ class RyTController extends BaseController {
                 $transaccion2->valor    = Input::get('valor');
                 $transaccion2->tipo     = 2;
                 $transaccion2->origen   = 'UsuarioBancoink';
+                $transaccion2->transferencia_id   = $transferencia->id;
                 $transaccion2->save();                
 
                 return Response::json(['success'=>true, 'valida_input'=>true, 'msg'=>'La transferencia de realizo correctamente']);
@@ -107,4 +109,46 @@ class RyTController extends BaseController {
 
 
     }
+
+
+    public function addTransferenciaBancoink()
+    {
+        //falta validar que si el usuario ya esta agregado, no lo vuelva a adicionar
+
+        $UsuariosBancoink = new UsuariosBancoink();
+        $UsuariosBancoink->user_id   = Input::get('user_id');
+        $UsuariosBancoink->user_id_t = Input::get('user_id_t');
+        $UsuariosBancoink->alias     = Input::get('alias');
+        $UsuariosBancoink->save();
+
+        return Response::json(['success'=>true, 'datos'=>$UsuariosBancoink]);
+
+    }
+
+    public function listaTransferenciasBancoink($user_id)
+    {
+
+        $ub = User::find($user_id)->usuarioBancoink;
+        $trans = array();
+
+        foreach ($ub as $key => $value) {
+            $trans[$key]['alias'] = $value->alias;
+            $trans[$key]['transacciones'] = count($value->userBancoinkTransferencia);
+        }
+        return Response::json(['success'=>true, 'datos'=>$trans]);        
+
+    }
+
+    public function listaBancos()
+    {
+        $bancos = Bancos::all();
+        return Response::json(['success'=>true, 'bancos'=>$bancos]);        
+    }    
+
+    public function getBanco($id)
+    {
+        $banco = Bancos::find($id);
+        return Response::json(['success'=>true, 'banco'=>$banco]);        
+    }    
+
 }

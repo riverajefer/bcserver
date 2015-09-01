@@ -67,15 +67,34 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 	/** Rutas Retiros y Transacciones **/
 	Route::get('ryt/buscar/{email}/{mi_email}', 'RyTController@buscarUserbyEmail');
 	Route::post('ryt/agregar_user', 'RyTController@addUserBancoink');
-	Route::post('ryt/transferencia_bancoink', 'RyTController@TransferenciaBancoink');
+	Route::post('ryt/agregar_transferencia_bancoink', 'RyTController@TransferenciaBancoink');
+
+	Route::get('ryt/lista_transferencias_bancoink/{user_id}', 'RyTController@listaTransferenciasBancoink');
+
+	Route::get('ryt/lista_bancos', 'RyTController@listaBancos');
+	Route::get('ryt/banco/{id}', 'RyTController@getBanco');
+
 
 }); 
 
 
 Route::get('hola', function(){
-	return $userbancoink = UsuariosBancoink::find(53)->user_id_t;
 
-	return "Hola";
+
+
+	//return $ubs = UsuariosBancoink::find(1)->userBancoinkTransferencia;
+	$ub = User::find(2)->usuarioBancoink;
+	$trans = array();
+
+	foreach ($ub as $key => $value) {
+		$trans[$key]['alias'] = $value->alias;
+		$trans[$key]['Transacciones'] = count($value->userBancoinkTransferencia);
+	}
+	return $trans;
+
+
+
+
 });
 
 
