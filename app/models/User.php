@@ -53,4 +53,9 @@ class User extends SentryUserModel implements UserInterface, RemindableInterface
 		return $this->hasMany('UsuariosBancoink');
 	}
 
+	public function bancos()
+	{
+		return $this->hasMany('UsersBanco', 'user_id');
+	}
+
 }

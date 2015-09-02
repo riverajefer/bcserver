@@ -71,8 +71,14 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('ryt/lista_transferencias_bancoink/{user_id}', 'RyTController@listaTransferenciasBancoink');
 
+	// Bancos
 	Route::get('ryt/lista_bancos', 'RyTController@listaBancos');
 	Route::get('ryt/banco/{id}', 'RyTController@getBanco');
+	
+	// Agregar Banco
+	Route::post('ryt/agregar_banco', 'RyTController@addBanco');
+
+	Route::get('ryt/lista_transferencias_banco/{user_id}', 'RyTController@listaTransferenciasBanco');
 
 
 }); 
@@ -80,20 +86,19 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 Route::get('hola', function(){
 
+	$user_id = 2;
+	//return $ub = User::find($user_id)->bancos;
 
-
-	//return $ubs = UsuariosBancoink::find(1)->userBancoinkTransferencia;
-	$ub = User::find(2)->usuarioBancoink;
+	//return $ubs = UsersBanco::find(1)->userBancoTransferencia;
+	$ub = User::find($user_id)->bancos;
 	$trans = array();
 
 	foreach ($ub as $key => $value) {
-		$trans[$key]['alias'] = $value->alias;
-		$trans[$key]['Transacciones'] = count($value->userBancoinkTransferencia);
+			$banco = Bancos::find($value->banco_id);
+            $trans[$key]['banco'] = $banco->banco;
+            $trans[$key]['transacciones'] = count($value->userBancoTransferencia);
 	}
 	return $trans;
-
-
-
 
 });
 

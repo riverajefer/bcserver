@@ -151,4 +151,38 @@ class RyTController extends BaseController {
         return Response::json(['success'=>true, 'banco'=>$banco]);        
     }    
 
+    public function addBanco()
+    {
+
+        $usuarioBanco = new UsersBanco();
+        $usuarioBanco->user_id        = Input::get('user_id');
+        $usuarioBanco->banco_id       = Input::get('banco_id');
+        $usuarioBanco->cedula         = Input::get('cedula');
+        $usuarioBanco->tipo_cuenta    = Input::get('tipo_cuenta');
+        $usuarioBanco->numero_cuenta  = Input::get('numero_cuenta');
+        $usuarioBanco->titular        = Input::get('titular');
+        $usuarioBanco->save();
+
+        return Response::json(['success'=>true, 'datos'=>$usuarioBanco]);
+
+    }
+
+    public function listaTransferenciasBanco($user_id)
+    {
+
+        $ub = User::find($user_id)->bancos;
+        $trans = array();
+
+        foreach ($ub as $key => $value) {
+                $banco = Bancos::find($value->banco_id);
+                $trans[$key]['banco'] = $banco->banco;
+                $trans[$key]['logo']  = $banco->logo;
+                $trans[$key]['transacciones'] = count($value->userBancoTransferencia);
+        }
+        return Response::json(['success'=>true, 'datos'=>$trans]);        
+
+    }    
+
 }
+
+
