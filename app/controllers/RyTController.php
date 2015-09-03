@@ -24,21 +24,32 @@ class RyTController extends BaseController {
 
     public function addUserBancoink()
     {
-        //falta validar que si el usuario ya esta agregado, no lo vuelva a adicionar
 
-        $UsuariosBancoink = new UsuariosBancoink();
-        $UsuariosBancoink->user_id   = Input::get('user_id');
-        $UsuariosBancoink->user_id_t = Input::get('user_id_t');
-        $UsuariosBancoink->alias     = Input::get('alias');
-        $UsuariosBancoink->save();
+        $user_id   = Input::get('user_id');
+        $user_id_t = Input::get('user_id_t');
 
-        return Response::json(['success'=>true, 'datos'=>$UsuariosBancoink]);
+        $usuario_registrado = UsuariosBancoink::where('user_id', $user_id)->where('user_id_t', $user_id_t)->first();
+
+        if($usuario_registrado){
+            return Response::json(['success'=>false, 'msg'=>'El usuario ya está registrado', 'datos'=>$usuario_registrado ]);
+        }else{
+
+            $UsuariosBancoink = new UsuariosBancoink();
+            $UsuariosBancoink->user_id   = Input::get('user_id');
+            $UsuariosBancoink->user_id_t = Input::get('user_id_t');
+            $UsuariosBancoink->alias     = Input::get('alias');
+            $UsuariosBancoink->save();
+
+            return Response::json(['success'=>true, 'datos'=>$UsuariosBancoink]);
+
+        }
 
     }
 
     public function TransferenciaBancoink()
     {
 
+        // validar que el valor que se va atransferir nosea superior al saldo
 
         $input = Input::all();
         $reglas =  array(
@@ -61,10 +72,22 @@ class RyTController extends BaseController {
         try
         {
             // Find the user using the user id
+            $user_id = Input::get('user_id');
             $user = Sentry::findUserById(Input::get('user_id'));
 
             if($user->checkPassword( Input::get('pw') ))
             {
+
+                // validar que el valor que se va atransferir nosea superior al saldo
+
+                $porcentaje = Recursos::getPorcentajeUser($user_id);
+                $saldo = User::find($user_id)->ahorro->sum('moneda');
+                $saldo = $saldo - ($saldo*$porcentaje);
+
+                if(Input::get('valor') >= $saldo){
+                    return Response::json(['success'=>false, 'msg'=>'El valor que va a transferir, debe ser menor a su saldo']);
+                }
+                
 
                 $transferencia = new UserBancoinkTransferencia();
 
@@ -133,6 +156,7 @@ class RyTController extends BaseController {
 
         foreach ($ub as $key => $value) {
             $trans[$key]['alias'] = $value->alias;
+            $trans[$key]['id']   =  $value->id;
             $trans[$key]['transacciones'] = count($value->userBancoinkTransferencia);
         }
         return Response::json(['success'=>true, 'datos'=>$trans]);        
@@ -175,6 +199,7 @@ class RyTController extends BaseController {
 
         foreach ($ub as $key => $value) {
                 $banco = Bancos::find($value->banco_id);
+                $trans[$key]['id']   =  $value->id;
                 $trans[$key]['banco'] = $banco->banco;
                 $trans[$key]['logo']  = $banco->logo;
                 $trans[$key]['transacciones'] = count($value->userBancoTransferencia);
@@ -182,6 +207,31 @@ class RyTController extends BaseController {
         return Response::json(['success'=>true, 'datos'=>$trans]);        
 
     }    
+
+    public function detallesTransferenciasBancoink($id)
+    {
+
+        $ub = UsuariosBancoink::find($id);
+        $alias = $ub->alias;
+        $trans = $ub->userBancoinkTransferencia;
+
+        return Response::json(['success'=>true, 'datos'=>$trans, 'alias'=>$alias]);       
+
+    }
+
+    public function detallesTransferenciasBanco($id)
+    {
+
+        $ub = UsersBanco::find($id);
+        $b  = Bancos::find($ub->banco_id);
+        $banco = $b->banco;
+        $logo  = $b->logo;
+        $trans = $ub->userBancoTransferencia;
+
+        return Response::json(['success'=>true, 'banco'=>$banco, 'logo'=>$logo, 'datos'=>$trans]);       
+
+    }
+
 
 }
 

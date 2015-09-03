@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-08-2015 a las 00:21:03
+-- Tiempo de generación: 04-09-2015 a las 00:41:12
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.5.19
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `ahorro` (
   `fecha` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=1384 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1399 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `ahorro`
@@ -1418,7 +1418,22 @@ INSERT INTO `ahorro` (`id`, `consecutivo`, `user_id`, `alcancia_id`, `moneda`, `
 (1380, 248, 2, 1, '1000', '24 de agosto - 16:24', 'lunes, 24 de agosto de 2015, Hora 16:24', '2015-08-24 21:24:46', '2015-08-24 21:24:46'),
 (1381, 248, 2, 1, '50', '24 de agosto - 16:24', 'lunes, 24 de agosto de 2015, Hora 16:24', '2015-08-24 21:24:47', '2015-08-24 21:24:47'),
 (1382, 248, 2, 1, '500', '24 de agosto - 16:24', 'lunes, 24 de agosto de 2015, Hora 16:24', '2015-08-24 21:24:50', '2015-08-24 21:24:50'),
-(1383, 249, 2, 1, '500', '25 de agosto - 09:43', 'martes, 25 de agosto de 2015, Hora 09:43', '2015-08-25 14:43:26', '2015-08-25 14:43:26');
+(1383, 249, 2, 1, '200', '27 de agosto - 11:30', 'jueves, 27 de agosto de 2015, Hora 11:30', '2015-08-27 16:30:00', '2015-08-27 16:30:00'),
+(1384, 249, 2, 1, '500', '27 de agosto - 11:30', 'jueves, 27 de agosto de 2015, Hora 11:30', '2015-08-27 16:30:02', '2015-08-27 16:30:02'),
+(1385, 249, 2, 1, '500', '27 de agosto - 11:30', 'jueves, 27 de agosto de 2015, Hora 11:30', '2015-08-27 16:30:04', '2015-08-27 16:30:04'),
+(1386, 249, 2, 1, '100', '27 de agosto - 11:30', 'jueves, 27 de agosto de 2015, Hora 11:30', '2015-08-27 16:30:05', '2015-08-27 16:30:05'),
+(1387, 249, 2, 1, '500', '27 de agosto - 11:30', 'jueves, 27 de agosto de 2015, Hora 11:30', '2015-08-27 16:30:06', '2015-08-27 16:30:06'),
+(1388, 250, 2, 1, '500', '27 de agosto - 13:51', 'jueves, 27 de agosto de 2015, Hora 13:51', '2015-08-27 18:51:51', '2015-08-27 18:51:51'),
+(1389, 250, 2, 1, '500', '27 de agosto - 13:51', 'jueves, 27 de agosto de 2015, Hora 13:51', '2015-08-27 18:51:58', '2015-08-27 18:51:58'),
+(1390, 250, 2, 1, '100', '27 de agosto - 13:52', 'jueves, 27 de agosto de 2015, Hora 13:52', '2015-08-27 18:52:00', '2015-08-27 18:52:00'),
+(1391, 250, 2, 1, '200', '27 de agosto - 13:52', 'jueves, 27 de agosto de 2015, Hora 13:52', '2015-08-27 18:52:01', '2015-08-27 18:52:01'),
+(1392, 250, 2, 1, '200', '27 de agosto - 13:52', 'jueves, 27 de agosto de 2015, Hora 13:52', '2015-08-27 18:52:06', '2015-08-27 18:52:06'),
+(1393, 250, 2, 1, '100', '27 de agosto - 13:52', 'jueves, 27 de agosto de 2015, Hora 13:52', '2015-08-27 18:52:12', '2015-08-27 18:52:12'),
+(1394, 250, 2, 1, '100', '27 de agosto - 13:52', 'jueves, 27 de agosto de 2015, Hora 13:52', '2015-08-27 18:52:12', '2015-08-27 18:52:12'),
+(1395, 250, 2, 1, '200', '27 de agosto - 13:52', 'jueves, 27 de agosto de 2015, Hora 13:52', '2015-08-27 18:52:17', '2015-08-27 18:52:17'),
+(1396, 250, 2, 1, '500', '27 de agosto - 13:52', 'jueves, 27 de agosto de 2015, Hora 13:52', '2015-08-27 18:52:24', '2015-08-27 18:52:24'),
+(1397, 251, 2, 1, '500', '31 de agosto - 16:52', 'lunes, 31 de agosto de 2015, Hora 16:52', '2015-08-31 21:52:56', '2015-08-31 21:52:56'),
+(1398, 251, 2, 1, '1000', '31 de agosto - 16:52', 'lunes, 31 de agosto de 2015, Hora 16:52', '2015-08-31 21:52:58', '2015-08-31 21:52:58');
 
 -- --------------------------------------------------------
 
@@ -1445,6 +1460,48 @@ CREATE TABLE IF NOT EXISTS `alcancias` (
 INSERT INTO `alcancias` (`id`, `referencia`, `nombre`, `ubicacion`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, '123abc', 'Piggy 1.0', 'Trigger', 'Piggy@algo.es', '$2y$10$ZfMVsi8B.AwL1xjnNTgCK.X5IOu9XvNtC4Mp5c2817ua4iOO49Q56', 'rowU0F2C6RM5rXn6vpIbCnYtu8Ro09VHVSOnX9vqjANyjXfKDQEgTg0kzxwm', '2015-06-04 22:21:13', '2015-06-04 22:24:55'),
 (2, '123abc', 'Piggy G ', 'Zona G', 'zonag@algo.es', '$2y$10$ZfMVsi8B.AwL1xjnNTgCK.X5IOu9XvNtC4Mp5c2817ua4iOO49Q56', 'rowU0F2C6RM5rXn6vpIbCnYtu8Ro09VHVSOnX9vqjANyjXfKDQEgTg0kzxwm', '2015-06-04 22:21:13', '2015-06-04 22:24:55');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bancos`
+--
+
+CREATE TABLE IF NOT EXISTS `bancos` (
+`id` int(10) unsigned NOT NULL,
+  `banco` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `logo` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `bancos`
+--
+
+INSERT INTO `bancos` (`id`, `banco`, `logo`, `created_at`, `updated_at`) VALUES
+(1, 'Banco de Bogotá', 'bogota.gif', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Banco Popular', 'popular.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Banco CorpBanca', 'corpbanca.jpg', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Bancolombia', 'bancolombia.gif', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'Citibank', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'Banco GNB Sudameris', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'BBVA Colombia', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'Banco de Occidente', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 'BCSC S.A.', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 'Davivienda', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, 'Colpatria Red Multibanca', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, 'Banagrario', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, 'AV Villas', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(14, 'Procredit', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 'Bancamía S.A.', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(16, 'WWB S.A.', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(17, 'Bancoomeva', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(18, 'Finandina', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(19, 'Banco Falabella S.A.', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(20, 'Banco Pichincha S.A.', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(21, 'Coopcentral', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(22, 'Banco Santander', 'banco.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1513,7 +1570,13 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2015_07_14_153325_create_users_porcentaje_table', 11),
 ('2015_07_22_105131_create_failed_jobs_table', 12),
 ('2014_10_09_212439_create_queue_table', 13),
-('2015_08_10_104751_create_table_rejected', 14);
+('2015_08_10_104751_create_table_rejected', 14),
+('2015_08_26_185526_create_table_transferencias_users', 15),
+('2015_08_27_143741_create_table_usuarios_bancoink_transferencias', 16),
+('2015_08_28_113018_create_transacciones_table', 17),
+('2015_09_01_160530_create_table_bancos', 18),
+('2015_09_02_154233_create_table_users_bancos', 19),
+('2015_09_02_170202_create_table_users_bancos_transferencias', 20);
 
 -- --------------------------------------------------------
 
@@ -1572,7 +1635,7 @@ CREATE TABLE IF NOT EXISTS `queue` (
   `attempts` int(10) unsigned NOT NULL,
   `payload` longtext NOT NULL,
   `fireon` bigint(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=ascii;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=ascii;
 
 --
 -- Volcado de datos para la tabla `queue`
@@ -1587,7 +1650,9 @@ INSERT INTO `queue` (`ID`, `queue_name`, `status`, `attempts`, `payload`, `fireo
 (6, 'default', 'pending', 1, '{"job":"mailer@handleQueuedMessage","data":{"view":"emails.resetpw","data":{"codigo":"hI2WF"},"callback":"C:38:\\"Illuminate\\\\Support\\\\SerializableClosure\\":2585:{a:2:{i:0;s:167:\\"function ($message) use($user) {\\n    $message->from(''info@bancoink.com'', ''Bancoink'');\\n    $message->to($user->email, $user->first_name)->subject(''Reset Password!'');\\n};\\";i:1;a:1:{s:4:\\"user\\";O:36:\\"Cartalyst\\\\Sentry\\\\Users\\\\Eloquent\\\\User\\":24:{s:8:\\"\\u0000*\\u0000table\\";s:5:\\"users\\";s:9:\\"\\u0000*\\u0000hidden\\";a:4:{i:0;s:8:\\"password\\";i:1;s:19:\\"reset_password_code\\";i:2;s:15:\\"activation_code\\";i:3;s:12:\\"persist_code\\";}s:10:\\"\\u0000*\\u0000guarded\\";a:3:{i:0;s:19:\\"reset_password_code\\";i:1;s:15:\\"activation_code\\";i:2;s:12:\\"persist_code\\";}s:21:\\"\\u0000*\\u0000hashableAttributes\\";a:2:{i:0;s:8:\\"password\\";i:1;s:12:\\"persist_code\\";}s:27:\\"\\u0000*\\u0000allowedPermissionsValues\\";a:3:{i:0;i:-1;i:1;i:0;i:2;i:1;}s:13:\\"\\u0000*\\u0000userGroups\\";N;s:20:\\"\\u0000*\\u0000mergedPermissions\\";N;s:13:\\"\\u0000*\\u0000connection\\";N;s:13:\\"\\u0000*\\u0000primaryKey\\";s:2:\\"id\\";s:10:\\"\\u0000*\\u0000perPage\\";i:15;s:12:\\"incrementing\\";b:1;s:10:\\"timestamps\\";b:1;s:13:\\"\\u0000*\\u0000attributes\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$zVeOFScdkWHjsmo8Tk2DuuJwneFjSdAkQ6DBBcqhy55.ePm55uILG\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"hI2WF\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 15:48:46\\";}s:11:\\"\\u0000*\\u0000original\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$zVeOFScdkWHjsmo8Tk2DuuJwneFjSdAkQ6DBBcqhy55.ePm55uILG\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"hI2WF\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 15:48:46\\";}s:12:\\"\\u0000*\\u0000relations\\";a:0:{}s:10:\\"\\u0000*\\u0000visible\\";a:0:{}s:10:\\"\\u0000*\\u0000appends\\";a:0:{}s:11:\\"\\u0000*\\u0000fillable\\";a:0:{}s:8:\\"\\u0000*\\u0000dates\\";a:0:{}s:10:\\"\\u0000*\\u0000touches\\";a:0:{}s:14:\\"\\u0000*\\u0000observables\\";a:0:{}s:7:\\"\\u0000*\\u0000with\\";a:0:{}s:13:\\"\\u0000*\\u0000morphClass\\";N;s:6:\\"exists\\";b:1;}}}}"}}', 1440103726),
 (7, 'default', 'pending', 1, '{"job":"mailer@handleQueuedMessage","data":{"view":"emails.resetpw","data":{"codigo":"PbNYR"},"callback":"C:38:\\"Illuminate\\\\Support\\\\SerializableClosure\\":2585:{a:2:{i:0;s:167:\\"function ($message) use($user) {\\n    $message->from(''info@bancoink.com'', ''Bancoink'');\\n    $message->to($user->email, $user->first_name)->subject(''Reset Password!'');\\n};\\";i:1;a:1:{s:4:\\"user\\";O:36:\\"Cartalyst\\\\Sentry\\\\Users\\\\Eloquent\\\\User\\":24:{s:8:\\"\\u0000*\\u0000table\\";s:5:\\"users\\";s:9:\\"\\u0000*\\u0000hidden\\";a:4:{i:0;s:8:\\"password\\";i:1;s:19:\\"reset_password_code\\";i:2;s:15:\\"activation_code\\";i:3;s:12:\\"persist_code\\";}s:10:\\"\\u0000*\\u0000guarded\\";a:3:{i:0;s:19:\\"reset_password_code\\";i:1;s:15:\\"activation_code\\";i:2;s:12:\\"persist_code\\";}s:21:\\"\\u0000*\\u0000hashableAttributes\\";a:2:{i:0;s:8:\\"password\\";i:1;s:12:\\"persist_code\\";}s:27:\\"\\u0000*\\u0000allowedPermissionsValues\\";a:3:{i:0;i:-1;i:1;i:0;i:2;i:1;}s:13:\\"\\u0000*\\u0000userGroups\\";N;s:20:\\"\\u0000*\\u0000mergedPermissions\\";N;s:13:\\"\\u0000*\\u0000connection\\";N;s:13:\\"\\u0000*\\u0000primaryKey\\";s:2:\\"id\\";s:10:\\"\\u0000*\\u0000perPage\\";i:15;s:12:\\"incrementing\\";b:1;s:10:\\"timestamps\\";b:1;s:13:\\"\\u0000*\\u0000attributes\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$zVeOFScdkWHjsmo8Tk2DuuJwneFjSdAkQ6DBBcqhy55.ePm55uILG\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"PbNYR\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 15:55:20\\";}s:11:\\"\\u0000*\\u0000original\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$zVeOFScdkWHjsmo8Tk2DuuJwneFjSdAkQ6DBBcqhy55.ePm55uILG\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"PbNYR\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 15:55:20\\";}s:12:\\"\\u0000*\\u0000relations\\";a:0:{}s:10:\\"\\u0000*\\u0000visible\\";a:0:{}s:10:\\"\\u0000*\\u0000appends\\";a:0:{}s:11:\\"\\u0000*\\u0000fillable\\";a:0:{}s:8:\\"\\u0000*\\u0000dates\\";a:0:{}s:10:\\"\\u0000*\\u0000touches\\";a:0:{}s:14:\\"\\u0000*\\u0000observables\\";a:0:{}s:7:\\"\\u0000*\\u0000with\\";a:0:{}s:13:\\"\\u0000*\\u0000morphClass\\";N;s:6:\\"exists\\";b:1;}}}}"}}', 1440104121),
 (8, 'default', 'pending', 1, '{"job":"mailer@handleQueuedMessage","data":{"view":"emails.resetpw","data":{"codigo":"dBPOc"},"callback":"C:38:\\"Illuminate\\\\Support\\\\SerializableClosure\\":2585:{a:2:{i:0;s:167:\\"function ($message) use($user) {\\n    $message->from(''info@bancoink.com'', ''Bancoink'');\\n    $message->to($user->email, $user->first_name)->subject(''Reset Password!'');\\n};\\";i:1;a:1:{s:4:\\"user\\";O:36:\\"Cartalyst\\\\Sentry\\\\Users\\\\Eloquent\\\\User\\":24:{s:8:\\"\\u0000*\\u0000table\\";s:5:\\"users\\";s:9:\\"\\u0000*\\u0000hidden\\";a:4:{i:0;s:8:\\"password\\";i:1;s:19:\\"reset_password_code\\";i:2;s:15:\\"activation_code\\";i:3;s:12:\\"persist_code\\";}s:10:\\"\\u0000*\\u0000guarded\\";a:3:{i:0;s:19:\\"reset_password_code\\";i:1;s:15:\\"activation_code\\";i:2;s:12:\\"persist_code\\";}s:21:\\"\\u0000*\\u0000hashableAttributes\\";a:2:{i:0;s:8:\\"password\\";i:1;s:12:\\"persist_code\\";}s:27:\\"\\u0000*\\u0000allowedPermissionsValues\\";a:3:{i:0;i:-1;i:1;i:0;i:2;i:1;}s:13:\\"\\u0000*\\u0000userGroups\\";N;s:20:\\"\\u0000*\\u0000mergedPermissions\\";N;s:13:\\"\\u0000*\\u0000connection\\";N;s:13:\\"\\u0000*\\u0000primaryKey\\";s:2:\\"id\\";s:10:\\"\\u0000*\\u0000perPage\\";i:15;s:12:\\"incrementing\\";b:1;s:10:\\"timestamps\\";b:1;s:13:\\"\\u0000*\\u0000attributes\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$tSNvPdUhH6lgpovY3zO9He\\/5bB9fk\\/o2prdqAjYF.Wl3ZZZYgDmsi\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"dBPOc\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 15:59:52\\";}s:11:\\"\\u0000*\\u0000original\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$tSNvPdUhH6lgpovY3zO9He\\/5bB9fk\\/o2prdqAjYF.Wl3ZZZYgDmsi\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"dBPOc\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 15:59:52\\";}s:12:\\"\\u0000*\\u0000relations\\";a:0:{}s:10:\\"\\u0000*\\u0000visible\\";a:0:{}s:10:\\"\\u0000*\\u0000appends\\";a:0:{}s:11:\\"\\u0000*\\u0000fillable\\";a:0:{}s:8:\\"\\u0000*\\u0000dates\\";a:0:{}s:10:\\"\\u0000*\\u0000touches\\";a:0:{}s:14:\\"\\u0000*\\u0000observables\\";a:0:{}s:7:\\"\\u0000*\\u0000with\\";a:0:{}s:13:\\"\\u0000*\\u0000morphClass\\";N;s:6:\\"exists\\";b:1;}}}}"}}', 1440104392),
-(9, 'default', 'pending', 1, '{"job":"mailer@handleQueuedMessage","data":{"view":"emails.resetpw","data":{"codigo":"5yVo8"},"callback":"C:38:\\"Illuminate\\\\Support\\\\SerializableClosure\\":2585:{a:2:{i:0;s:167:\\"function ($message) use($user) {\\n    $message->from(''info@bancoink.com'', ''Bancoink'');\\n    $message->to($user->email, $user->first_name)->subject(''Reset Password!'');\\n};\\";i:1;a:1:{s:4:\\"user\\";O:36:\\"Cartalyst\\\\Sentry\\\\Users\\\\Eloquent\\\\User\\":24:{s:8:\\"\\u0000*\\u0000table\\";s:5:\\"users\\";s:9:\\"\\u0000*\\u0000hidden\\";a:4:{i:0;s:8:\\"password\\";i:1;s:19:\\"reset_password_code\\";i:2;s:15:\\"activation_code\\";i:3;s:12:\\"persist_code\\";}s:10:\\"\\u0000*\\u0000guarded\\";a:3:{i:0;s:19:\\"reset_password_code\\";i:1;s:15:\\"activation_code\\";i:2;s:12:\\"persist_code\\";}s:21:\\"\\u0000*\\u0000hashableAttributes\\";a:2:{i:0;s:8:\\"password\\";i:1;s:12:\\"persist_code\\";}s:27:\\"\\u0000*\\u0000allowedPermissionsValues\\";a:3:{i:0;i:-1;i:1;i:0;i:2;i:1;}s:13:\\"\\u0000*\\u0000userGroups\\";N;s:20:\\"\\u0000*\\u0000mergedPermissions\\";N;s:13:\\"\\u0000*\\u0000connection\\";N;s:13:\\"\\u0000*\\u0000primaryKey\\";s:2:\\"id\\";s:10:\\"\\u0000*\\u0000perPage\\";i:15;s:12:\\"incrementing\\";b:1;s:10:\\"timestamps\\";b:1;s:13:\\"\\u0000*\\u0000attributes\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$uyWFZgCqKk15ES9Z7heUGO2Jvu8MrBIppscGi1jPe.Kufk\\/wp3Jiy\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"5yVo8\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 17:10:59\\";}s:11:\\"\\u0000*\\u0000original\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$uyWFZgCqKk15ES9Z7heUGO2Jvu8MrBIppscGi1jPe.Kufk\\/wp3Jiy\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"5yVo8\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 17:10:59\\";}s:12:\\"\\u0000*\\u0000relations\\";a:0:{}s:10:\\"\\u0000*\\u0000visible\\";a:0:{}s:10:\\"\\u0000*\\u0000appends\\";a:0:{}s:11:\\"\\u0000*\\u0000fillable\\";a:0:{}s:8:\\"\\u0000*\\u0000dates\\";a:0:{}s:10:\\"\\u0000*\\u0000touches\\";a:0:{}s:14:\\"\\u0000*\\u0000observables\\";a:0:{}s:7:\\"\\u0000*\\u0000with\\";a:0:{}s:13:\\"\\u0000*\\u0000morphClass\\";N;s:6:\\"exists\\";b:1;}}}}"}}', 1440108660);
+(9, 'default', 'pending', 1, '{"job":"mailer@handleQueuedMessage","data":{"view":"emails.resetpw","data":{"codigo":"5yVo8"},"callback":"C:38:\\"Illuminate\\\\Support\\\\SerializableClosure\\":2585:{a:2:{i:0;s:167:\\"function ($message) use($user) {\\n    $message->from(''info@bancoink.com'', ''Bancoink'');\\n    $message->to($user->email, $user->first_name)->subject(''Reset Password!'');\\n};\\";i:1;a:1:{s:4:\\"user\\";O:36:\\"Cartalyst\\\\Sentry\\\\Users\\\\Eloquent\\\\User\\":24:{s:8:\\"\\u0000*\\u0000table\\";s:5:\\"users\\";s:9:\\"\\u0000*\\u0000hidden\\";a:4:{i:0;s:8:\\"password\\";i:1;s:19:\\"reset_password_code\\";i:2;s:15:\\"activation_code\\";i:3;s:12:\\"persist_code\\";}s:10:\\"\\u0000*\\u0000guarded\\";a:3:{i:0;s:19:\\"reset_password_code\\";i:1;s:15:\\"activation_code\\";i:2;s:12:\\"persist_code\\";}s:21:\\"\\u0000*\\u0000hashableAttributes\\";a:2:{i:0;s:8:\\"password\\";i:1;s:12:\\"persist_code\\";}s:27:\\"\\u0000*\\u0000allowedPermissionsValues\\";a:3:{i:0;i:-1;i:1;i:0;i:2;i:1;}s:13:\\"\\u0000*\\u0000userGroups\\";N;s:20:\\"\\u0000*\\u0000mergedPermissions\\";N;s:13:\\"\\u0000*\\u0000connection\\";N;s:13:\\"\\u0000*\\u0000primaryKey\\";s:2:\\"id\\";s:10:\\"\\u0000*\\u0000perPage\\";i:15;s:12:\\"incrementing\\";b:1;s:10:\\"timestamps\\";b:1;s:13:\\"\\u0000*\\u0000attributes\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$uyWFZgCqKk15ES9Z7heUGO2Jvu8MrBIppscGi1jPe.Kufk\\/wp3Jiy\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"5yVo8\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 17:10:59\\";}s:11:\\"\\u0000*\\u0000original\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:777777;s:3:\\"pin\\";s:4:\\"1470\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1991-07-18\\";s:13:\\"habilitar_pin\\";i:1;s:8:\\"password\\";s:60:\\"$2y$10$uyWFZgCqKk15ES9Z7heUGO2Jvu8MrBIppscGi1jPe.Kufk\\/wp3Jiy\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-08-20 11:21:08\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$y1\\/55x0TR7qlwHcpyfgiVuW31on4JvnDcT2TjV0R9ftXhbx8YZMzK\\";s:19:\\"reset_password_code\\";s:5:\\"5yVo8\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-08-20 17:10:59\\";}s:12:\\"\\u0000*\\u0000relations\\";a:0:{}s:10:\\"\\u0000*\\u0000visible\\";a:0:{}s:10:\\"\\u0000*\\u0000appends\\";a:0:{}s:11:\\"\\u0000*\\u0000fillable\\";a:0:{}s:8:\\"\\u0000*\\u0000dates\\";a:0:{}s:10:\\"\\u0000*\\u0000touches\\";a:0:{}s:14:\\"\\u0000*\\u0000observables\\";a:0:{}s:7:\\"\\u0000*\\u0000with\\";a:0:{}s:13:\\"\\u0000*\\u0000morphClass\\";N;s:6:\\"exists\\";b:1;}}}}"}}', 1440108660),
+(10, 'default', 'pending', 1, '{"job":"mailer@handleQueuedMessage","data":{"view":"emails.resetpw","data":{"codigo":"kKKr7"},"callback":"C:38:\\"Illuminate\\\\Support\\\\SerializableClosure\\":2593:{a:2:{i:0;s:167:\\"function ($message) use($user) {\\n    $message->from(''info@bancoink.com'', ''Bancoink'');\\n    $message->to($user->email, $user->first_name)->subject(''Reset Password!'');\\n};\\";i:1;a:1:{s:4:\\"user\\";O:36:\\"Cartalyst\\\\Sentry\\\\Users\\\\Eloquent\\\\User\\":24:{s:8:\\"\\u0000*\\u0000table\\";s:5:\\"users\\";s:9:\\"\\u0000*\\u0000hidden\\";a:4:{i:0;s:8:\\"password\\";i:1;s:19:\\"reset_password_code\\";i:2;s:15:\\"activation_code\\";i:3;s:12:\\"persist_code\\";}s:10:\\"\\u0000*\\u0000guarded\\";a:3:{i:0;s:19:\\"reset_password_code\\";i:1;s:15:\\"activation_code\\";i:2;s:12:\\"persist_code\\";}s:21:\\"\\u0000*\\u0000hashableAttributes\\";a:2:{i:0;s:8:\\"password\\";i:1;s:12:\\"persist_code\\";}s:27:\\"\\u0000*\\u0000allowedPermissionsValues\\";a:3:{i:0;i:-1;i:1;i:0;i:2;i:1;}s:13:\\"\\u0000*\\u0000userGroups\\";N;s:20:\\"\\u0000*\\u0000mergedPermissions\\";N;s:13:\\"\\u0000*\\u0000connection\\";N;s:13:\\"\\u0000*\\u0000primaryKey\\";s:2:\\"id\\";s:10:\\"\\u0000*\\u0000perPage\\";i:15;s:12:\\"incrementing\\";b:1;s:10:\\"timestamps\\";b:1;s:13:\\"\\u0000*\\u0000attributes\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:1012320541;s:3:\\"pin\\";s:4:\\"1234\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1986-05-14\\";s:13:\\"habilitar_pin\\";i:0;s:8:\\"password\\";s:60:\\"$2y$10$w8lwm1y6HvNonZY14.ynIeBjpD8LRnDqMVrViU1HtdKcRzDfuvW3C\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-09-02 10:54:13\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$WNKNa2rb\\/8KxqChFBEM\\/0.1ZB3FlerMvOK6jHPwF0Z\\/x8U5pTCeyK\\";s:19:\\"reset_password_code\\";s:5:\\"kKKr7\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-09-02 10:59:02\\";}s:11:\\"\\u0000*\\u0000original\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:1012320541;s:3:\\"pin\\";s:4:\\"1234\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1986-05-14\\";s:13:\\"habilitar_pin\\";i:0;s:8:\\"password\\";s:60:\\"$2y$10$w8lwm1y6HvNonZY14.ynIeBjpD8LRnDqMVrViU1HtdKcRzDfuvW3C\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-09-02 10:54:13\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$WNKNa2rb\\/8KxqChFBEM\\/0.1ZB3FlerMvOK6jHPwF0Z\\/x8U5pTCeyK\\";s:19:\\"reset_password_code\\";s:5:\\"kKKr7\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-09-02 10:59:02\\";}s:12:\\"\\u0000*\\u0000relations\\";a:0:{}s:10:\\"\\u0000*\\u0000visible\\";a:0:{}s:10:\\"\\u0000*\\u0000appends\\";a:0:{}s:11:\\"\\u0000*\\u0000fillable\\";a:0:{}s:8:\\"\\u0000*\\u0000dates\\";a:0:{}s:10:\\"\\u0000*\\u0000touches\\";a:0:{}s:14:\\"\\u0000*\\u0000observables\\";a:0:{}s:7:\\"\\u0000*\\u0000with\\";a:0:{}s:13:\\"\\u0000*\\u0000morphClass\\";N;s:6:\\"exists\\";b:1;}}}}"}}', 1441209542),
+(11, 'default', 'pending', 1, '{"job":"mailer@handleQueuedMessage","data":{"view":"emails.resetpw","data":{"codigo":"MWF3I"},"callback":"C:38:\\"Illuminate\\\\Support\\\\SerializableClosure\\":2593:{a:2:{i:0;s:167:\\"function ($message) use($user) {\\n    $message->from(''info@bancoink.com'', ''Bancoink'');\\n    $message->to($user->email, $user->first_name)->subject(''Reset Password!'');\\n};\\";i:1;a:1:{s:4:\\"user\\";O:36:\\"Cartalyst\\\\Sentry\\\\Users\\\\Eloquent\\\\User\\":24:{s:8:\\"\\u0000*\\u0000table\\";s:5:\\"users\\";s:9:\\"\\u0000*\\u0000hidden\\";a:4:{i:0;s:8:\\"password\\";i:1;s:19:\\"reset_password_code\\";i:2;s:15:\\"activation_code\\";i:3;s:12:\\"persist_code\\";}s:10:\\"\\u0000*\\u0000guarded\\";a:3:{i:0;s:19:\\"reset_password_code\\";i:1;s:15:\\"activation_code\\";i:2;s:12:\\"persist_code\\";}s:21:\\"\\u0000*\\u0000hashableAttributes\\";a:2:{i:0;s:8:\\"password\\";i:1;s:12:\\"persist_code\\";}s:27:\\"\\u0000*\\u0000allowedPermissionsValues\\";a:3:{i:0;i:-1;i:1;i:0;i:2;i:1;}s:13:\\"\\u0000*\\u0000userGroups\\";N;s:20:\\"\\u0000*\\u0000mergedPermissions\\";N;s:13:\\"\\u0000*\\u0000connection\\";N;s:13:\\"\\u0000*\\u0000primaryKey\\";s:2:\\"id\\";s:10:\\"\\u0000*\\u0000perPage\\";i:15;s:12:\\"incrementing\\";b:1;s:10:\\"timestamps\\";b:1;s:13:\\"\\u0000*\\u0000attributes\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:1012320541;s:3:\\"pin\\";s:4:\\"1234\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1986-05-14\\";s:13:\\"habilitar_pin\\";i:0;s:8:\\"password\\";s:60:\\"$2y$10$w8lwm1y6HvNonZY14.ynIeBjpD8LRnDqMVrViU1HtdKcRzDfuvW3C\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-09-03 16:46:16\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$X26dWQYziNZBt9dWPZQ1Ze1zhIOzKAs9DznyzgCT95rkGa5Z3uXzu\\";s:19:\\"reset_password_code\\";s:5:\\"MWF3I\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-09-03 16:50:58\\";}s:11:\\"\\u0000*\\u0000original\\";a:21:{s:2:\\"id\\";i:2;s:3:\\"tag\\";s:10:\\"1491825229\\";s:13:\\"portafolio_id\\";i:3;s:10:\\"first_name\\";s:9:\\"Jefferson\\";s:9:\\"last_name\\";s:6:\\"Rivera\\";s:5:\\"email\\";s:23:\\"jefersonpatino@yahoo.es\\";s:6:\\"cedula\\";i:1012320541;s:3:\\"pin\\";s:4:\\"1234\\";s:4:\\"sexo\\";s:1:\\"m\\";s:16:\\"fecha_nacimiento\\";s:10:\\"1986-05-14\\";s:13:\\"habilitar_pin\\";i:0;s:8:\\"password\\";s:60:\\"$2y$10$w8lwm1y6HvNonZY14.ynIeBjpD8LRnDqMVrViU1HtdKcRzDfuvW3C\\";s:11:\\"permissions\\";N;s:9:\\"activated\\";i:1;s:15:\\"activation_code\\";N;s:12:\\"activated_at\\";N;s:10:\\"last_login\\";s:19:\\"2015-09-03 16:46:16\\";s:12:\\"persist_code\\";s:60:\\"$2y$10$X26dWQYziNZBt9dWPZQ1Ze1zhIOzKAs9DznyzgCT95rkGa5Z3uXzu\\";s:19:\\"reset_password_code\\";s:5:\\"MWF3I\\";s:10:\\"created_at\\";s:19:\\"2015-06-04 17:31:09\\";s:10:\\"updated_at\\";s:19:\\"2015-09-03 16:50:58\\";}s:12:\\"\\u0000*\\u0000relations\\";a:0:{}s:10:\\"\\u0000*\\u0000visible\\";a:0:{}s:10:\\"\\u0000*\\u0000appends\\";a:0:{}s:11:\\"\\u0000*\\u0000fillable\\";a:0:{}s:8:\\"\\u0000*\\u0000dates\\";a:0:{}s:10:\\"\\u0000*\\u0000touches\\";a:0:{}s:14:\\"\\u0000*\\u0000observables\\";a:0:{}s:7:\\"\\u0000*\\u0000with\\";a:0:{}s:13:\\"\\u0000*\\u0000morphClass\\";N;s:6:\\"exists\\";b:1;}}}}"}}', 1441317058);
 
 -- --------------------------------------------------------
 
@@ -1601,7 +1666,7 @@ CREATE TABLE IF NOT EXISTS `rejected` (
   `alcancia_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `rejected`
@@ -1775,8 +1840,7 @@ INSERT INTO `rejected` (`id`, `user_id`, `alcancia_id`, `created_at`, `updated_a
 (165, 2, 1, '2015-08-24 21:24:40', '2015-08-24 21:24:40'),
 (166, 2, 1, '2015-08-24 21:24:44', '2015-08-24 21:24:44'),
 (167, 2, 1, '2015-08-24 21:24:48', '2015-08-24 21:24:48'),
-(168, 2, 1, '2015-08-24 21:24:51', '2015-08-24 21:24:51'),
-(169, 2, 1, '2015-08-25 14:43:22', '2015-08-25 14:43:22');
+(168, 2, 1, '2015-08-24 21:24:51', '2015-08-24 21:24:51');
 
 -- --------------------------------------------------------
 
@@ -2187,7 +2251,7 @@ CREATE TABLE IF NOT EXISTS `throttle` (
   `last_attempt_at` timestamp NULL DEFAULT NULL,
   `suspended_at` timestamp NULL DEFAULT NULL,
   `banned_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `throttle`
@@ -2237,7 +2301,10 @@ INSERT INTO `throttle` (`id`, `user_id`, `ip_address`, `attempts`, `suspended`, 
 (41, 2, '192.168.1.26', 0, 0, 0, NULL, NULL, NULL),
 (42, 73, NULL, 0, 0, 0, NULL, NULL, NULL),
 (43, 74, NULL, 0, 0, 0, NULL, NULL, NULL),
-(44, 75, NULL, 0, 0, 0, NULL, NULL, NULL);
+(44, 75, NULL, 0, 0, 0, NULL, NULL, NULL),
+(45, 2, '192.168.1.68', 0, 0, 0, NULL, NULL, NULL),
+(46, 2, '192.168.1.13', 0, 0, 0, NULL, NULL, NULL),
+(47, 2, '192.168.1.32', 0, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2253,7 +2320,7 @@ CREATE TABLE IF NOT EXISTS `tokens` (
   `client` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `tokens`
@@ -2283,7 +2350,65 @@ INSERT INTO `tokens` (`id`, `user_id`, `api_token`, `expires_on`, `client`, `cre
 (25, 72, '8e84c9e3e2d3d80650016f59dd450f1bdc7e18935a48be8c30b7b6595843df4d', '2015-09-13 22:08:56', '||1||Chrome||||Win8.1|||||||1|1', '2015-08-13 22:08:56', '2015-08-13 22:08:56'),
 (26, 73, 'ef830999346fd899dd08d8ae21889c171c8ba9fbddcfe77c32dba841a7c75ff5', '2015-09-20 21:29:27', '1||||Safari|4|||AndroidOS||||||A|3|1', '2015-08-20 21:29:27', '2015-08-20 21:29:27'),
 (27, 74, 'e7ce570b19f2551593a6e2453c4840e8ffa06cf06b53b76557da949f5225e862', '2015-09-20 22:15:58', '1||||Safari|4|||AndroidOS||||||A|3|1', '2015-08-20 22:15:58', '2015-08-20 22:15:58'),
-(28, 75, '1d2b2d00558b33d2f2384435bcd973c24ae4139fa44f77579858e4420d51b3b1', '2015-09-21 20:28:24', '1||||Safari|4|||AndroidOS||||||A|3|1', '2015-08-21 20:28:24', '2015-08-21 20:28:24');
+(28, 75, '1d2b2d00558b33d2f2384435bcd973c24ae4139fa44f77579858e4420d51b3b1', '2015-09-21 20:28:24', '1||||Safari|4|||AndroidOS||||||A|3|1', '2015-08-21 20:28:24', '2015-08-21 20:28:24'),
+(29, 2, 'f3f065119cb8325877c74167c22f9cafffe1a821b912af4bb31cc13a93f64a89', '2015-09-26 19:42:21', '||1||Chrome||||Win7|||||||1|1', '2015-08-26 19:42:21', '2015-08-26 19:42:21');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `transacciones`
+--
+
+CREATE TABLE IF NOT EXISTS `transacciones` (
+`id` int(10) unsigned NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `tipo` int(11) NOT NULL,
+  `valor` decimal(19,4) NOT NULL,
+  `origen` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `transferencia_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `transacciones`
+--
+
+INSERT INTO `transacciones` (`id`, `user_id`, `tipo`, `valor`, `origen`, `transferencia_id`, `created_at`, `updated_at`) VALUES
+(1, 2, 2, '-2500.0000', 'UsuarioBancoink', 0, '2015-08-28 16:49:04', '2015-08-28 16:49:04'),
+(2, 10, 3, '2500.0000', 'UsuarioBancoink', 0, '2015-08-28 16:49:04', '2015-08-28 16:49:04'),
+(3, 2, 3, '-5500.0000', 'UsuarioBancoink', 0, '2015-08-28 22:13:26', '2015-08-28 22:13:26'),
+(4, 10, 2, '5500.0000', 'UsuarioBancoink', 0, '2015-08-28 22:13:26', '2015-08-28 22:13:26'),
+(5, 2, 3, '-4572.0000', 'UsuarioBancoink', 0, '2015-08-31 17:06:38', '2015-08-31 17:06:38'),
+(6, 10, 2, '4572.0000', 'UsuarioBancoink', 0, '2015-08-31 17:06:38', '2015-08-31 17:06:38'),
+(7, 2, 3, '-874.0000', 'UsuarioBancoink', 9, '2015-08-31 17:12:02', '2015-08-31 17:12:02'),
+(8, 10, 2, '874.0000', 'UsuarioBancoink', 0, '2015-08-31 17:12:02', '2015-08-31 17:12:02'),
+(9, 2, 3, '-57413.0000', 'UsuarioBancoink', 10, '2015-08-31 17:12:38', '2015-08-31 17:12:38'),
+(10, 10, 2, '57413.0000', 'UsuarioBancoink', 10, '2015-08-31 17:12:38', '2015-08-31 17:12:38'),
+(11, 2, 3, '-57413.0000', 'UsuarioBancoink', 11, '2015-08-31 17:12:39', '2015-08-31 17:12:39'),
+(12, 10, 2, '57413.0000', 'UsuarioBancoink', 11, '2015-08-31 17:12:39', '2015-08-31 17:12:39'),
+(13, 2, 3, '-7852.0000', 'UsuarioBancoink', 1, '2015-09-01 15:49:23', '2015-09-01 15:49:23'),
+(14, 10, 2, '7852.0000', 'UsuarioBancoink', 1, '2015-09-01 15:49:23', '2015-09-01 15:49:23'),
+(15, 2, 3, '-7842.0000', 'UsuarioBancoink', 2, '2015-09-01 15:51:50', '2015-09-01 15:51:50'),
+(16, 10, 2, '7842.0000', 'UsuarioBancoink', 2, '2015-09-01 15:51:50', '2015-09-01 15:51:50'),
+(17, 2, 3, '-5500.0000', 'UsuarioBancoink', 1, '2015-09-01 16:15:07', '2015-09-01 16:15:07'),
+(18, 10, 2, '5500.0000', 'UsuarioBancoink', 1, '2015-09-01 16:15:07', '2015-09-01 16:15:07'),
+(19, 2, 3, '-8750.0000', 'UsuarioBancoink', 2, '2015-09-01 16:16:55', '2015-09-01 16:16:55'),
+(20, 10, 2, '8750.0000', 'UsuarioBancoink', 2, '2015-09-01 16:16:55', '2015-09-01 16:16:55'),
+(21, 2, 3, '-50.0000', 'UsuarioBancoink', 3, '2015-09-01 16:18:54', '2015-09-01 16:18:54'),
+(22, 10, 2, '50.0000', 'UsuarioBancoink', 3, '2015-09-01 16:18:54', '2015-09-01 16:18:54'),
+(23, 2, 3, '-7850.0000', 'UsuarioBancoink', 1, '2015-09-01 16:27:41', '2015-09-01 16:27:41'),
+(24, 10, 2, '7850.0000', 'UsuarioBancoink', 1, '2015-09-01 16:27:41', '2015-09-01 16:27:41'),
+(25, 2, 3, '-5842.0000', 'UsuarioBancoink', 2, '2015-09-01 16:28:19', '2015-09-01 16:28:19'),
+(26, 69, 2, '5842.0000', 'UsuarioBancoink', 2, '2015-09-01 16:28:19', '2015-09-01 16:28:19'),
+(27, 2, 3, '-5874.0000', 'UsuarioBancoink', 6, '2015-09-03 20:46:23', '2015-09-03 20:46:23'),
+(28, 10, 2, '5874.0000', 'UsuarioBancoink', 6, '2015-09-03 20:46:23', '2015-09-03 20:46:23'),
+(29, 2, 3, '-1500.0000', 'UsuarioBancoink', 7, '2015-09-03 21:21:08', '2015-09-03 21:21:08'),
+(30, 57, 2, '1500.0000', 'UsuarioBancoink', 7, '2015-09-03 21:21:08', '2015-09-03 21:21:08'),
+(31, 2, 3, '-10000.0000', 'UsuarioBancoink', 8, '2015-09-03 21:21:38', '2015-09-03 21:21:38'),
+(32, 57, 2, '10000.0000', 'UsuarioBancoink', 8, '2015-09-03 21:21:39', '2015-09-03 21:21:39'),
+(33, 2, 3, '-487.0000', 'UsuarioBancoink', 9, '2015-09-03 22:12:27', '2015-09-03 22:12:27'),
+(34, 69, 2, '487.0000', 'UsuarioBancoink', 9, '2015-09-03 22:12:27', '2015-09-03 22:12:27');
 
 -- --------------------------------------------------------
 
@@ -2320,13 +2445,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `tag`, `portafolio_id`, `first_name`, `last_name`, `email`, `cedula`, `pin`, `sexo`, `fecha_nacimiento`, `habilitar_pin`, `password`, `permissions`, `activated`, `activation_code`, `activated_at`, `last_login`, `persist_code`, `reset_password_code`, `created_at`, `updated_at`) VALUES
-(2, '1491825229', 3, 'Jefferson', 'Rivera', 'jefersonpatino@yahoo.es', 1012320542, '1233', 'm', '1986-05-14', 0, '$2y$10$w8lwm1y6HvNonZY14.ynIeBjpD8LRnDqMVrViU1HtdKcRzDfuvW3C', NULL, 1, NULL, NULL, '2015-08-25 22:15:16', '$2y$10$ArGDknmAUd4WxOk/aoV43ub4nvmOJVGSl1n/ZSPOZ3bMJ0o8Atv5C', NULL, '2015-06-04 22:31:09', '2015-08-25 22:15:16'),
+(2, '1491825229', 3, 'Jefferson', 'Rivera', 'jefersonpatino@yahoo.es', 1012320541, '1234', 'm', '1986-05-14', 0, '$2y$10$qEctJLJmESOjIxZEqXi39.2rAKXBgx.S.PDiD3CxOLUlq1ZrJFZJe', NULL, 1, NULL, NULL, '2015-09-03 22:40:10', '$2y$10$rOJ.fn1sHYbRBclW.BsvhOVAtycbcFjEGzNBaDxUOGJvrtok6Ychq', NULL, '2015-06-04 22:31:09', '2015-09-03 22:40:10'),
 (3, '5197231978', 0, 'Alberto', 'Gonzales', 'a@b.c', 0, '0', '', '0000-00-00', 0, '$2y$10$fzRT0VAbOxCKGSkHOTU25ehjpuhxpCcMUA/5TfdStLhko9Le3z.Jy', NULL, 1, NULL, NULL, '2015-06-25 19:36:29', '$2y$10$dvABZy9rBdfm3RpE1dg1S./QSN3X1SDJANhzvoBtEaeQeN1HXq9g2', NULL, '2015-06-04 21:35:20', '2015-06-25 19:36:29'),
-(10, '', 0, 'Angie', 'Diaz Galeano', 'riverajefer@gmail.com', 1032461591, '0', '', '0000-00-00', 0, '$2y$10$N5A9AZtdb66paxaMoMlORuH0Cs2WoLp0ih1wP/.GQibQdruMEJjJ2', NULL, 1, NULL, NULL, '2015-06-05 16:47:21', '$2y$10$Vlix.VNi7O0qVkXvEwfu2eQCilVvAWd.Dg/MutXAXy1dK6hsjO8uW', NULL, '2015-06-05 16:47:21', '2015-06-05 16:47:21'),
+(10, '', 0, 'Jhon', 'Doe', 'riverajefer@gmail.com', 1032461591, '0', '', '0000-00-00', 0, '$2y$10$N5A9AZtdb66paxaMoMlORuH0Cs2WoLp0ih1wP/.GQibQdruMEJjJ2', NULL, 1, NULL, NULL, '2015-06-05 16:47:21', '$2y$10$Vlix.VNi7O0qVkXvEwfu2eQCilVvAWd.Dg/MutXAXy1dK6hsjO8uW', NULL, '2015-06-05 16:47:21', '2015-06-05 16:47:21'),
 (11, '', 0, 'juan', 'gomez', 'jg@gg.com', 1239, '0', '', '0000-00-00', 0, '$2y$10$PbS4CG358pGXbsFwxycoW.VMasa7SlRV2Bb8o5GGTOdS7gArd2hle', NULL, 1, NULL, NULL, '2015-06-05 19:59:32', '$2y$10$Q.4dyKGCtejp3vFmC6.ZEOJb64GgWbfKcJbSQNCy28tZlJ1a3FnNW', NULL, '2015-06-05 19:59:32', '2015-06-05 19:59:32'),
 (12, '', 0, 'dfdf', 'dfdf', 'admin@opiniofy.com', 34344, '0', '', '0000-00-00', 0, '$2y$10$DOuuXDtU0ZeT3jDyH/PTxuHFxcQebgwM..LZRHNP/nPwd35UWO7qm', NULL, 1, NULL, NULL, '2015-06-05 21:14:19', '$2y$10$axMsUW7USZdkt.i9iP/thuDSCmme2T0qIC7e3F0rjMrc1n/.LXclu', NULL, '2015-06-05 21:14:19', '2015-06-05 21:14:19'),
 (13, '', 0, 'ghcn', 'gbbv', 'hjg@ghhg.vg', 123654, '0', '', '0000-00-00', 0, '$2y$10$Xg1eHXl4snSjuOWqVRpoXeACU4ki8.ZAd29qkvxocrh9up/H0GcJm', NULL, 1, NULL, NULL, '2015-06-05 21:18:10', '$2y$10$ADunPgRbfaLqaAWthZaZyeiXca3xAJhzPQ4djLqYuV9pbSfUF72Di', NULL, '2015-06-05 21:18:10', '2015-06-05 21:18:10'),
-(14, '', 0, 'Angie', 'Diaz Galeano', 'admin@opiniofy.coma', 3232323, '0', '', '0000-00-00', 0, '$2y$10$Wtc93XZ8DLTVrokwssB9KuHhAgRklPMEtUTXfmscwP6JnUimNAgbG', NULL, 1, NULL, NULL, '2015-06-05 21:55:52', '$2y$10$3l4yYYW1UEUZiw/NBVGez.rg5e.dPXpJMDVGjXNthrYJmGZbr4JVG', NULL, '2015-06-05 21:55:51', '2015-06-05 21:55:52'),
 (15, '', 0, 'gjg', 'ghjj', 'gjg@ghj.com', 55878, '0', '', '0000-00-00', 0, '$2y$10$536z6kDybIR6YopJP5Ws3O41.a6fj4wWsPW5n1hyb3KNqtnJjat/O', NULL, 1, NULL, NULL, '2015-06-05 22:31:56', '$2y$10$qZYVuKNrCxlJSXEfWIJ0Z.STaFjRRNc7EStTwuESPRVKhuEeuscI2', NULL, '2015-06-05 22:31:55', '2015-06-05 22:31:56'),
 (16, '', 0, 'Angie', 'Diaz Galeano', 'riverajefer3@gmail.com', 1032461591, '0', '', '0000-00-00', 0, '$2y$10$fLI9JFk.XR91ZRw0uaNBn.IYnUexmmRxrmyy2M/VzlhrPB/Kjvv.e', NULL, 1, NULL, NULL, '2015-06-09 15:20:48', '$2y$10$lu7IfTqrIkblppnEPjqWB.5Egt.bFbwir/Ofcas9a3LTa2Tmdokfq', NULL, '2015-06-09 15:20:48', '2015-06-09 15:20:48'),
 (17, '', 0, 'vjg', 'gjgg', 'cjh@gh.g', 5688988, '0', '', '0000-00-00', 0, '$2y$10$OndOJ92Srpa2My7BZ2laZ./75XluzXwW9yJe5eNu.tMWZWaJkzSe.', NULL, 1, NULL, NULL, '2015-06-09 18:48:07', '$2y$10$XPJpnn4gyNDTINHUETH4cuHvHQT6flW8lV7Vuc0Q1Mk7SqtQIdKgK', NULL, '2015-06-09 18:48:07', '2015-06-09 18:48:07'),
@@ -2387,6 +2511,55 @@ INSERT INTO `users` (`id`, `tag`, `portafolio_id`, `first_name`, `last_name`, `e
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `users_bancos`
+--
+
+CREATE TABLE IF NOT EXISTS `users_bancos` (
+`id` int(10) unsigned NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `banco_id` int(11) NOT NULL,
+  `numero_cuenta` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo_cuenta` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `titular` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `cedula` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users_bancos`
+--
+
+INSERT INTO `users_bancos` (`id`, `user_id`, `banco_id`, `numero_cuenta`, `tipo_cuenta`, `titular`, `cedula`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, '554417854', 'Corriente', 'Juan Lopez', '45454', '2015-09-02 21:45:57', '2015-09-02 21:45:57'),
+(3, 2, 4, '25454', 'Corriente', 'Lucas', '1545', '2015-09-02 22:25:38', '2015-09-02 22:25:38'),
+(4, 2, 2, '14584545', 'Corriente', 'Pedro', '4545', '2015-09-03 16:19:45', '2015-09-03 16:19:45');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users_bancos_transferencias`
+--
+
+CREATE TABLE IF NOT EXISTS `users_bancos_transferencias` (
+`id` int(10) unsigned NOT NULL,
+  `userbanco_id` int(11) NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `valor` decimal(19,4) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users_bancos_transferencias`
+--
+
+INSERT INTO `users_bancos_transferencias` (`id`, `userbanco_id`, `descripcion`, `valor`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing', '8512.0000', '2015-09-03 07:13:09', '2015-09-03 07:13:09');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `users_groups`
 --
 
@@ -2424,6 +2597,59 @@ CREATE TABLE IF NOT EXISTS `users_porcentaje` (
 INSERT INTO `users_porcentaje` (`id`, `user_id`, `valor`, `created_at`, `updated_at`) VALUES
 (1, 2, 0.05, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_bancoink`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_bancoink` (
+`id` int(10) unsigned NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_id_t` int(11) NOT NULL,
+  `alias` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios_bancoink`
+--
+
+INSERT INTO `usuarios_bancoink` (`id`, `user_id`, `user_id_t`, `alias`, `created_at`, `updated_at`) VALUES
+(1, 2, 10, 'Jhon Doe', '2015-09-01 16:27:25', '2015-09-01 16:27:25'),
+(2, 2, 69, 'Antonio Gomez', '2015-09-01 16:28:07', '2015-09-01 16:28:07'),
+(3, 2, 57, 'Alejandra Lopez', '2015-09-03 16:13:33', '2015-09-03 16:13:33'),
+(4, 2, 68, 'Marco Lopez', '2015-09-03 20:22:57', '2015-09-03 20:22:57');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_bancoink_transferencias`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_bancoink_transferencias` (
+`id` int(10) unsigned NOT NULL,
+  `usuariobancoink_id` int(11) NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `valor` decimal(19,4) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios_bancoink_transferencias`
+--
+
+INSERT INTO `usuarios_bancoink_transferencias` (`id`, `usuariobancoink_id`, `descripcion`, `valor`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit', '7850.0000', '2015-09-01 16:27:41', '2015-09-01 16:27:41'),
+(2, 2, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit', '5842.0000', '2015-09-01 16:28:19', '2015-09-01 16:28:19'),
+(5, 1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit', '2850.0000', '2015-09-01 16:27:41', '2015-09-01 16:27:41'),
+(6, 1, 'Item avatars are essentially a showcase of an image', '5874.0000', '2015-09-03 20:46:23', '2015-09-03 20:46:23'),
+(7, 3, 'In the example, the first item only has a left aligned icon', '1500.0000', '2015-09-03 21:21:08', '2015-09-03 21:21:08'),
+(8, 3, 'In the example, the first item only has a left aligned icon', '10000.0000', '2015-09-03 21:21:38', '2015-09-03 21:21:38'),
+(9, 2, 'Holaaaaa', '487.0000', '2015-09-03 22:12:27', '2015-09-03 22:12:27');
+
 --
 -- Índices para tablas volcadas
 --
@@ -2439,6 +2665,12 @@ ALTER TABLE `ahorro`
 --
 ALTER TABLE `alcancias`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `alcancias_email_unique` (`email`);
+
+--
+-- Indices de la tabla `bancos`
+--
+ALTER TABLE `bancos`
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `failed_jobs`
@@ -2495,10 +2727,28 @@ ALTER TABLE `tokens`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `transacciones`
+--
+ALTER TABLE `transacciones`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `users_email_unique` (`email`), ADD KEY `users_activation_code_index` (`activation_code`), ADD KEY `users_reset_password_code_index` (`reset_password_code`);
+
+--
+-- Indices de la tabla `users_bancos`
+--
+ALTER TABLE `users_bancos`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `users_bancos_transferencias`
+--
+ALTER TABLE `users_bancos_transferencias`
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `users_groups`
@@ -2513,6 +2763,18 @@ ALTER TABLE `users_porcentaje`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `usuarios_bancoink`
+--
+ALTER TABLE `usuarios_bancoink`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `usuarios_bancoink_transferencias`
+--
+ALTER TABLE `usuarios_bancoink_transferencias`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -2520,12 +2782,17 @@ ALTER TABLE `users_porcentaje`
 -- AUTO_INCREMENT de la tabla `ahorro`
 --
 ALTER TABLE `ahorro`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1384;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1399;
 --
 -- AUTO_INCREMENT de la tabla `alcancias`
 --
 ALTER TABLE `alcancias`
 MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `bancos`
+--
+ALTER TABLE `bancos`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
 --
@@ -2550,12 +2817,12 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT de la tabla `queue`
 --
 ALTER TABLE `queue`
-MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `rejected`
 --
 ALTER TABLE `rejected`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=170;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=169;
 --
 -- AUTO_INCREMENT de la tabla `rentabilidad`
 --
@@ -2565,22 +2832,47 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=397;
 -- AUTO_INCREMENT de la tabla `throttle`
 --
 ALTER TABLE `throttle`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT de la tabla `tokens`
 --
 ALTER TABLE `tokens`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+--
+-- AUTO_INCREMENT de la tabla `transacciones`
+--
+ALTER TABLE `transacciones`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
 MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=76;
 --
+-- AUTO_INCREMENT de la tabla `users_bancos`
+--
+ALTER TABLE `users_bancos`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `users_bancos_transferencias`
+--
+ALTER TABLE `users_bancos_transferencias`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT de la tabla `users_porcentaje`
 --
 ALTER TABLE `users_porcentaje`
 MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `usuarios_bancoink`
+--
+ALTER TABLE `usuarios_bancoink`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `usuarios_bancoink_transferencias`
+--
+ALTER TABLE `usuarios_bancoink_transferencias`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

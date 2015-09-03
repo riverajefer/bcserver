@@ -80,25 +80,45 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('ryt/lista_transferencias_banco/{user_id}', 'RyTController@listaTransferenciasBanco');
 
+	Route::get('ryt/detalles_transferencias_bancoink/{id}', 'RyTController@detallesTransferenciasBancoink');
+
+	Route::get('ryt/detalles_transferencias_banco/{id}', 'RyTController@detallesTransferenciasBanco');
+
 
 }); 
 
 
 Route::get('hola', function(){
 
-	$user_id = 2;
-	//return $ub = User::find($user_id)->bancos;
+		$user_id = 2;
+		$porcentaje = Recursos::getPorcentajeUser($user_id);
+		$saldo = User::find($user_id)->ahorro->sum('moneda');
+		return $saldo = $saldo - ($saldo*$porcentaje);
 
-	//return $ubs = UsersBanco::find(1)->userBancoTransferencia;
-	$ub = User::find($user_id)->bancos;
-	$trans = array();
+		$data = UsuariosBancoink::where('user_id', 2)->where('user_id_t', 69)->first();
+		if($data){
+			return "Ya está registrado el usuario";
 
-	foreach ($ub as $key => $value) {
-			$banco = Bancos::find($value->banco_id);
-            $trans[$key]['banco'] = $banco->banco;
-            $trans[$key]['transacciones'] = count($value->userBancoTransferencia);
-	}
-	return $trans;
+		}else{
+			return "No  está registrado";
+
+		}
+
+
+			//return User::find(2)->usuarioBancoink->where('user_id_t', 10);
+
+        $ub = UsersBanco::find(1);
+        $banco = Bancos::find($ub->banco_id)->banco;
+        $trans = $ub->userBancoTransferencia;
+
+        return Response::json(['success'=>true, 'banco'=>$banco, 'datos'=>$trans]);   
+
+
+        $ub = UsuariosBancoink::find(1);
+        $alias = $ub->alias;
+        $trans = $ub->userBancoinkTransferencia;
+
+        return Response::json(['success'=>true, 'datos'=>$trans, 'alias'=>$alias]);   
 
 });
 
