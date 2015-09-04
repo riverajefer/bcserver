@@ -84,6 +84,10 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('ryt/detalles_transferencias_banco/{id}', 'RyTController@detallesTransferenciasBanco');
 
+	Route::get('ryt/cuenta_bancaria/{id}', 'RyTController@getCuentaBancaria');
+
+	Route::post('ryt/agregar_transferencia_banco', 'RyTController@TransferenciaBanco');
+
 
 }); 
 
@@ -103,7 +107,6 @@ Route::get('hola', function(){
 			return "No  está registrado";
 
 		}
-
 
 			//return User::find(2)->usuarioBancoink->where('user_id_t', 10);
 
