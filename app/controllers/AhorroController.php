@@ -4,22 +4,10 @@ class AhorroController extends BaseController {
 
 
 	/****************************************************
-	  Retorna el total ahorrado por user
+	  Guarda el deposito, enviado por el user (monedas)
 	*****************************************************/
 
-	public function getAhorro($id)
-	{
-		$user  = User::find($id);
-		$ahorro = number_format($user->ahorro->sum('moneda'), 2);
-		return "$ ".$ahorro;
-	}
-
-
-	/****************************************************
-	  Guarda el ahorro, enviado por el user
-	*****************************************************/
-
-	public function postAhorro()
+	public function postDeposito()
 	{
 
 	    $email       = Input::get('email');
@@ -40,28 +28,43 @@ class AhorroController extends BaseController {
 			$fecha =  utf8_encode(strftime("%A, %d de %B de %Y, Hora %H:%M"));
 			$fecha_corta =  utf8_encode(strftime("%d de %B - %H:%M"));
 
-	    	$alcancia_id = Auth::User()->id;
-	        
-	    	
-	        $ahorro = new Ahorro();
-	        $ahorro->user_id          = $user_id; 
-	        $ahorro->alcancia_id      = $alcancia_id;
-	        $ahorro->consecutivo      = $consecutivo;
-	        $ahorro->moneda 	 	  = $moneda; 
-	        $ahorro->fecha 	  	  	  = $fecha;
-	        $ahorro->fecha_corta      = $fecha_corta;
-	        $ahorro->save();
+	        $deposito = new UserAlcanciaDeposito();
+	        $deposito->user_alcancia_id = $consecutivo;
+	        $deposito->moneda 	 	    = $moneda; 
+	        $deposito->fecha 	  	  	= $fecha;
+	        $deposito->fecha_corta      = $fecha_corta;
+	        $deposito->save();
 
+			$uad = UserAlcancia::find($consecutivo)->transacciones->first();
+
+			if(empty($uad)){
+
+	            $transaccion = new Transacciones();
+	            $transaccion->user_id          = $user_id;
+	            $transaccion->valor            = $moneda;
+	            $transaccion->tipo             = 1;
+	            $transaccion->origen           = $deposito->userAlcancia->alcancia->ubicacion; // ubicació de la alcancia
+	            $transaccion->user_alcancia_id = $consecutivo;
+	            $transaccion->estado           = 1; 
+	            $transaccion->save();	
+	            
+			}
+			else{
+
+				$update_transaccion = Transacciones::find($uad->id);
+	            $suma_moneda = $update_transaccion->valor + $moneda;
+	            $update_transaccion->valor = $suma_moneda;
+	            $update_transaccion->save();	
+			}
+
+			// Para enviar en tiempo real con pusher
 			$usuario = User::find($user_id);
 			// get porcentaje user
-			$porcentaje = Recursos::getPorcentajeUser($user_id);
-
-			$ahorro = $usuario->ahorro;
-
-			$suma = $ahorro->sum('moneda');
+			$porcentaje = $usuario->porcentaje;
+			$suma = Recursos::getSumaMonedaByUser($user_id);
 			$suma = $suma - ($suma*$porcentaje);
 
-		    //Pusherer::trigger('Canal_moneda'.$usuario->email, 'my_event-'.$usuario->email, array( 'moneda' => $moneda, 'suma'=>$suma ));
+		    //Pusherer::trigger('Canal_moneda'.$usuario->email, 'my_event-'.$usuario->email, array('suma'=>$suma ));
 	        
 	        return "Ahorro Guardado Ok";
 	    }
@@ -72,6 +75,7 @@ class AhorroController extends BaseController {
 
 	}
 
+	
 	/****************************************************
 	  Guarda los registros de las monedas rechazadas
 	*****************************************************/
@@ -114,16 +118,14 @@ class AhorroController extends BaseController {
 	public function sumaAhorro()
 	{
 		$user_id = Input::get('user_id');
-
 		$usuario = User::find($user_id);
+		
+		
+		$porcentaje = $usuario->porcentaje;
 
-		// get porcentaje user
-		$porcentaje = Recursos::getPorcentajeUser($user_id);
-
-		$ahorro = $usuario->ahorro;
-
-		$suma = $ahorro->sum('moneda');
+		$suma = Recursos::getSumaMonedaByUser($user_id);
 		$suma = $suma - ($suma*$porcentaje);
+
 		return Response::json(['success'=>true, 'suma'=>$suma]);	
 	}
 
@@ -136,6 +138,8 @@ class AhorroController extends BaseController {
 	{
 
 		$user = User::find($id);
+		$ua = $user->UserAlcancia;
+
 
 		$hoy = date('Y-m-d');
 		$hace_30_dias = date('Y-m-d', strtotime('today - 30 days')); 
@@ -143,12 +147,13 @@ class AhorroController extends BaseController {
 
 		$date->modify('+1 day');
 		$hoy =  $date->format('Y-m-d');
-		
-		$ahorro_30dias = $user->ahorro()->whereBetween('ahorro.created_at', array($hace_30_dias, $hoy))->sum('moneda');
-
-		// get porcentaje user
-		$porcentaje = Recursos::getPorcentajeUser($id);
-		$ahorro_30dias = $ahorro_30dias - ($ahorro_30dias*$porcentaje);		
+			
+		$suma = 0;
+		foreach ($ua as $key => $value) {
+			$suma = $suma + $value->userAlcanciaDeposito()->whereBetween('users_alcancia_deposito.created_at', array($hace_30_dias, $hoy))->sum('moneda');
+		}
+		$porcentaje = $user->porcentaje;
+		$ahorro_30dias = $suma - ($suma*$porcentaje);				
 
 		return Response::json(['success'=>true, 'ahorro_30d'=>$ahorro_30dias]);
 

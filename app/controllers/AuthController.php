@@ -3,16 +3,6 @@
 class AuthController extends BaseController {
 
 
-  public function __construct()
-    {
-        //$this->beforeFilter('permite');
-    }
-
-	public function postLogin()
-	{
-
-	}
-
     public function postRegistro()
     {
 
@@ -47,6 +37,7 @@ class AuthController extends BaseController {
                 'cedula'     => Input::get('cedula'),
                 'password'   => Input::get('password'),
                 'pin'        => Input::get('pin'),
+                'porcentaje' => 0.05,
                 'activated'  => true,
             ));
             $userId = $user->getId();
@@ -63,13 +54,7 @@ class AuthController extends BaseController {
             $user_login = Sentry::findUserById($userId);
             Sentry::login($user_login, false);
 
-            $user_ahorro  = User::find($user_login->id);
-            $ahorro = $user_ahorro->ahorro->sum('moneda');
-
-
-            $porcentaje = Recursos::getPorcentajeUser($user_login->id);
-            $ahorro = $ahorro - ($ahorro*$porcentaje);
-            return Response::json(['success'=>true, 'user'=>$user_login, 'ahorro' => $ahorro, 'token' => $token->api_token]);
+            return Response::json(['success'=>true, 'user'=>$user_login, 'token' => $token->api_token]);
 
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)

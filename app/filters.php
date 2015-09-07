@@ -122,15 +122,8 @@ Route::filter('auth.login', function($route, $request)
 
 			// si el login, fue exitoso, retorno un json con, los datos del user, y el token
 	        $token = $consulta_token->first();
-	        $user_ahorro  = User::find($user_id);  
-	        $ahorro = $user_ahorro->ahorro->sum('moneda');
 	        
-	        // porcetaje de descuento del usuario
-            $porcentaje = Recursos::getPorcentajeUser($user_id);
-            $ahorro = $ahorro - ($ahorro*$porcentaje);	        
-	        return Response::json(['success'=>True, 'user' => $user, 'ahorro' => $ahorro, 'token' => $token->api_token]);   
-
-			$error = '';
+	        return Response::json(['success'=>True, 'user' => $user, 'token' => $token->api_token]);   
 
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)

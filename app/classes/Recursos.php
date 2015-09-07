@@ -3,39 +3,19 @@
 class Recursos {
 
 
-    public static function getPorcentajeUser($user_id) 
-    {
-
-
-	    $porcentaje_general = Porcentaje::take(1)->get();
-
-	    $user = User::findOrFail($user_id);
-
-	   	$user_porcentaje = $user->porcentaje;	
-
-	   	$ValorPorcentaje = '';
-
-		if($user_porcentaje)
-		{
-			$ValorPorcentaje = $user_porcentaje->valor;
-		}
-
-		else{
-
-			$ValorPorcentaje = $porcentaje_general[0]->valor;
-		}
-
-		return $ValorPorcentaje;
-
-    }
-
-
     public static function hola() 
     {
         return "Hola Mundo de los recursos";
     }
 
-
+    public static function getSumaMonedaByUser($user_id){
+		$ua = User::find($user_id)->UserAlcancia;
+		$suma = 0;
+		foreach ($ua as $key => $value) {
+			$suma = $suma + $value->userAlcanciaDeposito->sum('moneda');
+		}
+		return $suma;
+    }
 
 	// último día habíl dese
 	public static function ultimoDiaHabilDesde($date, $dias){

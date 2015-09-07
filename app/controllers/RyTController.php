@@ -80,7 +80,8 @@ class RyTController extends BaseController {
 
                 // Valida que el valor, a transferir no sea superior al saldo
 
-                $porcentaje = Recursos::getPorcentajeUser($user_id);
+                $porcentaje = $user_id->porcentaje;
+
                 $saldo = User::find($user_id)->ahorro->sum('moneda');
                 $saldo = $saldo - ($saldo*$porcentaje);
 
@@ -264,8 +265,8 @@ class RyTController extends BaseController {
             {
 
                 // Valida que el valor, a transferir no sea superior al saldo
+                $porcentaje = $user_id->porcentaje;
 
-                $porcentaje = Recursos::getPorcentajeUser($user_id);
                 $saldo = User::find($user_id)->ahorro->sum('moneda');
                 $saldo = $saldo - ($saldo*$porcentaje);
 

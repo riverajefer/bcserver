@@ -11,10 +11,13 @@ Route::get('/', function()
 *****************************************************/
 
 Route::get('rpi/user/{tag}', 'RpiController@getUser');
-Route::get('rpi/user_id/{tag}', 'RpiController@getUserId');
-Route::get('rpi/consecutivo/{id}', 'RpiController@getConsecutivo');
-Route::post('rpi/ahorro', 'AhorroController@postAhorro');
-Route::post('rpi/rejected', 'AhorroController@postRejected');
+Route::get('rpi/user_tag/{tag}', 'RpiController@getUserId');
+
+Route::get('rpi/sesion_user_alcancia/{user_id}/{alcancia_id}', 'RpiController@sesionUserAlcancia');
+
+Route::post('rpi/deposito', 'AhorroController@postDeposito');
+
+Route::post('rpi/rejected/{id}', 'RpiController@saveRejected');
 
 Route::get('usuarios', 'UsersController@getUsers');
 Route::get('usuario/historial/{id}', 'UsersController@getHistorialUser');
@@ -22,6 +25,7 @@ Route::get('usuario/historial/{id}', 'UsersController@getHistorialUser');
 Route::get('ahorro/{id}', 'AhorroController@getAhorro');
 
 Route::post('api/registro/mobil', 'AuthController@postRegistro');
+
 
 Route::group(array('prefix' => 'api', 'before' => 'auth.login'), function() {
 
@@ -63,8 +67,10 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::post('perfil/modificar/{user_id}', 'UsersController@postModificarPerfil');
 
+	/****************************************************
+	  Rutas Retiros y Transacciones
+	*****************************************************/
 
-	/** Rutas Retiros y Transacciones **/
 	Route::get('ryt/buscar/{email}/{mi_email}', 'RyTController@buscarUserbyEmail');
 	Route::post('ryt/agregar_user', 'RyTController@addUserBancoink');
 	Route::post('ryt/agregar_transferencia_bancoink', 'RyTController@TransferenciaBancoink');
@@ -94,41 +100,15 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 Route::get('hola', function(){
 
-		$user_id = 2;
-		$porcentaje = Recursos::getPorcentajeUser($user_id);
-		$saldo = User::find($user_id)->ahorro->sum('moneda');
-		return $saldo = $saldo - ($saldo*$porcentaje);
+	return UserAlcanciaDeposito::find(1)->userAlcancia->alcancia->id;
+		$user_id = 1;
+		$usuario = User::find($user_id)->alcancia;
+		return $porcentaje = $usuario->porcentaje;
+		return $suma = Recursos::getSumaMonedaByUser($user_id);
+		return $suma = $suma - ($suma*$porcentaje);
 
-		$data = UsuariosBancoink::where('user_id', 2)->where('user_id_t', 69)->first();
-		if($data){
-			return "Ya está registrado el usuario";
+	return Transacciones::all();
 
-		}else{
-			return "No  está registrado";
-
-		}
-
-			//return User::find(2)->usuarioBancoink->where('user_id_t', 10);
-
-        $ub = UsersBanco::find(1);
-        $banco = Bancos::find($ub->banco_id)->banco;
-        $trans = $ub->userBancoTransferencia;
-
-        return Response::json(['success'=>true, 'banco'=>$banco, 'datos'=>$trans]);   
-
-
-        $ub = UsuariosBancoink::find(1);
-        $alias = $ub->alias;
-        $trans = $ub->userBancoinkTransferencia;
-
-        return Response::json(['success'=>true, 'datos'=>$trans, 'alias'=>$alias]);   
 
 });
-
-
-Route::get('renta', 'RentaController@vista');
-Route::post('renta', 'RentaController@save');
-
-Route::get('renta_all', 'RentaController@getAll');
-Route::get('renta_semana', 'RentaController@getSemana');
 

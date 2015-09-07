@@ -33,17 +33,16 @@ class RpiController extends BaseController {
 
 	}
 
-	public function getConsecutivo($user_id)
+
+	public function sesionUserAlcancia($user_id, $alcancia_id)
 	{
-		$conse = Ahorro::where('user_id', $user_id)->orderBy('created_at', 'desc')->first();
+		$UserAlcancia = new UserAlcancia();
 
-	    if(empty($conse)){
-	        $conse = 1;
-	    }else{
-	    	$conse = $conse->consecutivo+1;	
-	    }
+		$UserAlcancia->user_id 	   = $user_id;
+		$UserAlcancia->alcancia_id = $alcancia_id;
+		$UserAlcancia->save();
 
-        return $conse;
+		return $UserAlcancia->id;
 	}
 
 	public function getUsers()
@@ -69,22 +68,36 @@ class RpiController extends BaseController {
 	}
 
 
-	public function getEstadoPuerta()
+	/****************************************************
+	  Guarda los registros de las monedas rechazadas
+	*****************************************************/
+
+	public function saveRejected($id)
 	{
 
-		$estado_puerta = Puerta::where('token', '123456')->first();
-		return $estado_puerta->estado;
+	    $email       = Input::get('email');
+	    $password    = Input::get('password');
+	    $user_id     = Input::get('user_id');
+
+	    Auth::attempt(array(
+	        'email'     => $email ,
+	        'password'  => $password,
+	    ));
+
+	    if(Auth::check())
+	    {
+
+	        $rejected = new Rejected();
+	        $rejected->user_alcancia_id  = $id; 
+	        $rejected->save();
+
+	        return "Rejected Guardado Ok";
+	    }
+
+	    else{
+	        return "No logueado";
+	    }
 
 	}
-
-	public function cerrarPuerta()
-	{
-
-		$cambio_estado = Puerta::find(1);
-		$cambio_estado->estado = 1;
-		$cambio_estado->save();
-		return Response::json(['success'=>true]);	
-
-	}	
 
 }
