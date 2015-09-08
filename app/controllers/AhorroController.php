@@ -27,10 +27,16 @@ class AhorroController extends BaseController {
 			setlocale(LC_TIME, "esp");
 			$fecha =  utf8_encode(strftime("%A, %d de %B de %Y, Hora %H:%M"));
 			$fecha_corta =  utf8_encode(strftime("%d de %B - %H:%M"));
+			
+			$usuario = User::find($user_id);
+			$porcentaje = $usuario->porcentaje;
+			$moneda_des = $moneda - ($moneda*$porcentaje);
+
 
 	        $deposito = new UserAlcanciaDeposito();
 	        $deposito->user_alcancia_id = $consecutivo;
 	        $deposito->moneda 	 	    = $moneda; 
+	        $deposito->moneda_des 	 	= $moneda_des; 
 	        $deposito->fecha 	  	  	= $fecha;
 	        $deposito->fecha_corta      = $fecha_corta;
 	        $deposito->save();
@@ -41,7 +47,7 @@ class AhorroController extends BaseController {
 
 	            $transaccion = new Transacciones();
 	            $transaccion->user_id          = $user_id;
-	            $transaccion->valor            = $moneda;
+	            $transaccion->valor            = $moneda_des;
 	            $transaccion->tipo             = 1;
 	            $transaccion->origen           = $deposito->userAlcancia->alcancia->ubicacion; // ubicació de la alcancia
 	            $transaccion->user_alcancia_id = $consecutivo;
@@ -52,15 +58,12 @@ class AhorroController extends BaseController {
 			else{
 
 				$update_transaccion = Transacciones::find($uad->id);
-	            $suma_moneda = $update_transaccion->valor + $moneda;
+	            $suma_moneda = $update_transaccion->valor + $moneda_des;
 	            $update_transaccion->valor = $suma_moneda;
 	            $update_transaccion->save();	
 			}
 
-			// Para enviar en tiempo real con pusher
-			$usuario = User::find($user_id);
-			// get porcentaje user
-			$porcentaje = $usuario->porcentaje;
+			
 			$suma = Recursos::getSumaMonedaByUser($user_id);
 			$suma = $suma - ($suma*$porcentaje);
 

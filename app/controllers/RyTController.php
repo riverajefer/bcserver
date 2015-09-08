@@ -17,7 +17,7 @@ class RyTController extends BaseController {
         }
         catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
         {
-            return Response::json(['success'=>false, 'msg'=>'El usuario No existe']);
+            return Response::json(['success'=>false, 'msg'=>'El usuario no se encontró, en la base de datos']);
         }
 
 	}
@@ -79,11 +79,12 @@ class RyTController extends BaseController {
             {
 
                 // Valida que el valor, a transferir no sea superior al saldo
-
-                $porcentaje = $user_id->porcentaje;
-
-                $saldo = User::find($user_id)->ahorro->sum('moneda');
+                $usuario = User::find($user_id);
+                
+                $porcentaje = $usuario->porcentaje; // get porcentaje user
+                $saldo = Recursos::getSumaMonedaByUser($user_id);
                 $saldo = $saldo - ($saldo*$porcentaje);
+
 
                 if(Input::get('valor') >= $saldo){
                     return Response::json(['success'=>false, 'msg'=>'El valor que va a transferir, debe ser menor a su saldo']);
@@ -107,6 +108,7 @@ class RyTController extends BaseController {
                 $transaccion->tipo     = 3;
                 $transaccion->origen   = 'UsuarioBancoink';
                 $transaccion->transferencia_id   = $transferencia->id;
+                $transaccion->estado    = 1;
                 $transaccion->save();
 
                 $transaccion2 = new Transacciones();
@@ -116,7 +118,7 @@ class RyTController extends BaseController {
                 $transaccion2->tipo     = 2;
                 $transaccion2->origen   = 'UsuarioBancoink';
                 $transaccion2->transferencia_id   = $transferencia->id;
-                $transaccion->estado               = 1;
+                $transaccion2->estado    = 1;
                 $transaccion2->save();                
 
                 return Response::json(['success'=>true, 'valida_input'=>true, 'msg'=>'La transferencia de realizo correctamente']);
@@ -235,8 +237,6 @@ class RyTController extends BaseController {
     public function TransferenciaBanco()
     {
 
-        // validar que el valor que se va atransferir nosea superior al saldo
-
         $input = Input::all();
         $reglas =  array(
             'pw'    => 'required',
@@ -265,15 +265,17 @@ class RyTController extends BaseController {
             {
 
                 // Valida que el valor, a transferir no sea superior al saldo
-                $porcentaje = $user_id->porcentaje;
-
-                $saldo = User::find($user_id)->ahorro->sum('moneda');
+                $usuario = User::find($user_id);
+                
+                $porcentaje = $usuario->porcentaje; // get porcentaje user
+                $saldo = Recursos::getSumaMonedaByUser($user_id);
                 $saldo = $saldo - ($saldo*$porcentaje);
+
 
                 if(Input::get('valor') >= $saldo){
                     return Response::json(['success'=>false, 'msg'=>'El valor que va a transferir, debe ser menor a su saldo']);
                 }
-                
+
 
                 $transferencia = new UserBancoTransferencia();
 
@@ -310,9 +312,7 @@ class RyTController extends BaseController {
             return Response::json(['success'=>false, 'valida_input'=>true, 'msg'=>'El usuario no existe']);
         }
 
-
     }
-
 
 
 }

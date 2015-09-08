@@ -3,13 +3,47 @@
 class HistorialController extends BaseController {
 
 
-
-
 	/**********************************************************************
 	  Retorna Todo el historial por usuario, agrupados por su consecutivo
 	***********************************************************************/	
 
 	public function getHistorial($id)
+	{
+
+		$transacciones = User::find($id)->transacciones()
+			->where('estado', 1)
+			->orderBy('id', 'desc')
+			->take(15)->skip(0)
+			->get();
+		return Response::json(['success'=>true, 'historial'=>$transacciones, 'count'=>count($transacciones)]);
+
+	}
+
+	/***********************************************************************************
+	  Retorna El último registro de la semana, por usuario, agrupado por su consecutivo
+	************************************************************************************/	
+
+	public function getMoreHistorial($id, $mas)
+	{
+
+		$skip_ini = 9; 
+		$skip = $skip_ini + $mas;
+		
+		$transacciones = User::find($id)->transacciones()
+			->where('estado', 1)
+			->orderBy('id', 'desc')
+			->take(3)->skip($skip)
+			->get();
+
+		return Response::json(['success'=>true, 'historial'=>$transacciones]);
+
+	}	
+
+	/**********************************************************************
+	  Retorna Todo el historial por usuario, agrupados por su consecutivo
+	***********************************************************************/	
+
+	public function getHistorial2($id)
 	{
 
 		$historial = DB::table('alcancias')
@@ -33,11 +67,13 @@ class HistorialController extends BaseController {
 	}
 
 
+
+
 	/***********************************************************************************
 	  Retorna El último registro de la semana, por usuario, agrupado por su consecutivo
 	************************************************************************************/	
 
-	public function getMoreHistorial($id, $mas)
+	public function getMoreHistorial2($id, $mas)
 	{
 
 		$skip_ini = 9; 
@@ -54,7 +90,8 @@ class HistorialController extends BaseController {
 
 		return Response::json(['success'=>true, 'historial'=>$historial]);
 
-	}	
+	}
+
 
 
 	/**********************************************************************
@@ -64,13 +101,18 @@ class HistorialController extends BaseController {
 	public function getHistorialDetalles($user_id, $consecutivo)
 	{
 
+		/*
 		$detalles = DB::table('ahorro')->where('user_id', $user_id)->where('consecutivo', $consecutivo);
 		$registros =  $detalles->get();
 
 		$alcancia = $detalles->first()->alcancia_id;
 		$ubicacion = Alcancia::find($alcancia)->ubicacion;
+*/
+		$ua = UserAlcancia::find($consecutivo);
+		$detalles = $ua->userAlcanciaDeposito;
+		$ubicacion_alcancia = $ua->alcancia->ubicacion;
 
- 		return Response::json(['success'=>true, 'ubicacion' =>$ubicacion, 'detalles'=>$registros]);            
+ 		return Response::json(['success'=>true, 'ubicacion' =>$ubicacion_alcancia, 'detalles'=>$detalles]);            
 
 	}		
 
