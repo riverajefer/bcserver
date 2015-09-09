@@ -71,16 +71,27 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 	Route::get('ryt/detalles_transferencias_banco/{id}', 'RyTController@detallesTransferenciasBanco');
 	Route::get('ryt/cuenta_bancaria/{id}', 'RyTController@getCuentaBancaria');
 	Route::post('ryt/agregar_transferencia_banco', 'RyTController@TransferenciaBanco');
-
+	
+	Route::get('ryt/detalle_transferencias_bancoink/{id}', 'RyTController@detalleTransferenciasBancoink');
 	// Ruta histrial transacciones
-
-
-
 
 }); 
 
 
 Route::get('hola', function(){
+
+
+   return $ub = UserBancoinkTransferencia::find(3);
+        return $ub = UsuariosBancoink::find($ub->usuariobancoink_id);
+        $alias = $ub->alias;
+        $trans = $ub->userBancoinkTransferencia;
+
+        return Response::json(['success'=>true, 'datos'=>$trans, 'alias'=>$alias]);     
+
+
+
+	$user_id =1;
+	return User::find($user_id)->transacciones->sum('valor');
 
 	return $detalles = UserAlcancia::find(1)->alcancia;
 

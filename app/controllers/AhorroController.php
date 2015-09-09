@@ -78,41 +78,6 @@ class AhorroController extends BaseController {
 
 	}
 
-	
-	/****************************************************
-	  Guarda los registros de las monedas rechazadas
-	*****************************************************/
-
-	public function postRejected()
-	{
-
-	    $email       = Input::get('email');
-	    $password    = Input::get('password');
-	    $user_id     = Input::get('user_id');
-
-	    Auth::attempt(array(
-	        'email'     => $email ,
-	        'password'  => $password,
-	    ));
-
-	    if(Auth::check())
-	    {
-
-	    	$alcancia_id = Auth::User()->id;
-	        
-	        $rejected = new Rejected();
-	        $rejected->user_id      = $user_id; 
-	        $rejected->alcancia_id  = $alcancia_id;
-	        $rejected->save();
-
-	        return "Rejected Guardado Ok";
-	    }
-
-	    else{
-	        return "No logueado";
-	    }
-
-	}
 
 	/****************************************************
 	  Retorna el total ahorrado por user
@@ -125,11 +90,12 @@ class AhorroController extends BaseController {
 		
 		
 		$porcentaje = $usuario->porcentaje;
-
 		$suma = Recursos::getSumaMonedaByUser($user_id);
 		$suma = $suma - ($suma*$porcentaje);
 
-		return Response::json(['success'=>true, 'suma'=>$suma]);	
+		$suma_total = $usuario->transacciones->sum('valor');
+
+		return Response::json(['success'=>true, 'suma'=>$suma_total]);	
 	}
 
 

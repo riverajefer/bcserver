@@ -211,7 +211,20 @@ class RyTController extends BaseController {
         $trans = $ub->userBancoinkTransferencia;
 
         return Response::json(['success'=>true, 'datos'=>$trans, 'alias'=>$alias]);       
+    }
 
+    public function detalleTransferenciasBancoink($id)
+    {
+
+        $trans = UserBancoinkTransferencia::find($id);
+        $alias = UsuariosBancoink::find($trans->usuariobancoink_id)->alias;
+
+
+        //$ub = UserBancoinkTransferencia::find($id);
+        //$alias = $ub->alias;
+        //$trans = $ub->userBancoinkTransferencia;
+
+        return Response::json(['success'=>true, 'datos'=>$trans, 'alias'=>$alias]);       
     }
 
     public function detallesTransferenciasBanco($id)
