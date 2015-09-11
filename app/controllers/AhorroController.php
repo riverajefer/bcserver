@@ -50,6 +50,7 @@ class AhorroController extends BaseController {
 	            $transaccion->valor            = $moneda_des;
 	            $transaccion->tipo             = 1;
 	            $transaccion->origen           = $deposito->userAlcancia->alcancia->ubicacion; // ubicació de la alcancia
+	            $transaccion->movimiento       = 'Deposito';
 	            $transaccion->user_alcancia_id = $consecutivo;
 	            $transaccion->estado           = 1; 
 	            $transaccion->save();	

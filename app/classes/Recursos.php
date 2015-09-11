@@ -8,6 +8,17 @@ class Recursos {
         return "Hola Mundo de los recursos";
     }
 
+
+    public static function fechaUTC($fecha){
+
+		$date = new DateTime($fecha);
+		$date->modify('+1 day');
+		$nueva_fecha = $date->format('Y-m-d H:i:s');
+		date_default_timezone_set('UTC');
+		$fechaUTC =  (strtotime($nueva_fecha) * 1000) - (strtotime('02-01-1970 00:00:00') * 1000);
+		return $fechaUTC;
+    }
+
     public static function getSumaMonedaByUser($user_id){
 		$ua = User::find($user_id)->UserAlcancia;
 		$suma = 0;

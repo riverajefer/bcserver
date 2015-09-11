@@ -74,60 +74,29 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 	
 	Route::get('ryt/detalle_transferencias_bancoink/{id}', 'RyTController@detalleTransferenciasBancoink');
 	Route::get('ryt/detalle_transferencias_banco/{id}', 'RyTController@detalleTransferenciasBanco');
+
+
+	Route::get('historial/get_data_grafica/{id}', 'HistorialController@getDataGrafica');
 	// Ruta histrial transacciones
 
 }); 
 
 
 Route::get('hola', function(){
+		
+		$transacciones = User::find(1)->transacciones()->orderBy('id', 'asc')->get();
 
-		$fecha_inicio = '2015-09-08';
-		$fecha_fin    = '2015-09-11';
+		$datos = array();
+		$movimientos = array();
+		foreach ($transacciones as $key => $value) {
+			$fecha = $value->created_at;
+			$name = $value->origen;
+			$fechaUTC = Recursos::fechaUTC($fecha);
+			$movimientos[$fechaUTC]  = array($value->origen);
+			///$datos[]  = array($fechaUTC, $value->valor, 'id'=>$name);
+			$datos[]  = array($fechaUTC, $value->valor);
+		}
 
-
-		$transacciones = User::find(1)->transacciones()
-			->where('estado', 1)
-			->orderBy('id', 'desc')
-			->whereBetween('created_at', array($fecha_inicio, $fecha_fin))
-			->get();
-		$cantidad = count($transacciones);
-		$saldo    = $transacciones->sum('valor');
-
-		return Response::json(['success'=>true, 'historial'=>$transacciones, 'cantidad'=>$cantidad, 'saldo'=>$saldo]);
-
-
-
-
-$ub = UserBancoTransferencia::find(2);
-return UsersBanco::find($ub->userbanco_id);
-
-
-   return $ub = UserBancoinkTransferencia::find(3);
-        return $ub = UsuariosBancoink::find($ub->usuariobancoink_id);
-        $alias = $ub->alias;
-        $trans = $ub->userBancoinkTransferencia;
-
-        return Response::json(['success'=>true, 'datos'=>$trans, 'alias'=>$alias]);     
-
-
-
-	$user_id =1;
-	return User::find($user_id)->transacciones->sum('valor');
-
-	return $detalles = UserAlcancia::find(1)->alcancia;
-
-	$transacciones = User::find(1)->transacciones()->where('estado', 1)->get();
-		return Response::json(['success'=>true, 'historial'=>$transacciones, 'count'=>count($transacciones)]);
-
-	return UserAlcanciaDeposito::find(1)->userAlcancia->alcancia->id;
-		$user_id = 1;
-		$usuario = User::find($user_id)->alcancia;
-		return $porcentaje = $usuario->porcentaje;
-		return $suma = Recursos::getSumaMonedaByUser($user_id);
-		return $suma = $suma - ($suma*$porcentaje);
-
-	return Transacciones::all();
-
-
+		return Response::json(['success'=>true, 'datos'=>$datos, 'movimientos'=>$movimientos]);
 });
 

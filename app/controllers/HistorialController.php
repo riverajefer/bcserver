@@ -80,6 +80,29 @@ class HistorialController extends BaseController {
 		return Response::json(['success'=>true, 'historial'=>$transacciones, 'cantidad'=>$cantidad, 'saldo'=>$saldo]);
 	}
 
+	/******************************************************************************
+	  Retorna El historial entre un rango de fechas para un user
+	*******************************************************************************/
+
+	public function getDataGrafica($id)
+	{
+
+		$transacciones = User::find($id)->transacciones()->orderBy('id', 'asc')->get();
+
+		$datos = array();
+		$movimientos = array();
+		foreach ($transacciones as $key => $value) {
+			$fecha = $value->created_at;
+			$name = $value->origen;
+			$fechaUTC = Recursos::fechaUTC($fecha);
+			$movimientos[round($value->valor)]  = array($value->movimiento);
+			///$datos[]  = array($fechaUTC, $value->valor, 'id'=>$name);
+			$datos[]  = array($fechaUTC, $value->valor);
+		}
+
+		return Response::json(['success'=>true, 'datos'=>$datos, 'movimientos'=>$movimientos]);
+
+	}
 	
 
 }

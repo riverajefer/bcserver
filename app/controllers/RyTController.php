@@ -107,6 +107,7 @@ class RyTController extends BaseController {
                 $transaccion->valor    = Input::get('valor')*(-1); // se vuelve negativo
                 $transaccion->tipo     = 3;
                 $transaccion->origen   = 'UsuarioBancoink';
+                $transaccion->movimiento   = 'Transferencia Bancoink';
                 $transaccion->transferencia_id   = $transferencia->id;
                 $transaccion->estado    = 1;
                 $transaccion->save();
@@ -117,6 +118,7 @@ class RyTController extends BaseController {
                 $transaccion2->valor    = Input::get('valor');
                 $transaccion2->tipo     = 2;
                 $transaccion2->origen   = 'UsuarioBancoink';
+                $transaccion2->movimiento   = 'Transferencia Bancoink';
                 $transaccion2->transferencia_id   = $transferencia->id;
                 $transaccion2->estado    = 1;
                 $transaccion2->save();                
@@ -317,6 +319,7 @@ class RyTController extends BaseController {
                 $transaccion->tipo                   = 4;
                 $transaccion->origen                 = 'Transferencia Bancaria';
                 $transaccion->transferencia_banco_id = $transferencia->id;
+                $transaccion->movimiento   = 'Transferencia Bancaria';
                 $transaccion->estado                 = 0; 
                 $transaccion->save();
 
