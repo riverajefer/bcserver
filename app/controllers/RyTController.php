@@ -109,18 +109,20 @@ class RyTController extends BaseController {
                 $transaccion->origen   = 'UsuarioBancoink';
                 $transaccion->movimiento   = 'Transferencia Bancoink';
                 $transaccion->transferencia_id   = $transferencia->id;
+                $transaccion->fecha            = date('Y-m-d');
                 $transaccion->estado    = 1;
                 $transaccion->save();
 
                 $transaccion2 = new Transacciones();
 
-                $transaccion2->user_id  = $userbancoink->user_id_t;
-                $transaccion2->valor    = Input::get('valor');
-                $transaccion2->tipo     = 2;
-                $transaccion2->origen   = 'UsuarioBancoink';
-                $transaccion2->movimiento   = 'Transferencia Bancoink';
-                $transaccion2->transferencia_id   = $transferencia->id;
-                $transaccion2->estado    = 1;
+                $transaccion2->user_id          = $userbancoink->user_id_t;
+                $transaccion2->valor            = Input::get('valor');
+                $transaccion2->tipo             = 2;
+                $transaccion2->origen           = 'UsuarioBancoink';
+                $transaccion2->movimiento       = 'Transferencia Bancoink';
+                $transaccion2->transferencia_id = $transferencia->id;
+                $transaccion2->fecha            = date('Y-m-d');
+                $transaccion2->estado           = 1;
                 $transaccion2->save();                
 
                 return Response::json(['success'=>true, 'valida_input'=>true, 'msg'=>'La transferencia de realizo correctamente']);
@@ -319,7 +321,8 @@ class RyTController extends BaseController {
                 $transaccion->tipo                   = 4;
                 $transaccion->origen                 = 'Transferencia Bancaria';
                 $transaccion->transferencia_banco_id = $transferencia->id;
-                $transaccion->movimiento   = 'Transferencia Bancaria';
+                $transaccion->movimiento             = 'Transferencia Bancaria';
+                $transaccion->fecha                  = date('Y-m-d');
                 $transaccion->estado                 = 0; 
                 $transaccion->save();
 

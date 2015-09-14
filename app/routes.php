@@ -84,19 +84,13 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 Route::get('hola', function(){
 		
-		$transacciones = User::find(1)->transacciones()->orderBy('id', 'asc')->get();
+	$query = User::find(1)->transacciones()->where('estado', 1)->orderBy('id', 'desc');
 
-		$datos = array();
-		$movimientos = array();
-		foreach ($transacciones as $key => $value) {
-			$fecha = $value->created_at;
-			$name = $value->origen;
-			$fechaUTC = Recursos::fechaUTC($fecha);
-			$movimientos[$fechaUTC]  = array($value->origen);
-			///$datos[]  = array($fechaUTC, $value->valor, 'id'=>$name);
-			$datos[]  = array($fechaUTC, $value->valor);
-		}
+    $transacciones = $query->take(15)->skip(0)->get();
+    $cantidad      = count($query->get());
+    $saldo         = $query->sum('valor');
 
-		return Response::json(['success'=>true, 'datos'=>$datos, 'movimientos'=>$movimientos]);
+
+   return Response::json(['success'=>true, 'historial'=>$transacciones, 'count'=>$cantidad, 'saldo'=>$saldo]);
 });
 
