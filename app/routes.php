@@ -45,6 +45,7 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 	Route::post('historial/rango/{id}', 'HistorialController@getHistorialRango'); // Todos los registros por usuario
 	Route::get('historial/more/{id}/{take}', 'HistorialController@getMoreHistorial');
 	Route::get('historial/detalles/{user_id}/{consecutivo}', 'HistorialController@getHistorialDetalles');
+	Route::get('historial/get_data_grafica/{id}', 'HistorialController@getDataGrafica');
 	/** End Rutas Historial **/
 
 	Route::get('codigoTarjeta/{id}', 'UsersController@getCodigoTarjeta');
@@ -75,8 +76,6 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 	Route::get('ryt/detalle_transferencias_bancoink/{id}', 'RyTController@detalleTransferenciasBancoink');
 	Route::get('ryt/detalle_transferencias_banco/{id}', 'RyTController@detalleTransferenciasBanco');
 
-
-	Route::get('historial/get_data_grafica/{id}', 'HistorialController@getDataGrafica');
 	// Ruta histrial transacciones
 
 }); 
@@ -89,7 +88,6 @@ Route::get('hola', function(){
     $transacciones = $query->take(15)->skip(0)->get();
     $cantidad      = count($query->get());
     $saldo         = $query->sum('valor');
-
 
    return Response::json(['success'=>true, 'historial'=>$transacciones, 'count'=>$cantidad, 'saldo'=>$saldo]);
 });

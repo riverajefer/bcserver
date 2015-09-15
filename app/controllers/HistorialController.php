@@ -10,7 +10,7 @@ class HistorialController extends BaseController {
 	public function getHistorial($id)
 	{
 
-		$query = User::find(1)->transacciones()->where('estado', 1)->orderBy('id', 'desc');
+		$query = User::find($id)->transacciones()->where('estado', 1)->orderBy('id', 'desc');
 
 	    $transacciones = $query->take(15)->skip(0)->get();
 	    $cantidad      = count($query->get());
@@ -104,39 +104,19 @@ class HistorialController extends BaseController {
 		}
 
 		// Logica, para agregar al comienzo del arreglo, un dato 0, el día anterior de un deposito.
-		$fecha_ini =  $prepara[0][2];
-		$ayer = date('Y-m-d', strtotime('-1 day', strtotime($fecha_ini)));
-		$ayer = Recursos::fechaUTC($ayer);
-		$nuevo = array($ayer, 0);
-		array_unshift($datos, $nuevo);
+		if($query)
+		{
+			$fecha_ini =  $prepara[0][2];
+			$ayer = date('Y-m-d', strtotime('-1 day', strtotime($fecha_ini)));
+			$ayer = Recursos::fechaUTC($ayer);
+			$nuevo = array($ayer, 0);
+			array_unshift($datos, $nuevo);
+		}
+
 
 		return Response::json(['success'=>true, 'datos'=>$datos]);
 
 	}
-	
 
-	/******************************************************************************
-	  Retorna El historial entre un rango de fechas para un user, por movimiento
-	*******************************************************************************/
-
-	public function getDataGrafica2($id)
-	{
-
-		$transacciones = User::find($id)->transacciones()->orderBy('id', 'asc')->get();
-
-		$datos = array();
-		$movimientos = array();
-		foreach ($transacciones as $key => $value) {
-			$fecha = $value->created_at;
-			$name = $value->origen;
-			$fechaUTC = Recursos::fechaUTC($fecha);
-			$movimientos[round($value->valor)]  = array($value->movimiento);
-			///$datos[]  = array($fechaUTC, $value->valor, 'id'=>$name);
-			$datos[]  = array($fechaUTC, $value->valor);
-		}
-
-		return Response::json(['success'=>true, 'datos'=>$datos, 'movimientos'=>$movimientos]);
-
-	}	
 
 }
