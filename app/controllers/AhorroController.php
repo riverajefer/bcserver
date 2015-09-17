@@ -85,11 +85,9 @@ class AhorroController extends BaseController {
 	  Retorna el total ahorrado por user
 	*****************************************************/	
 
-	public function sumaAhorro()
+	public function getSaldo($user_id)
 	{
-		$user_id = Input::get('user_id');
 		$usuario = User::find($user_id);
-		
 		
 		$porcentaje = $usuario->porcentaje;
 		$suma = Recursos::getSumaMonedaByUser($user_id);

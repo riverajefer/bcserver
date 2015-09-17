@@ -97,10 +97,12 @@ class HistorialController extends BaseController {
 
 		$datos = array();
 		$prepara = array();
+		$suma = 0;
 		foreach ($query as $key => $value) {
 			$fechaUTC = Recursos::fechaUTC($value->fecha);
-			$datos[]  = array($fechaUTC, $value->sum);
-			$prepara[]  = array($value->sum, $fechaUTC, $value->fecha);
+			$suma =  $suma +  $value->sum;
+			$datos[]  = array($fechaUTC, $suma);
+			$prepara[]  = array($suma, $fechaUTC, $value->fecha);
 		}
 
 		// Logica, para agregar al comienzo del arreglo, un dato 0, el día anterior de un deposito.
