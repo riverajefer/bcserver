@@ -2,7 +2,8 @@
 
 Route::get('/', function()
 {
-	return View::make('index');
+	//return View::make('index');
+	return Redirect::to('admin/usuarios');
 
 });
 
@@ -91,43 +92,30 @@ Route::get('usuarios', 'Controllers\Backend\UsersController@getUsers');
 Route::group(array('prefix' => 'admin'), function() {
 
     Route::get('usuarios', array('as' => 'usuarios', 'uses' => 'AdminUsersController@getUsers'));
-    //Route::get('group/index', array('as'   => 'adminGroupIndex', 'uses' => 'GroupController@index'));
+    Route::get('usuarios/historial/{id}', array('as' => 'historial_usuario', 'uses' => 'AdminHistorialController@getHistorialByUser'));
+    Route::get('usuarios/historial/deposito/{id}', array('as' => 'deposito', 'uses' => 'AdminHistorialController@getDeposito'));
+    Route::get('usuarios/historial/transferencia-bancoink/{id}', array('as' => 'bancoink', 'uses' => 'AdminHistorialController@getTransferenciaBancoink'));
+    Route::get('usuarios/historial/transferencia-banco/{id}', array('as' => 'banco', 'uses' => 'AdminHistorialController@getTransferenciaBanco'));
+    Route::get('cuentas_bancarias', array('as' => 'cuentas', 'uses' => 'AdminCuentasController@getCuentasBanco'));
+    Route::get('cuentas_bancarias/validar/{id}', array('as' => 'validar-cuenta', 'uses' => 'AdminCuentasController@validarCuenta'));
+    Route::get('cuentas_bancarias/datelle/{id}', array('as' => 'detalle-cuenta', 'uses' => 'AdminCuentasController@detalleCuenta'));
+    Route::get('cuentas_bancarias/transferencias/{id}', array('as' => 'cuenta-transferencias', 'uses' => 'AdminCuentasController@cuentaTransferencias'));
 
 });
 
 
 
 Route::get('hola', function(){
-		
-		$query = DB::table('transacciones')
-			->selectRaw('fecha, sum(valor) as sum')
-			->where('user_id', 1)
-			->groupBy('fecha')
-			->orderBy('fecha')
-			->get();
 
-		$datos = array();
-		$prepara = array();
-		$suma = 0;
-		foreach ($query as $key => $value) {
-			$fechaUTC = Recursos::fechaUTC($value->fecha);
-			$suma =  $suma +  $value->sum;
-			$datos[]  = array($fechaUTC, $suma);
-			$prepara[]  = array($suma, $fechaUTC, $value->fecha);
-		}
+return $user = User::find(1)->transacciones->sum('valor');
+$d1 = new DateTime('1986-05-13');
+$hoy = new DateTime();
 
-		// Logica, para agregar al comienzo del arreglo, un dato 0, el día anterior de un deposito.
-		if($query)
-		{
-			$fecha_ini =  $prepara[0][2];
-			$ayer = date('Y-m-d', strtotime('-1 day', strtotime($fecha_ini)));
-			$ayer = Recursos::fechaUTC($ayer);
-			$nuevo = array($ayer, 0);
-			array_unshift($datos, $nuevo);
-		}
+return $diff =  $hoy->diff(new DateTime('1986-05-13'))->y;
 
-
-		return Response::json(['success'=>true, 'datos'=>$datos]);
+echo $diff->y;
+//echo Carbon::createFromDate('1986-05-13')->diff(Carbon::now())->format('%y years, %m months and %d days');
+ return;
 
 });
 

@@ -8,6 +8,7 @@
 {{HTML::script('js/jquery-ui.min.js')}}
 {{HTML::script('js/modernizr.custom.js')}}
 {{HTML::script('js/jquery.dlmenu.js')}}
+{{HTML::script('https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js')}}
 
 @show
 <!-- Fin Inclue JS  -->
@@ -23,6 +24,9 @@
 {{HTML::style('css/sb-admin.css')}}
 {{HTML::style('css/main.css')}}
 {{HTML::style('css/component.css')}}
+{{HTML::style('//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css')}}
+
+
 
 @show 
 <!-- FIn Inclue CSS  -->

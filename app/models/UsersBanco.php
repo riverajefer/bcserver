@@ -10,4 +10,13 @@ class UsersBanco extends Eloquent  {
 		return $this->hasMany('UserBancoTransferencia', 'userbanco_id');
 	}
 
+	public function usuario()
+	{
+		return $this->belongsTo('User', 'user_id');
+	}		
+
+	public function banco()
+	{
+		return $this->belongsTo('Bancos', 'banco_id');
+	}	
 }

@@ -4,17 +4,14 @@
         <li>
             <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
         </li>
-		<li>
-            <a href="charts.html"><i class="fa fa-fw fa-users"></i> Usuarios</a>
+		<li class="{{ Request::is( 'admin/usuarios') ? 'active' : '' }}">
+            <a href="{{URL::to('admin/usuarios')}}"><i class="fa fa-fw fa-users"></i> Usuarios</a>
         </li>        
         <li>
             <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Estadisticas</a>
         </li>
-        <li>
-            <a href="tables.html"><i class="fa fa-fw fa-credit-card"></i> Validar Cuenta Bancaria</a>
-        </li>
-        <li class="active">
-            <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+        <li class="{{ Request::is( 'admin/cuentas_bancarias') ? 'active' : '' }}">
+            <a href="{{URL::to('admin/cuentas_bancarias')}}"><i class="fa fa-fw fa-credit-card"></i> Validar Cuenta Bancaria</a>
         </li>
     </ul>
 </div>
