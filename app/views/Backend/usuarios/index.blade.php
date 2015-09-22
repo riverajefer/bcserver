@@ -19,6 +19,8 @@
 			<th>Edad</th>
 			<th>Saldo</th>
 			<th>Estado</th>
+			<th>Último acceso</th>
+			<th>Fecha de registro</th>
 			<th>Acciones</th>
 		</thead>
 		<tbody>
@@ -47,6 +49,8 @@
 				@else
 					<td class="danger">Bloqueado</td>
 				@endif
+				<td>{{$user->last_login}}</td>
+				<td>{{$user->created_at}}</td>
 				<td>
 					<div class="dropdown">
 					  <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

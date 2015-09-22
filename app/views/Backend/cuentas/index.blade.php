@@ -23,8 +23,8 @@
 			<th>Usuario</th>
 			<th>Banco</th>
 			<th>Transferencias</th>
-			<th>Estado</th>
 			<th>Fecha</th>
+			<th>Estado</th>
 		</thead>
 		<tbody>
 		@foreach($datos as $key=>$dato)
@@ -37,6 +37,7 @@
 				</td>
 				<td>
 					<a href="{{URL::route('detalle-cuenta', $dato->id)}}">
+						<img src="{{asset('images/bancos/'.$dato->banco->logo)}}" alt="" width="20px">
 						{{$dato->banco->banco}} <em>(detalles de la cuenta)</em>
 					</a>
 				</td>
@@ -45,7 +46,7 @@
 						Transferencias
 					</a>					
 				</td>
-
+				<td>{{$dato->created_at}}</td>
 				@if($dato->estado)
 					<td class="success">{{$dato->msg_estado}}</td>
 				@else
@@ -55,7 +56,6 @@
 					</a>
 				</td>
 				@endif
-				<td>{{$dato->created_at}}</td>
 			</tr>
 		@endforeach
 		</tbody>

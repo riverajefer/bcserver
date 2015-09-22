@@ -7,7 +7,7 @@ class UsuariosBancoinkTransferencias extends Eloquent  {
 
 	public function usuariosBancoink()
 	{
-		return $this->belongsTo('UsuariosBancoink', 'id');
+		return $this->belongsTo('UsuariosBancoink', 'usuariobancoink_id');
 	}	
 
 }

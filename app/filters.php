@@ -43,6 +43,32 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('auth.admin', function()
+{
+
+	if (Sentry::check())
+	{
+		$user   = Sentry::getUser();
+	    $groups = $user->getGroups();
+	    if($groups!='[]')
+	    {
+	        if($groups[0]->name != 'Administrador')
+	        {
+	        	return Redirect::to('admin/login')->with('message','Login field is required.');
+
+	        }
+	    }
+
+	}
+	else
+	{
+	    return Redirect::to('admin/login')->with('message','Login field is required.');
+	}
+
+
+});
+
+
 
 Route::filter('auth.basic', function()
 {

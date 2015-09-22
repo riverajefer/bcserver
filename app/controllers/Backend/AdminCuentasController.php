@@ -4,7 +4,7 @@ class AdminCuentasController extends BaseController {
 
 	public function getCuentasBanco()
 	{
-	   $ub =  UsersBanco::all();
+	   $ub =  UsersBanco::orderBy('estado')->get();
        $data = array(
         'datos'=>$ub
         );
@@ -47,6 +47,33 @@ class AdminCuentasController extends BaseController {
         );
 
         return View::make('Backend/cuentas.transferencias', $data);
+    }
+
+    public function listaTransferenciasBancarias()
+    {
+        $transferencias =  UserBancoTransferencia::orderBy('estado')->get();
+        $total =  UserBancoTransferencia::where('estado',1)->sum('valor');
+        $data = array(
+            'transferencias'=>$transferencias,
+            'total'=>$total
+        );
+        return View::make('Backend/cuentas.lista-transferencias', $data);
+
+    }
+
+    public function validarTransferencia($id)
+    {
+        $ubt =  UserBancoTransferencia::find($id);
+        $ubt->estado = 1;
+        $ubt->msg_estado = 'Realizada';
+        $ubt->save();
+
+        $transaccion = $ubt->transaccion;
+        $transaccion->estado = 1;
+        $transaccion->save();
+
+
+        return Redirect::back()->with('message','Transferencia activada');
     }
 
 }

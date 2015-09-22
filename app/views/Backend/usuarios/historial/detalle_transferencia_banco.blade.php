@@ -16,7 +16,12 @@
   <li class="list-group-item"><strong>Número de Cuenta:</strong> {{$cuenta->numero_cuenta}}</li>
   <li class="list-group-item"><strong>Valor:</strong> ${{ number_format($detalles->valor,2)}}</li>
   <li class="list-group-item"><strong>Descripción:</strong> {{$detalles->created_at}}</li>
-  <li class="list-group-item"><strong>Estado:</strong> {{$detalles->msg_estado}}</li>
+  @if($detalles->estado)
+  	<li class="list-group-item list-group-item-success"><strong>Estado de la transferencia:</strong> {{$detalles->msg_estado}}</li>
+  @else
+	<li class="list-group-item list-group-item-danger"><strong>Estado de la transferencia:</strong> {{$detalles->msg_estado}}</li>
+  @endif
+  
 </ul>
 
 

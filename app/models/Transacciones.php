@@ -20,4 +20,9 @@ class Transacciones extends Eloquent  {
 		return $this->belongsTo('UserAlcancia', 'user_alcancia_id');
 	}	
 
+	public function user()
+	{
+		return $this->belongsTo('User', 'user_id');
+	}		
+
 }

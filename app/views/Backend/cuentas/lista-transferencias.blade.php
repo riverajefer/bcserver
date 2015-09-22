@@ -3,11 +3,11 @@
 
 @section('title')
 @parent
- ¡ Cuentas Banacarias !
+ ¡ Transacciones Banacarias !
 @stop
 <div align="center" class="row">
-<h2>Cuentas Bancarias</h2><hr>
-
+<h2>Transacciones Bancarias</h2><hr>
+<h3 align="left"><strong>Total: ${{ number_format($total,2)}}</strong></h3>
 @if(Session::has('message'))
 	<div class="alert alert-success alert-dismissible" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -31,22 +31,29 @@
 		@foreach($transferencias as $key=>$transferencia)
 			<tr>
 				<td>{{$key =$key+1}}</td>
-				<td>{{$user->first_name}} {{$user->last_name}}</td>
 				<td>
-					<img src="{{asset('images/bancos/'.$banco->logo)}}" alt="" width="20px">
-					{{$banco->banco}}
-				</td>
-				<td>{{$transferencia->descripcion}}</td>
-				<td>{{ number_format($transferencia->valor,2)}}</td>
-				<td>{{$transferencia->created_at}}</td>
-				@if($transferencia->estado)
-					<td>{{$transferencia->msg_estado}}</td>	
-				@else
-				<td>
-			    	<a href="#" class="btn btn-xs btn-success">
-						Validar Transferencia
+					<a href="{{URL::route('historial_usuario', $transferencia->userBanco->usuario->id)}}">
+						{{$transferencia->userBanco->usuario->first_name}}
+						{{$transferencia->userBanco->usuario->last_name}}
 					</a>
 				</td>
+				<td>
+					<a href="{{URL::route('detalle-cuenta', $transferencia->userBanco->id )}}">
+						<img src="{{asset('images/bancos/'.$transferencia->userBanco->banco->logo)}}" alt="" width="20px">
+						{{$transferencia->userBanco->banco->banco}} (detalles de la cuenta)					
+					</a>
+				</td>
+				<td>{{$transferencia->descripcion}}</td>
+				<td>$ {{ number_format($transferencia->valor,2)}}</td>
+				<td>{{$transferencia->created_at}}</td>
+				@if($transferencia->estado)
+					<td class="success">{{$transferencia->msg_estado}}</td>	
+				@else
+					<td class="danger">
+				    	<a href="{{URL::route('validar-transferencia', $transferencia->id)}}" class="btn btn-xs btn-success">
+							Validar Transferencia
+						</a>
+					</td>
 				@endif
 
 			</tr>

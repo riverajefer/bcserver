@@ -14,7 +14,7 @@ class AdminHistorialController extends BaseController {
     {
 
         $usuario= User::find($id);
-        $query = $usuario->transacciones()->where('estado', 1)->orderBy('id', 'desc');
+        $query = $usuario->transacciones()->orderBy('id', 'desc');
 
         $transacciones = $query->take(15)->skip(0)->get();
         $cantidad      = count($query->get());
@@ -75,8 +75,6 @@ class AdminHistorialController extends BaseController {
         $cuenta = UsersBanco::find($trans->userbanco_id);
         $banco  = Bancos::find($cuenta->banco_id);
 
-        //return Response::json(['success'=>true, 'banco'=>$banco, 'cuenta'=>$cuenta, 'datos'=>$trans]);       
-
         $usuario= User::find($cuenta->user_id);
         $data  = array(
             'detalles'=>$trans,
@@ -89,5 +87,48 @@ class AdminHistorialController extends BaseController {
 
     }
 
+    public function geHistorialAll()
+    {
+
+        $transacciones =  Transacciones::all();
+
+        $data  = array(
+            'transacciones'=>$transacciones,
+        );
+
+        return View::make('Backend/historial/index', $data);
+
+    }
+
+    public function geHistorialDepositos()
+    {
+
+        $transacciones =  Transacciones::where('tipo',1)->get();
+
+        $total =  Transacciones::where('tipo',1)->sum('valor');
+        $data  = array(
+            'transacciones'=>$transacciones,
+            'total'=>$total,
+        );
+
+        return View::make('Backend/historial/depositos', $data);
+
+    }
+
+    public function geHistorialTransferenciasBancoink()
+    {
+
+        $transacciones =  UsuariosBancoinkTransferencias::all();
+
+        $data  = array(
+            'transacciones'=>$transacciones,
+            'total'=>$transacciones->sum('valor'),
+        );
+
+        return View::make('Backend/historial/transferencias_bancoink', $data);
+
+    }
+
 
 }
+

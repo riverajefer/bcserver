@@ -6,14 +6,12 @@
  ¡ Historial !
 @stop
 <div align="center" class="row">
-	<h2>Historial de Registros</h2><hr>
-	<h4 align="left">Usuario: {{$user->first_name}} {{$user->last_name}}</h4>
-	<h4 align="left">Saldo: ${{ number_format($saldo,2)}}</h4>
-	<br>
+<h2>Historial de Registros</h2><hr>
 <div class="table-responsive2">
 	<table class="table table-hover table-striped table-bordered" id="tabla">
 		<thead>
 			<th>No</th>
+			<th>Usuario</th>
 			<th>Movimiento</th>
 			<th>Origen</th>
 			<th>Valor</th>
@@ -24,7 +22,11 @@
 		@foreach($transacciones as $key=>$transaccion)
 			<tr>
 				<td>{{$key =$key+1}}</td>
-
+				<td>
+					<a href="{{URL::route('historial_usuario', $transaccion->user->id)}}">
+						{{$transaccion->user->first_name}} {{$transaccion->user->last_name}}
+					</a>
+				</td>
 				@if ($transaccion->tipo == 1)
 					<td class="success"> 
 						<a href="{{URL::to('admin/usuarios/historial/deposito/'.$transaccion->user_alcancia_id)}}">
@@ -55,12 +57,12 @@
 				
 				<td>{{$transaccion->origen}}</td>
 				<td>${{ number_format($transaccion->valor,2)}}</td>
-				<td>{{$transaccion->created_at}}</td>
 				@if($transaccion->estado)
 					<td class="success">Realizada</td>
 				@else
 					<td class="warning">Pendiente</td>
 				@endif
+				<td>{{$transaccion->created_at}}</td>
 			</tr>
 		@endforeach
 		</tbody>

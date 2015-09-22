@@ -2,9 +2,7 @@
 
 Route::get('/', function()
 {
-	//return View::make('index');
-	return Redirect::to('admin/usuarios');
-
+	return View::make('Backend/login');
 });
 
 /****************************************************
@@ -82,14 +80,11 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
   Rutas: Backend
 *****************************************************/
 
-Route::get('usuarios', 'Controllers\Backend\UsersController@getUsers');
+Route::get('admin/login', array('as' => 'login', 'uses' => 'AdminLoginController@login'));
+Route::post('admin/login', array('as' => 'login', 'uses' => 'AdminLoginController@postLogin'));
+Route::get('admin/logout', array('as' => 'salir', 'uses' => 'AdminLoginController@salir'));
 
-//Route::get('usuario/historial/{id}', 'UsersController@getHistorialUser');
-
-
-
-
-Route::group(array('prefix' => 'admin'), function() {
+Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function() {
 
     Route::get('usuarios', array('as' => 'usuarios', 'uses' => 'AdminUsersController@getUsers'));
     Route::get('usuarios/historial/{id}', array('as' => 'historial_usuario', 'uses' => 'AdminHistorialController@getHistorialByUser'));
@@ -100,22 +95,18 @@ Route::group(array('prefix' => 'admin'), function() {
     Route::get('cuentas_bancarias/validar/{id}', array('as' => 'validar-cuenta', 'uses' => 'AdminCuentasController@validarCuenta'));
     Route::get('cuentas_bancarias/datelle/{id}', array('as' => 'detalle-cuenta', 'uses' => 'AdminCuentasController@detalleCuenta'));
     Route::get('cuentas_bancarias/transferencias/{id}', array('as' => 'cuenta-transferencias', 'uses' => 'AdminCuentasController@cuentaTransferencias'));
+    Route::get('cuentas_bancarias/lista-transferencias', array('as' => 'lista-transferencias', 'uses' => 'AdminCuentasController@listaTransferenciasBancarias'));
+    Route::get('cuentas_bancarias/transferencia/validar/{id}', array('as' => 'validar-transferencia', 'uses' => 'AdminCuentasController@validarTransferencia'));
+	Route::get('historial', array('as' => 'historial', 'uses' => 'AdminHistorialController@geHistorialAll'));    
+	Route::get('historial/depositos', array('as' => 'historial-depositos', 'uses' => 'AdminHistorialController@geHistorialDepositos'));    
+	Route::get('historial/transferencias-bancoink', array('as' => 'historial-transferencias-bancoink', 'uses' => 'AdminHistorialController@geHistorialTransferenciasBancoink'));    
 
 });
 
 
 
 Route::get('hola', function(){
-
-return $user = User::find(1)->transacciones->sum('valor');
-$d1 = new DateTime('1986-05-13');
-$hoy = new DateTime();
-
-return $diff =  $hoy->diff(new DateTime('1986-05-13'))->y;
-
-echo $diff->y;
-//echo Carbon::createFromDate('1986-05-13')->diff(Carbon::now())->format('%y years, %m months and %d days');
- return;
-
+	return "Hola";
 });
+
 
