@@ -22,11 +22,26 @@
         </li>        
         -->
         <li class="{{ Request::is( 'admin/cuentas_bancarias') ? 'active' : '' }}">
-            <a href="{{URL::to('admin/cuentas_bancarias')}}"><i class="fa fa-fw fa-credit-card"></i> Cuentas Bancarias</a>
+            <a href="{{URL::to('admin/cuentas_bancarias')}}"><i class="fa fa-fw fa-credit-card"></i> Cuentas Bancarias
+             @if (UsersBanco::where('estado',0)->count()) 
+	             <span class="badge badge-success">
+	             	{{UsersBanco::where('estado',0)->count()}}
+	             </span>
+             @endif
+
+            </a>
         </li>
 
         <li class="{{ Request::is( 'admin/cuentas_bancarias/lista-transferencias') ? 'active' : '' }}">
-            <a href="{{URL::to('admin/cuentas_bancarias/lista-transferencias')}}"><i class="fa fa-fw fa-credit-card"></i> Transferencias Bancarias</a>
+            <a href="{{URL::to('admin/cuentas_bancarias/lista-transferencias')}}"> 
+            <i class="fa fa-fw fa-credit-card"></i>
+             Transferencias Bancarias 
+             @if (UserBancoTransferencia::where('estado',0)->count()) 
+	             <span class="badge badge-success">
+	             	{{UserBancoTransferencia::where('estado',0)->count()}}
+	             </span>
+             @endif
+	        </a>
         </li> 
         <li>
             <a href="{{URL::route('salir')}}"><i class="fa fa-fw fa-power-off"></i> Salir</a>

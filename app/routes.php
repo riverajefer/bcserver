@@ -106,7 +106,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function() {
 
 
 Route::get('hola', function(){
-	return "Hola";
+          $usuario = User::find(1);
+                
+                return $tr = $usuario->transacciones->sum('valor'); // get porcentaje user
+
+
+
 });
 
 

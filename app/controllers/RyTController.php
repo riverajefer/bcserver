@@ -80,16 +80,16 @@ class RyTController extends BaseController {
 
                 // Valida que el valor, a transferir no sea superior al saldo
                 $usuario = User::find($user_id);
-                
-                $porcentaje = $usuario->porcentaje; // get porcentaje user
-                $saldo = Recursos::getSumaMonedaByUser($user_id);
-                $saldo = $saldo - ($saldo*$porcentaje);
-
+                $saldo = $usuario->transacciones->sum('valor');
 
                 if(Input::get('valor') >= $saldo){
                     return Response::json(['success'=>false, 'msg'=>'El valor que va a transferir, debe ser menor a su saldo']);
                 }
                 
+                if(Input::get('valor') < 4000){
+                    return Response::json(['success'=>false, 'msg'=>'El valor mínimo que puede transferir, es de $4.000']);
+                }
+
 
                 $transferencia = new UserBancoinkTransferencia();
 
@@ -292,13 +292,15 @@ class RyTController extends BaseController {
                 // Valida que el valor, a transferir no sea superior al saldo
                 $usuario = User::find($user_id);
                 
-                $porcentaje = $usuario->porcentaje; // get porcentaje user
-                $saldo = Recursos::getSumaMonedaByUser($user_id);
-                $saldo = $saldo - ($saldo*$porcentaje);
-
+                $saldo = $usuario->transacciones->sum('valor');
 
                 if(Input::get('valor') >= $saldo){
                     return Response::json(['success'=>false, 'msg'=>'El valor que va a transferir, debe ser menor a su saldo']);
+                }
+
+
+                if(Input::get('valor') < 30000){
+                    return Response::json(['success'=>false, 'msg'=>'El valor mínimo que puede transferir, es de $30.000']);
                 }
 
 

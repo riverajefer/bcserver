@@ -35,7 +35,7 @@ body {
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 225px;
+        padding-left: 255px;
     }
 
     #page-wrapper {
@@ -118,7 +118,7 @@ ul.alert-dropdown {
         position: fixed;
         top: 51px;
         left: 225px;
-        width: 225px;
+        width: 255px;
         margin-left: -225px;
         border: none;
         border-radius: 0;
@@ -130,7 +130,7 @@ ul.alert-dropdown {
     }
 
     .side-nav>li>a {
-        width: 225px;
+        width: 255px;
     }
 
     .side-nav li a:hover,
