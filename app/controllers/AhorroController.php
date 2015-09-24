@@ -69,7 +69,7 @@ class AhorroController extends BaseController {
 			$suma = Recursos::getSumaMonedaByUser($user_id);
 			$suma = $suma - ($suma*$porcentaje);
 
-		    //Pusherer::trigger('Canal_moneda'.$usuario->email, 'my_event-'.$usuario->email, array('suma'=>$suma ));
+		    Pusherer::trigger('Canal_moneda'.$usuario->email, 'my_event-'.$usuario->email, array('suma'=>$suma ));
 	        
 	        return "Ahorro Guardado Ok";
 	    }
@@ -88,11 +88,6 @@ class AhorroController extends BaseController {
 	public function getSaldo($user_id)
 	{
 		$usuario = User::find($user_id);
-		
-		$porcentaje = $usuario->porcentaje;
-		$suma = Recursos::getSumaMonedaByUser($user_id);
-		$suma = $suma - ($suma*$porcentaje);
-
 		$suma_total = $usuario->transacciones->sum('valor');
 
 		return Response::json(['success'=>true, 'suma'=>$suma_total]);	
@@ -107,8 +102,6 @@ class AhorroController extends BaseController {
 	{
 
 		$user = User::find($id);
-		$ua = $user->UserAlcancia;
-
 
 		$hoy = date('Y-m-d');
 		$hace_30_dias = date('Y-m-d', strtotime('today - 30 days')); 
@@ -117,12 +110,7 @@ class AhorroController extends BaseController {
 		$date->modify('+1 day');
 		$hoy =  $date->format('Y-m-d');
 			
-		$suma = 0;
-		foreach ($ua as $key => $value) {
-			$suma = $suma + $value->userAlcanciaDeposito()->whereBetween('users_alcancia_deposito.created_at', array($hace_30_dias, $hoy))->sum('moneda');
-		}
-		$porcentaje = $user->porcentaje;
-		$ahorro_30dias = $suma - ($suma*$porcentaje);				
+		$ahorro_30dias = $user->transacciones()->whereBetween('created_at', array($hace_30_dias, $hoy))->sum('valor');			
 
 		return Response::json(['success'=>true, 'ahorro_30d'=>$ahorro_30dias]);
 

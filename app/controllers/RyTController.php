@@ -86,10 +86,7 @@ class RyTController extends BaseController {
                     return Response::json(['success'=>false, 'msg'=>'El valor que va a transferir, debe ser menor a su saldo']);
                 }
                 
-                if(Input::get('valor') < 4000){
-                    return Response::json(['success'=>false, 'msg'=>'El valor mínimo que puede transferir, es de $4.000']);
-                }
-
+       
 
                 $transferencia = new UserBancoinkTransferencia();
 
@@ -298,12 +295,12 @@ class RyTController extends BaseController {
                     return Response::json(['success'=>false, 'msg'=>'El valor que va a transferir, debe ser menor a su saldo']);
                 }
 
-
+/*
                 if(Input::get('valor') < 30000){
                     return Response::json(['success'=>false, 'msg'=>'El valor mínimo que puede transferir, es de $30.000']);
                 }
 
-
+*/
                 $transferencia = new UserBancoTransferencia();
 
                 $transferencia->userbanco_id  = Input::get('id');

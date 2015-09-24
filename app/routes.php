@@ -86,6 +86,7 @@ Route::get('admin/logout', array('as' => 'salir', 'uses' => 'AdminLoginControlle
 
 Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function() {
 
+	Route::get('home', array('as' => 'home', 'uses' => 'AdminHomeController@index'));
     Route::get('usuarios', array('as' => 'usuarios', 'uses' => 'AdminUsersController@getUsers'));
     Route::get('usuarios/historial/{id}', array('as' => 'historial_usuario', 'uses' => 'AdminHistorialController@getHistorialByUser'));
     Route::get('usuarios/historial/deposito/{id}', array('as' => 'deposito', 'uses' => 'AdminHistorialController@getDeposito'));
@@ -99,6 +100,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function() {
     Route::get('cuentas_bancarias/transferencia/validar/{id}', array('as' => 'validar-transferencia', 'uses' => 'AdminCuentasController@validarTransferencia'));
 	Route::get('historial', array('as' => 'historial', 'uses' => 'AdminHistorialController@geHistorialAll'));    
 	Route::get('historial/depositos', array('as' => 'historial-depositos', 'uses' => 'AdminHistorialController@geHistorialDepositos'));    
+	Route::get('historial/depositos-all', array('as' => 'historial-depositos-all', 'uses' => 'AdminHistorialController@geHistorialDepositosAll'));    
 	Route::get('historial/transferencias-bancoink', array('as' => 'historial-transferencias-bancoink', 'uses' => 'AdminHistorialController@geHistorialTransferenciasBancoink'));    
 
 });
@@ -106,10 +108,18 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function() {
 
 
 Route::get('hola', function(){
-          $usuario = User::find(1);
-                
-                return $tr = $usuario->transacciones->sum('valor'); // get porcentaje user
 
+		return count(User::all());
+		$usuario = User::find(1);
+
+		$hoy = date('Y-m-d');
+		$hace_30_dias = date('Y-m-d', strtotime('today - 30 days')); 
+		$date = new DateTime($hoy);
+
+		$date->modify('+1 day');
+		$hoy =  $date->format('Y-m-d');
+		
+		return  $suma_total = $usuario->transacciones()->whereBetween('created_at', array($hace_30_dias, $hoy))->sum('valor');
 
 
 });

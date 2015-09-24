@@ -129,6 +129,22 @@ class AdminHistorialController extends BaseController {
 
     }
 
+    public function geHistorialDepositosAll()
+    {
+
+        $depositos =  UserAlcanciaDeposito::all();
+
+        $total =  $depositos->sum('moneda');
+        $data  = array(
+            'depositos'=>$depositos,
+            'total'=>$total,
+        );
+
+        return View::make('Backend/historial/depositos_all', $data);
+
+    }
+
+
 
 }
 

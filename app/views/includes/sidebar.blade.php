@@ -1,9 +1,9 @@
 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
-        <li>
-            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-        </li>
+		<li class="{{ Request::is( 'admin/home') ? 'active' : '' }}">
+            <a href="{{URL::to('admin/home')}}"><i class="fa fa-fw fa-dashboard"></i> Home</a>
+        </li>      
 		<li class="{{ Request::is( 'admin/usuarios') ? 'active' : '' }}">
             <a href="{{URL::to('admin/usuarios')}}"><i class="fa fa-fw fa-users"></i> Usuarios</a>
         </li>        
@@ -12,8 +12,12 @@
         </li>
 
         <li class="{{ Request::is( 'admin/historial/depositos') ? 'active' : '' }}">
-            <a href="{{URL::route('historial-depositos')}}"><i class="fa fa-share"></i> Depositos</a>
+            <a href="{{URL::route('historial-depositos')}}"><i class="fa fa-share"></i> Depositos por Usuario</a>
         </li>        
+
+        <li class="{{ Request::is( 'admin/historial/depositos-all') ? 'active' : '' }}">
+            <a href="{{URL::route('historial-depositos-all')}}"><i class="fa fa-share"></i> Depositos All</a>
+        </li>         
         <li class="{{ Request::is( 'admin/historial/transferencias-bancoink') ? 'active' : '' }}">
             <a href="{{URL::route('historial-transferencias-bancoink')}}"><i class="fa fa-fw fa-user"></i> Transferencias Bancoink</a>
         </li>         
