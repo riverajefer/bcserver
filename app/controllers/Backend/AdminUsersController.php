@@ -5,7 +5,7 @@ class AdminUsersController extends BaseController {
 	public function getUsers()
 	{
 
-	   $usuarios= User::all();
+	   $usuarios= User::where('admin',0)->get();
        $hoy = new DateTime();
        $data = array(
         'usuarios' =>$usuarios,

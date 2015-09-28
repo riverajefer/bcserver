@@ -23,6 +23,7 @@ Route::group(array('prefix' => 'api'), function() {
 
 	Route::get('login', array('before' => 'auth.login', 'uses' => 'AuthController@postLogin'));
     Route::post('registro/mobil', 'AuthController@postRegistro');
+    Route::post('registro/device', 'AuthController@postRegistroDevice');
 
 	// Rutas para el restablecer la contraseña
 	Route::post('resetpw/{email}', 'ResetPwController@getCodigo');
@@ -53,6 +54,7 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 
 	Route::get('codigoTarjeta/{id}', 'UsersController@getCodigoTarjeta');
 	Route::post('perfil/modificar/{user_id}', 'UsersController@postModificarPerfil');
+	Route::post('perfil/modificar_pw/{user_id}', 'UsersController@postModificarPw');
 
 
 	/****************************************************
@@ -109,17 +111,49 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function() {
 
 Route::get('hola', function(){
 
-		return count(User::all());
-		$usuario = User::find(1);
 
-		$hoy = date('Y-m-d');
-		$hace_30_dias = date('Y-m-d', strtotime('today - 30 days')); 
-		$date = new DateTime($hoy);
+return $findUserByCedula = User::where('cedula', 'lg@yahoo.es')->where('cedula','<>',0)->first();
 
-		$date->modify('+1 day');
-		$hoy =  $date->format('Y-m-d');
-		
-		return  $suma_total = $usuario->transacciones()->whereBetween('created_at', array($hace_30_dias, $hoy))->sum('valor');
+return $findUserByEmail = Sentry::findUserByLogin('lg@yahoo.es');
+
+
+//$input_buscar = 321545454;
+$mi_email = 'doe@yahoo.es';
+$input_buscar = 'jefersonpatino@yahoo.es';
+$input_buscar = 'doe@yahoo.es';
+	
+		$user_que_solicita = User::where('email', $mi_email)->first();
+
+		$findUserByCedula = User::where('cedula', $input_buscar)->where('cedula','<>',0)->get();
+
+		if($findUserByCedula == '[]'){
+
+	        try{
+
+	            $findUserByEmail = Sentry::findUserByLogin($input_buscar);
+
+	            if($mi_email == $findUserByEmail->email){
+	                return Response::json(['success'=>false, 'msg'=>'No, se puede buscar a usted mismo']);
+	            }        
+
+	            return Response::json(['success'=>true, 'user'=>$findUserByEmail]);
+	        }
+	        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+	        {
+	            return Response::json(['success'=>false, 'msg'=>'El usuario no se encontró, en la base de datos']);
+	        }
+
+		}
+		else{
+
+			if($user_que_solicita->cedula == $input_buscar ){
+				return Response::json(['success'=>false, 'msg'=>'No, se puede buscar a usted mismo']);
+			}else{
+
+				return Response::json(['success'=>true, 'user'=>$findUserByCedula]);
+
+			}
+		}
 
 
 });

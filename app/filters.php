@@ -175,7 +175,7 @@ Route::filter('auth.login', function($route, $request)
         // The following is only required if the throttling is enabled
         catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e)
         {
-            $error = array('usuario' => 'El usuario está suspendido' );
+            $error = array('usuario' => 'El usuario está suspendido, por realizar 5 intentos fallidos de inicio de sesión, vuelva a intentar en 20 minutos' );
         }
         catch (Cartalyst\Sentry\Throttling\UserBannedException $e)
         {

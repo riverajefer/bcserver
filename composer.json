@@ -10,7 +10,8 @@
 		"artdarek/pusherer": "1.0.*",
 		"moura137/laravel-elephantio": "~0.1",
         "nesbot/Carbon": "*",
-        "shamiao/l4mysqlqueue": "~1.0"
+        "shamiao/l4mysqlqueue": "~1.0",
+        "schuppo/password-strength": "~0.7"
 	},
 	"autoload": {
 

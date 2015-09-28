@@ -10,10 +10,11 @@ class AuthController extends BaseController {
         $reglas =  array(
             'nombre'    => 'required', 
             'apellido'  => 'required',
-            'cedula'    => 'required|numeric',
+            'celular'   => 'required|numeric|unique:users',
+            'cedula'    => 'required|numeric|unique:users',
             'email'     => 'required|email|unique:users',
             'pin'       => 'required|numeric|digits_between:0,4',
-            'password'  => 'required|min:6|confirmed',
+            'password'  => 'required|numbers|case_diff|letters|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
             
         );
@@ -34,6 +35,7 @@ class AuthController extends BaseController {
                 'first_name' => Input::get('nombre'),
                 'last_name'  => Input::get('apellido'),
                 'email'      => Input::get('email'),
+                'celular'    => Input::get('celular'),
                 'cedula'     => Input::get('cedula'),
                 'password'   => Input::get('password'),
                 'pin'        => Input::get('pin'),
@@ -77,5 +79,29 @@ class AuthController extends BaseController {
 
 
     }
+
+    public function postRegistroDevice()
+    {
+        if(Input::get('user_id')){
+
+            $data_device = implode(" ",Input::get('device'));
+
+            $device = new UsersDevice();
+            $device->user_id = Input::get('user_id');
+            $device->device = $data_device;
+            $device->cordova = Input::get('cordova');
+            $device->model = Input::get('model');
+            $device->platform = Input::get('platform');
+            $device->uuid = Input::get('uuid');
+            $device->version = Input::get('version');
+
+            $device->save();
+            return "Ok";
+        }else{
+            return;
+        }
+
+    }
+
 
 }

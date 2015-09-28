@@ -126,6 +126,7 @@ return array(
 		'Artdarek\Pusherer\PushererServiceProvider',
 		'Moura137\LaravelElephant\ElephantServiceProvider',
 		'Shamiao\L4mysqlqueue\L4mysqlqueueServiceProvider',
+		'Schuppo\PasswordStrength\PasswordStrengthServiceProvider',
 
 	),
 

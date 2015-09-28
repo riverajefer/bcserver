@@ -27,7 +27,7 @@ class AdminLoginController extends BaseController {
                         );
 
                         $user = Sentry::authenticate($credentials, false);
-                        return Redirect::to('admin/historial');
+                        return Redirect::to('admin/home');
 
                     }
                     catch (Cartalyst\Sentry\Users\LoginRequiredException $e)

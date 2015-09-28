@@ -43,6 +43,7 @@ class AhorroController extends BaseController {
 
 			$uad = UserAlcancia::find($consecutivo)->transacciones->first();
 
+			// si es el primer deposito
 			if(empty($uad)){
 
 	            $transaccion = new Transacciones();
@@ -68,8 +69,9 @@ class AhorroController extends BaseController {
 			
 			$suma = Recursos::getSumaMonedaByUser($user_id);
 			$suma = $suma - ($suma*$porcentaje);
+			$suma_total = $usuario->transacciones->sum('valor');
 
-		    Pusherer::trigger('Canal_moneda'.$usuario->email, 'my_event-'.$usuario->email, array('suma'=>$suma ));
+		    Pusherer::trigger('Canal_moneda'.$usuario->email, 'my_event-'.$usuario->email, array('suma'=>$suma_total ));
 	        
 	        return "Ahorro Guardado Ok";
 	    }

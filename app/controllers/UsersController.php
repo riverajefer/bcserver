@@ -113,4 +113,56 @@ class UsersController extends BaseController {
 
     }
 
+    public function postModificarPw($user_id)
+    {
+
+        $pw_actual = Input::get('pw_actual');
+
+        try
+        {
+            // Find the user using the user id
+            $input = Input::all();
+            $user = Sentry::findUserById($user_id);
+
+            if($user->checkPassword($pw_actual))
+            {
+
+                $reglas =  array(
+                    'password'  => 'required|numbers|case_diff|letters|min:6|confirmed',
+                    'password_confirmation' => 'required',
+                );
+
+               $validation = Validator::make($input, $reglas);
+
+               if ($validation->fails())
+                {
+                    return Response::json([
+                        'success'=>false, 
+                        'errors'=>$validation->errors()->toArray()
+                    ]);
+                } 
+                $user->password = $password; 
+                $user->save();      
+                return Response::json(['success'=>true, 'user'=>$user]);
+
+            }
+            else
+            {
+                return Response::json([
+                    'success'=>false, 
+                    'errors'=>array('error' => 'La contraseña actual no coincide' )
+                ]);
+            }
+        }
+        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+        {
+            return Response::json([
+                'success'=>false, 
+                'errors'=>array('error' => 'El usuario no existe' )
+            ]);
+        }
+
+    }
+
+
 }

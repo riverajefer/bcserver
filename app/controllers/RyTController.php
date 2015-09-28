@@ -2,24 +2,42 @@
 
 class RyTController extends BaseController {
 
-	public function buscarUserbyEmail($email, $mi_email)
+	public function buscarUserbyEmail($input_buscar, $mi_email)
 	{
 
-        try{
+        $user_que_solicita = User::where('email', $mi_email)->first();
 
-            $user = Sentry::findUserByLogin($email);
+        $findUserByCedula = User::where('cedula', $input_buscar)->where('cedula','<>',0)->first();
 
-            if($mi_email == $user->email){
+        // buscar por # de cedula
+        if(empty($findUserByCedula)){
+            // buscar por email
+            try{
+                $findUserByEmail = Sentry::findUserByLogin($input_buscar);
+
+                // valida que su email no sea el mismo que va a buscar
+                if($mi_email == $findUserByEmail->email){
+                    return Response::json(['success'=>false, 'msg'=>'No, se puede buscar a usted mismo']);
+                }        
+
+                return Response::json(['success'=>true, 'user'=>$findUserByEmail]);
+            }
+            catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
+            {
+                return Response::json(['success'=>false, 'msg'=>'El usuario no se encontró, en la base de datos']);
+            }
+
+        }
+        else{
+            // valida que su cedula no sea la misma que va a buscar
+            if($user_que_solicita->cedula == $input_buscar ){
                 return Response::json(['success'=>false, 'msg'=>'No, se puede buscar a usted mismo']);
-            }        
+            }else{
 
-            return Response::json(['success'=>true, 'user'=>$user]);
-        }
-        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
-        {
-            return Response::json(['success'=>false, 'msg'=>'El usuario no se encontró, en la base de datos']);
-        }
+                return Response::json(['success'=>true, 'user'=>$findUserByCedula]);
 
+            }
+        }
 	}
 
     public function addUserBancoink()
@@ -27,6 +45,7 @@ class RyTController extends BaseController {
 
         $user_id   = Input::get('user_id');
         $user_id_t = Input::get('user_id_t');
+        $alias     = Input::get('alias');
 
         $usuario_registrado = UsuariosBancoink::where('user_id', $user_id)->where('user_id_t', $user_id_t)->first();
 
@@ -35,9 +54,9 @@ class RyTController extends BaseController {
         }else{
 
             $UsuariosBancoink = new UsuariosBancoink();
-            $UsuariosBancoink->user_id   = Input::get('user_id');
-            $UsuariosBancoink->user_id_t = Input::get('user_id_t');
-            $UsuariosBancoink->alias     = Input::get('alias');
+            $UsuariosBancoink->user_id   = $user_id;
+            $UsuariosBancoink->user_id_t = $user_id_t;
+            $UsuariosBancoink->alias     = $alias;
             $UsuariosBancoink->save();
 
             return Response::json(['success'=>true, 'datos'=>$UsuariosBancoink]);
@@ -200,6 +219,7 @@ class RyTController extends BaseController {
                 $trans[$key]['titular']       = $value->titular;
                 $trans[$key]['transacciones'] = count($value->userBancoTransferencia);
         }
+        
         return Response::json(['success'=>true, 'datos'=>$trans]);        
 
     }    
@@ -285,27 +305,29 @@ class RyTController extends BaseController {
 
             if($user->checkPassword( Input::get('pw') ))
             {
+                $valor = Input::get('valor');
 
                 // Valida que el valor, a transferir no sea superior al saldo
                 $usuario = User::find($user_id);
                 
                 $saldo = $usuario->transacciones->sum('valor');
 
-                if(Input::get('valor') >= $saldo){
+                if($valor >= $saldo){
                     return Response::json(['success'=>false, 'msg'=>'El valor que va a transferir, debe ser menor a su saldo']);
                 }
 
-/*
-                if(Input::get('valor') < 30000){
+                /*
+                if($valor < 30000){
                     return Response::json(['success'=>false, 'msg'=>'El valor mínimo que puede transferir, es de $30.000']);
                 }
 
-*/
+                */
+
                 $transferencia = new UserBancoTransferencia();
 
                 $transferencia->userbanco_id  = Input::get('id');
                 $transferencia->descripcion   = Input::get('descripcion');
-                $transferencia->valor         = Input::get('valor');
+                $transferencia->valor         = $valor;
                 $transferencia->estado        = 0;
                 $transferencia->msg_estado    = 'Pendiente';
                 $transferencia->save();
@@ -316,7 +338,7 @@ class RyTController extends BaseController {
 
                 // Programar el % descuento, por está transaccion
                 $transaccion->user_id                = $userbanco->user_id;
-                $transaccion->valor                  = Input::get('valor')*(-1); // se vuelve negativo, 
+                $transaccion->valor                  = ($valor)*(-1); // se vuelve negativo, 
                 $transaccion->tipo                   = 4;
                 $transaccion->origen                 = 'Transferencia Bancaria';
                 $transaccion->transferencia_banco_id = $transferencia->id;
