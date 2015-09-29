@@ -78,8 +78,8 @@ class UsersController extends BaseController {
             'nombre'    		=> 'required', 
             'apellido'  		=> 'required',
             'cedula'    		=> 'required|numeric',
+            'celular'           => 'required|numeric',
             'email'     		=> 'required|email|unique:users,email,'.$user_id,
-            'pin'       		=> 'required|numeric|digits_between:0,4',
             'fecha_nacimiento'	=> 'required|date',
             'sexo'				=> 'required',
             'habilitar_pin'		=> 'required'
@@ -100,9 +100,9 @@ class UsersController extends BaseController {
 
         $user->first_name 		= Input::get('nombre');
         $user->last_name 		= Input::get('apellido');
-        $user->cedula	  		= Input::get('cedula');
+        $user->celular	  		= Input::get('cedula');
+        $user->celular           = Input::get('celular');
         $user->email 	 		= Input::get('email');
-        $user->pin 				= Input::get('pin');
         $user->fecha_nacimiento = Input::get('fecha_nacimiento');
         $user->sexo 			= Input::get('sexo');
         $user->habilitar_pin 	= Input::get('habilitar_pin');
@@ -123,6 +123,7 @@ class UsersController extends BaseController {
             // Find the user using the user id
             $input = Input::all();
             $user = Sentry::findUserById($user_id);
+            $password = Input::get('password');
 
             if($user->checkPassword($pw_actual))
             {
@@ -150,7 +151,7 @@ class UsersController extends BaseController {
             {
                 return Response::json([
                     'success'=>false, 
-                    'errors'=>array('error' => 'La contraseña actual no coincide' )
+                    'errors'=>array('>>' => 'La contraseña actual no coincide' )
                 ]);
             }
         }
@@ -158,11 +159,53 @@ class UsersController extends BaseController {
         {
             return Response::json([
                 'success'=>false, 
-                'errors'=>array('error' => 'El usuario no existe' )
+                'errors'=>array('>>' => 'El usuario no existe' )
             ]);
         }
-
     }
 
+    public function postModificarPin($user_id)
+    {
+
+        $pin_actual = Input::get('pin_actual');
+        $nuevo_pin = Input::get('nuevo_pin');
+
+        $user = User::find($user_id)->where('pin', $pin_actual)->first();
+
+        $input = Input::all();
+
+        if($user)
+        {
+            $reglas =  array(
+                'nuevo_pin'  => 'required|numeric|digits_between:0,4|confirmed',
+                'nuevo_pin_confirmation' => 'required',
+            );
+            
+           $validation = Validator::make($input, $reglas);
+           if ($validation->fails())
+            {
+                return Response::json([
+                    'success'=>false, 
+                    'errors'=>$validation->errors()->toArray()
+                ]);
+            }
+
+            $user = User::find($user_id);
+            $user->pin = $nuevo_pin;
+            $user->save();
+
+            return Response::json(['success'=>true, 'user'=>$user]);
+
+        }else{
+
+            return Response::json([
+                'success'=>false, 
+                'errors'=>array('>>' => 'El Pin actual no coincide' )
+            ]);
+
+        }
+
+     
+    }
 
 }

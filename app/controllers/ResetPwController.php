@@ -86,8 +86,8 @@ class ResetPwController extends BaseController {
 
 		        $input = Input::all();
 		        $reglas =  array(
-		            'password'  => 'required|min:3|confirmed',
-		            'password_confirmation' => 'required|min:3'
+		            'password'  => 'required|case_diff|letters|min:6|confirmed',
+		            'password_confirmation' => 'required|min:6'
 		        );
 
 		       $validation = Validator::make($input, $reglas);

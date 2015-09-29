@@ -35,6 +35,7 @@ class AuthController extends BaseController {
                 'first_name' => Input::get('nombre'),
                 'last_name'  => Input::get('apellido'),
                 'email'      => Input::get('email'),
+                'habilitar_pin'=>      1,
                 'celular'    => Input::get('celular'),
                 'cedula'     => Input::get('cedula'),
                 'password'   => Input::get('password'),

@@ -55,6 +55,7 @@ Route::group(array('prefix' => 'api', 'before' => 'auth.token'), function() {
 	Route::get('codigoTarjeta/{id}', 'UsersController@getCodigoTarjeta');
 	Route::post('perfil/modificar/{user_id}', 'UsersController@postModificarPerfil');
 	Route::post('perfil/modificar_pw/{user_id}', 'UsersController@postModificarPw');
+	Route::post('perfil/modificar_pin/{user_id}', 'UsersController@postModificarPin');
 
 
 	/****************************************************
@@ -111,51 +112,17 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function() {
 
 Route::get('hola', function(){
 
+        $trans = UserBancoinkTransferencia::find(18);
+        $ub = UsuariosBancoink::find($trans->usuariobancoink_id);
+         $origen = User::find($ub->user_id);
+         return $alias = $ub->alias;
 
-return $findUserByCedula = User::where('cedula', 'lg@yahoo.es')->where('cedula','<>',0)->first();
 
-return $findUserByEmail = Sentry::findUserByLogin('lg@yahoo.es');
-
-
-//$input_buscar = 321545454;
-$mi_email = 'doe@yahoo.es';
-$input_buscar = 'jefersonpatino@yahoo.es';
-$input_buscar = 'doe@yahoo.es';
-	
-		$user_que_solicita = User::where('email', $mi_email)->first();
-
-		$findUserByCedula = User::where('cedula', $input_buscar)->where('cedula','<>',0)->get();
-
-		if($findUserByCedula == '[]'){
-
-	        try{
-
-	            $findUserByEmail = Sentry::findUserByLogin($input_buscar);
-
-	            if($mi_email == $findUserByEmail->email){
-	                return Response::json(['success'=>false, 'msg'=>'No, se puede buscar a usted mismo']);
-	            }        
-
-	            return Response::json(['success'=>true, 'user'=>$findUserByEmail]);
-	        }
-	        catch (Cartalyst\Sentry\Users\UserNotFoundException $e)
-	        {
-	            return Response::json(['success'=>false, 'msg'=>'El usuario no se encontró, en la base de datos']);
-	        }
-
-		}
-		else{
-
-			if($user_que_solicita->cedula == $input_buscar ){
-				return Response::json(['success'=>false, 'msg'=>'No, se puede buscar a usted mismo']);
-			}else{
-
-				return Response::json(['success'=>true, 'user'=>$findUserByCedula]);
-
-			}
-		}
-
+	$user_id = 1;
+	$pin_actual = '1234';
+	return $user = User::find($user_id)->where('pin', $pin_actual)->first();
 
 });
+
 
 

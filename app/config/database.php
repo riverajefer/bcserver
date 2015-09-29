@@ -62,7 +62,18 @@ return array(
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
-
+/*
+		'mysql' => array(
+			'driver'    => 'mysql',
+			'host'      => 'external-db.s206862.gridserver.com',
+			'database'  => 'db206862_bancoink1',
+			'username'  => 'db206862',
+			'password'  => 'Chapinero123@',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+*/
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
